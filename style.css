@@ -387,6 +387,44 @@ body {
 }
 
 /* ===== Sidebar Schedule ===== */
+/* Sidebar Guide Link */
+.sidebar-guide {
+    border-bottom: 1px solid var(--border-light);
+}
+
+.guide-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.15s ease;
+    border-left: 3px solid var(--primary);
+}
+
+.guide-link:hover {
+    background: #fff8f0;
+}
+
+.guide-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.guide-link strong {
+    display: block;
+    font-size: 13px;
+    color: var(--primary);
+    margin-bottom: 2px;
+}
+
+.guide-link small {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 0;
+}
+
 .sidebar-schedule {
     margin-top: 0;
     background: var(--bg-white);

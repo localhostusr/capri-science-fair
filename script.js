@@ -156,6 +156,13 @@ function collectGroupMembers() {
     return JSON.stringify(members);
 }
 
+// ===== Safety Materials Toggle =====
+function toggleSafetyFields() {
+    const hasSafety = document.querySelector('input[name="hasSafety"]:checked').value === 'yes';
+    const safetyFields = document.getElementById('safety-fields');
+    safetyFields.style.display = hasSafety ? 'block' : 'none';
+}
+
 // ===== Form Validation =====
 function validateForm(form) {
     let isValid = true;
@@ -242,6 +249,8 @@ document.getElementById('signup-form').addEventListener('submit', async function
         projectTitle: document.getElementById('project-title').value.trim(),
         projectDescription: document.getElementById('project-description').value.trim(),
         category: document.getElementById('category').value,
+        hasSafetyConsiderations: document.querySelector('input[name="hasSafety"]:checked').value,
+        safetyDetails: (document.getElementById('safety-details').value || '').trim(),
         parentName: document.getElementById('parent-name').value.trim(),
         parentEmail: document.getElementById('parent-email').value.trim(),
         parentPhone: document.getElementById('parent-phone').value.trim(),
@@ -308,6 +317,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Group project toggle
     document.querySelectorAll('.group-toggle').forEach(function(radio) {
         radio.addEventListener('change', toggleGroupFields);
+    });
+
+    // Safety materials toggle
+    document.querySelectorAll('.safety-toggle').forEach(function(radio) {
+        radio.addEventListener('change', toggleSafetyFields);
     });
 
     // Add group member button

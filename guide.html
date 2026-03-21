@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Fair Quick Start Guide — Capri Elementary 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Oswald:wght@700&family=Bangers&family=Anton&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Reset & Variables (matching main site) ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary: #e8611a;
+            --primary-light: #f27432;
+            --primary-dark: #c85210;
+            --secondary: #9cc5d4;
+            --secondary-light: #b5d6e1;
+            --secondary-dark: #6a9aad;
+            --grey: #8c8c8c;
+            --accent: #f5f5f0;
+            --bg: #fafafa;
+            --bg-white: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #555555;
+            --text-muted: #888888;
+            --border: #d4d4d4;
+            --border-light: #e8e8e8;
+            --error: #c4342d;
+            --success: #2d7d46;
+            --radius: 2px;
+            --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== Language Toggle ===== */
+        .lang-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 100;
+            display: flex;
+            background: var(--bg-white);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .lang-btn {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .lang-btn.active {
+            background: var(--secondary-dark);
+            color: white;
+        }
+
+        .lang-btn:not(.active):hover {
+            background: var(--border-light);
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            background: var(--primary);
+            color: white;
+            padding: 32px 20px 28px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--secondary-dark);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, transparent 40%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-logo {
+            height: 90px;
+            width: auto;
+            margin-bottom: 12px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .hero .theme {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-style: italic;
+            opacity: 0.85;
+            margin-bottom: 12px;
+        }
+
+        .hero .event-date {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* ===== Toolbar ===== */
+        .toolbar {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            background: var(--bg-white);
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            border-radius: var(--radius);
+        }
+
+        .toolbar-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #fff8f0;
+        }
+
+        .toolbar-btn.primary-btn {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .toolbar-btn.primary-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ===== Main Content ===== */
+        .guide-container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* ===== Sections ===== */
+        .guide-section {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            margin-top: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-header {
+            padding: 20px 28px 16px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .section-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--secondary-dark);
+            margin-bottom: 4px;
+        }
+
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+        }
+
+        .section-body {
+            padding: 24px 28px 28px;
+        }
+
+        .section-body p {
+            margin-bottom: 14px;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+
+        .section-body p:last-child { margin-bottom: 0; }
+
+        .section-body ul, .section-body ol {
+            margin: 0 0 16px 20px;
+            font-size: 15px;
+            color: var(--text-light);
+        }
+
+        .section-body li {
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+
+        .section-body strong {
+            color: var(--text);
+        }
+
+        /* ===== Welcome Intro ===== */
+        .welcome-box {
+            background: var(--accent);
+            border-left: 4px solid var(--primary);
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+
+        .welcome-box p {
+            font-size: 16px;
+            color: var(--text);
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        /* ===== Sub-sections ===== */
+        .subsection {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .subsection:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .subsection h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* ===== Scientific Method List ===== */
+        .method-list {
+            list-style: none;
+            margin-left: 0 !important;
+            counter-reset: method;
+        }
+
+        .method-list li {
+            counter-increment: method;
+            padding: 8px 0 8px 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .method-list li:last-child { border-bottom: none; }
+
+        .method-list li::before {
+            content: counter(method);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+            border-radius: var(--radius);
+        }
+
+        /* ===== Project Idea Cards ===== */
+        .idea-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .idea-card {
+            border: 1px solid var(--border-light);
+            padding: 14px 16px;
+            border-left: 3px solid var(--secondary);
+            transition: border-left-color 0.15s ease;
+        }
+
+        .idea-card:hover {
+            border-left-color: var(--primary);
+        }
+
+        .idea-card h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .idea-card .idea-icon {
+            margin-right: 4px;
+        }
+
+        .idea-card ul {
+            list-style: none;
+            margin: 0 !important;
+            padding: 0;
+        }
+
+        .idea-card li {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .idea-card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 9px;
+            width: 4px;
+            height: 4px;
+            background: var(--secondary-dark);
+            border-radius: 50%;
+        }
+
+        /* ===== Grade Level Tips ===== */
+        .grade-tips {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .grade-tip {
+            background: var(--accent);
+            padding: 16px;
+            border-top: 3px solid var(--secondary-dark);
+        }
+
+        .grade-tip h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .grade-tip p {
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
+        /* ===== Board Layout ===== */
+        .board-diagram {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 2px;
+            margin: 16px 0;
+            background: var(--border);
+            border: 2px solid var(--text);
+        }
+
+        .board-panel {
+            background: var(--bg-white);
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .board-panel strong {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            margin-bottom: 4px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .board-dimensions {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ===== Tips / Mistakes Cards ===== */
+        .tip-list {
+            list-style: none;
+            margin-left: 0 !important;
+        }
+
+        .tip-list li {
+            padding: 8px 0 8px 28px;
+            position: relative;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .tip-list li:last-child { border-bottom: none; }
+
+        .tip-list li::before {
+            position: absolute;
+            left: 0;
+            top: 8px;
+            font-size: 14px;
+        }
+
+        .tip-list.do li::before { content: '\2713'; color: var(--success); font-weight: 700; }
+        .tip-list.dont li::before { content: '\2717'; color: var(--error); font-weight: 700; }
+
+        /* ===== Presentation Tips ===== */
+        .talk-bubble {
+            background: var(--accent);
+            border-left: 4px solid var(--secondary-dark);
+            padding: 14px 18px;
+            margin: 10px 0;
+            font-size: 14px;
+            font-style: italic;
+            color: var(--text-light);
+        }
+
+        /* ===== Schedule Strip ===== */
+        .schedule-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1px;
+            background: var(--border-light);
+            margin-top: 12px;
+        }
+
+        .schedule-item {
+            background: var(--bg-white);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .schedule-item .time-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .schedule-item .time-desc {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* ===== Parent Section Accent ===== */
+        .parent-section .section-header {
+            background: var(--accent);
+        }
+
+        .parent-callout {
+            background: #fff8f0;
+            border: 1px solid #f5dcc4;
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            margin-top: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        /* ===== Resources ===== */
+        .resource-list {
+            list-style: none;
+            margin-left: 0 !important;
+        }
+
+        .resource-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .resource-list li:last-child { border-bottom: none; }
+
+        .resource-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .resource-list a {
+            color: var(--secondary-dark);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .resource-list a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .resource-desc {
+            display: block;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* ===== CTA Section ===== */
+        .cta-section {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 40px 24px;
+            margin-top: 28px;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--secondary-dark);
+        }
+
+        .cta-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .cta-section p {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 36px;
+            background: white;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border-radius: var(--radius);
+            transition: all 0.15s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-btn:hover {
+            background: var(--accent);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-1px);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: var(--secondary-dark);
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 28px 20px;
+            font-size: 13px;
+            letter-spacing: 0.02em;
+        }
+
+        footer p + p {
+            margin-top: 4px;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 700px) {
+            .idea-grid { grid-template-columns: 1fr; }
+            .grade-tips { grid-template-columns: 1fr; }
+            .board-diagram { grid-template-columns: 1fr; }
+            .section-header { padding: 16px 20px 12px; }
+            .section-body { padding: 20px; }
+            .hero { padding: 24px 16px 20px; }
+            .hero-logo { height: 70px; }
+            .guide-container { padding: 0 12px 60px; }
+            .lang-toggle { top: 10px; right: 10px; }
+            .lang-btn { padding: 6px 14px; font-size: 12px; }
+        }
+
+        /* ===== Print Styles ===== */
+        @media print {
+            .lang-toggle, .toolbar, .cta-section { display: none !important; }
+
+            body { background: white; font-size: 11pt; }
+            .hero { background: white !important; color: black !important; padding: 16px 0; border-bottom: 2px solid #e8611a; }
+            .hero::before, .hero::after { display: none; }
+            .hero-badge { border-color: #ccc; color: #333; }
+            .hero h1 { color: black; font-size: 20pt; }
+            .hero .theme { color: #555; }
+            .hero .event-date { color: #333; }
+
+            .guide-container { max-width: 100%; padding: 0; }
+            .guide-section { box-shadow: none; border: 1px solid #ddd; margin-top: 16px; break-inside: avoid; }
+            .section-header h2 { font-size: 13pt; }
+            .section-body { padding: 12px 16px 16px; }
+            .section-body p { font-size: 10pt; }
+
+            .idea-grid { grid-template-columns: 1fr 1fr; }
+            .idea-card { border: 1px solid #ddd; }
+            .grade-tips { grid-template-columns: 1fr 1fr 1fr; }
+            .board-diagram { break-inside: avoid; }
+
+            footer { background: white !important; color: #888 !important; border-top: 1px solid #ddd; padding: 12px 0; }
+
+            a { color: inherit; text-decoration: none; }
+            a[href]::after { content: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+    <button id="btn-en" class="lang-btn active" onclick="setLang('en')">English</button>
+    <button id="btn-es" class="lang-btn" onclick="setLang('es')">Espanol</button>
+</div>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="hero-content">
+        <img src="logo.png" alt="Capri Elementary Stingrays" class="hero-logo">
+        <div class="hero-badge">
+            <span data-en="Capri Elementary" data-es="Escuela Primaria Capri">Capri Elementary</span>
+        </div>
+        <h1 data-en="Science Fair Quick Start Guide" data-es="Guia Rapida de la Feria de Ciencias">Science Fair Quick Start Guide</h1>
+        <p class="theme" data-en="&ldquo;Science Brings Us Together&rdquo;" data-es="&ldquo;La Ciencia Nos Une&rdquo;">&ldquo;Science Brings Us Together&rdquo;</p>
+        <p class="event-date" data-en="Wednesday, April 23, 2026" data-es="Miercoles, 23 de abril de 2026">Wednesday, April 23, 2026</p>
+    </div>
+</header>
+
+<!-- Toolbar -->
+<div class="toolbar">
+    <button class="toolbar-btn" onclick="window.print()">
+        <span>&#128438;</span>
+        <span data-en="Print / Save as PDF" data-es="Imprimir / Guardar como PDF">Print / Save as PDF</span>
+    </button>
+    <a href="index.html" class="toolbar-btn primary-btn">
+        <span>&#9998;</span>
+        <span data-en="Sign Up for Science Fair" data-es="Inscribirse en la Feria de Ciencias">Sign Up for Science Fair</span>
+    </a>
+</div>
+
+<!-- Guide Content -->
+<div class="guide-container">
+
+    <!-- 1. Welcome / Intro -->
+    <section class="guide-section">
+        <div class="section-header">
+            <h2 data-en="Welcome, Future Scientists!" data-es="Bienvenidos, Futuros Cientificos!">Welcome, Future Scientists!</h2>
+        </div>
+        <div class="section-body">
+            <div class="welcome-box">
+                <p data-en="Think doing a science project is too hard? Think again! If you can ask a question and try to find the answer, you can do a science project. It really is that simple."
+                   data-es="Crees que hacer un proyecto de ciencias es muy dificil? Piensalo otra vez! Si puedes hacer una pregunta e intentar encontrar la respuesta, puedes hacer un proyecto de ciencias. Es asi de simple.">Think doing a science project is too hard? Think again! If you can ask a question and try to find the answer, you can do a science project. It really is that simple.</p>
+            </div>
+            <p data-en="This year's theme is &ldquo;Science Brings Us Together.&rdquo; We're focusing on collaboration, shared resources, and community problem-solving. Group projects are encouraged! Think about real challenges our community faces &mdash; clean water, energy, food, sustainability &mdash; and explore solutions together."
+               data-es="El tema de este ano es &ldquo;La Ciencia Nos Une.&rdquo; Nos enfocamos en la colaboracion, los recursos compartidos y la resolucion de problemas comunitarios. Se animan los proyectos en grupo! Piensen en los desafios reales que enfrenta nuestra comunidad &mdash; agua limpia, energia, alimentos, sostenibilidad &mdash; y exploren soluciones juntos.">This year's theme is &ldquo;Science Brings Us Together.&rdquo; We're focusing on collaboration, shared resources, and community problem-solving. Group projects are encouraged! Think about real challenges our community faces &mdash; clean water, energy, food, sustainability &mdash; and explore solutions together.</p>
+            <p data-en="Whether you work solo or with friends, this guide will walk you through everything you need to know. Let's get started!"
+               data-es="Ya sea que trabajes solo o con amigos, esta guia te llevara paso a paso por todo lo que necesitas saber. Empecemos!">Whether you work solo or with friends, this guide will walk you through everything you need to know. Let's get started!</p>
+        </div>
+    </section>
+
+    <!-- 2. Before You Start -->
+    <section class="guide-section">
+        <div class="section-header">
+            <div class="section-number" data-en="Before You Start" data-es="Antes de Empezar">Before You Start</div>
+            <h2 data-en="Gather Your Materials" data-es="Reune Tus Materiales">Gather Your Materials</h2>
+        </div>
+        <div class="section-body">
+            <p data-en="Here's what you'll need to get your project going:" data-es="Esto es lo que necesitaras para empezar tu proyecto:">Here's what you'll need to get your project going:</p>
+            <ul>
+                <li data-en="A notebook or journal to record your observations" data-es="Un cuaderno o diario para registrar tus observaciones">A notebook or journal to record your observations</li>
+                <li data-en="Pencils, pens, and markers" data-es="Lapices, boligrafos y marcadores">Pencils, pens, and markers</li>
+                <li data-en="A tri-fold display board (available from Ms. Pudvah in the Science Lab!)" data-es="Un tablero triptico (disponible con la Sra. Pudvah en el Laboratorio de Ciencias!)">A tri-fold display board (available from Ms. Pudvah in the Science Lab!)</li>
+                <li data-en="Glue, tape, and scissors" data-es="Pegamento, cinta adhesiva y tijeras">Glue, tape, and scissors</li>
+                <li data-en="Paper and printer access for titles and labels" data-es="Papel y acceso a impresora para titulos y etiquetas">Paper and printer access for titles and labels</li>
+                <li data-en="Materials specific to your experiment (varies by project)" data-es="Materiales especificos para tu experimento (varian segun el proyecto)">Materials specific to your experiment (varies by project)</li>
+                <li data-en="A curious mind and a willingness to explore!" data-es="Una mente curiosa y ganas de explorar!">A curious mind and a willingness to explore!</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 3. Step 1: Pick Your Project -->
+    <section class="guide-section">
+        <div class="section-header">
+            <div class="section-number" data-en="Step 1" data-es="Paso 1">Step 1</div>
+            <h2 data-en="Pick Your Project" data-es="Elige Tu Proyecto">Pick Your Project</h2>
+        </div>
+        <div class="section-body">
+
+            <!-- Scientific Method -->
+            <div class="subsection">
+                <h3 data-en="The Scientific Method &mdash; Your Roadmap" data-es="El Metodo Cientifico &mdash; Tu Hoja de Ruta">The Scientific Method &mdash; Your Roadmap</h3>
+                <p data-en="Every great science project follows these steps. Think of them as your roadmap from question to discovery:"
+                   data-es="Todo gran proyecto de ciencias sigue estos pasos. Piensa en ellos como tu hoja de ruta desde la pregunta hasta el descubrimiento:">Every great science project follows these steps. Think of them as your roadmap from question to discovery:</p>
+                <ol class="method-list">
+                    <li data-en="<strong>Purpose</strong> &mdash; Why are you doing this experiment? What do you want to learn?" data-es="<strong>Proposito</strong> &mdash; Por que estas haciendo este experimento? Que quieres aprender?"><strong>Purpose</strong> &mdash; Why are you doing this experiment? What do you want to learn?</li>
+                    <li data-en="<strong>Question</strong> &mdash; What specific question are you trying to answer?" data-es="<strong>Pregunta</strong> &mdash; Que pregunta especifica intentas responder?"><strong>Question</strong> &mdash; What specific question are you trying to answer?</li>
+                    <li data-en="<strong>Hypothesis</strong> &mdash; What do you THINK the answer will be? (Your best guess!)" data-es="<strong>Hipotesis</strong> &mdash; Que CREES que sera la respuesta? (Tu mejor suposicion!)"><strong>Hypothesis</strong> &mdash; What do you THINK the answer will be? (Your best guess!)</li>
+                    <li data-en="<strong>Method</strong> &mdash; What steps will you follow to test your hypothesis?" data-es="<strong>Metodo</strong> &mdash; Que pasos seguiras para probar tu hipotesis?"><strong>Method</strong> &mdash; What steps will you follow to test your hypothesis?</li>
+                    <li data-en="<strong>Materials</strong> &mdash; What supplies and tools do you need?" data-es="<strong>Materiales</strong> &mdash; Que materiales y herramientas necesitas?"><strong>Materials</strong> &mdash; What supplies and tools do you need?</li>
+                    <li data-en="<strong>Results</strong> &mdash; What happened? Record your data, measurements, and observations." data-es="<strong>Resultados</strong> &mdash; Que paso? Registra tus datos, mediciones y observaciones."><strong>Results</strong> &mdash; What happened? Record your data, measurements, and observations.</li>
+                    <li data-en="<strong>Conclusion</strong> &mdash; Was your hypothesis right or wrong? What did you learn?" data-es="<strong>Conclusion</strong> &mdash; Tu hipotesis fue correcta o incorrecta? Que aprendiste?"><strong>Conclusion</strong> &mdash; Was your hypothesis right or wrong? What did you learn?</li>
+                </ol>
+                <p data-en="Remember: It's totally OK if your hypothesis is wrong! That's how real science works. The goal is to learn something new."
+                   data-es="Recuerda: Esta totalmente bien si tu hipotesis es incorrecta! Asi funciona la ciencia real. La meta es aprender algo nuevo.">Remember: It's totally OK if your hypothesis is wrong! That's how real science works. The goal is to learn something new.</p>
+            </div>
+
+            <!-- Project Idea Starters -->
+            <div class="subsection">
+                <h3 data-en="Project Idea Starters" data-es="Ideas para Proyectos">Project Idea Starters</h3>
+                <p data-en="Not sure where to start? Pick a category that interests you and try one of these questions &mdash; or come up with your own!"
+                   data-es="No sabes por donde empezar? Elige una categoria que te interese y prueba una de estas preguntas &mdash; o inventa la tuya!">Not sure where to start? Pick a category that interests you and try one of these questions &mdash; or come up with your own!</p>
+                <div class="idea-grid">
+                    <div class="idea-card">
+                        <h4><span class="idea-icon">&#128167;</span> <span data-en="Clean Water" data-es="Agua Limpia">Clean Water</span></h4>
+                        <ul>
+                            <li data-en="Does a homemade filter clean water better than store-bought?" data-es="Un filtro casero limpia el agua mejor que uno comprado?">Does a homemade filter clean water better than store-bought?</li>
+                            <li data-en="How does salt concentration affect water evaporation?" data-es="Como afecta la concentracion de sal la evaporacion del agua?">How does salt concentration affect water evaporation?</li>
+                        </ul>
+                    </div>
+                    <div class="idea-card">
+                        <h4><span class="idea-icon">&#9889;</span> <span data-en="Energy" data-es="Energia">Energy</span></h4>
+                        <ul>
+                            <li data-en="Which color surface absorbs the most solar heat?" data-es="Que color de superficie absorbe mas calor solar?">Which color surface absorbs the most solar heat?</li>
+                            <li data-en="Can you power a small light with a lemon battery?" data-es="Puedes encender una luz pequena con una bateria de limon?">Can you power a small light with a lemon battery?</li>
+                        </ul>
+                    </div>
+                    <div class="idea-card">
+                        <h4><span class="idea-icon">&#127793;</span> <span data-en="Food &amp; Agriculture" data-es="Alimentos y Agricultura">Food &amp; Agriculture</span></h4>
+                        <ul>
+                            <li data-en="Do plants grow faster with music?" data-es="Las plantas crecen mas rapido con musica?">Do plants grow faster with music?</li>
+                            <li data-en="What type of soil helps seeds sprout the fastest?" data-es="Que tipo de suelo ayuda a las semillas a brotar mas rapido?">What type of soil helps seeds sprout the fastest?</li>
+                        </ul>
+                    </div>
+                    <div class="idea-card">
+                        <h4><span class="idea-icon">&#9851;</span> <span data-en="Sustainability" data-es="Sostenibilidad">Sustainability</span></h4>
+                        <ul>
+                            <li data-en="Which material decomposes fastest in soil?" data-es="Que material se descompone mas rapido en el suelo?">Which material decomposes fastest in soil?</li>
+                            <li data-en="Does recycled paper hold as much weight as new paper?" data-es="El papel reciclado soporta tanto peso como el papel nuevo?">Does recycled paper hold as much weight as new paper?</li>
+                        </ul>
+                    </div>
+                    <div class="idea-card">
+                        <h4><span class="idea-icon">&#129657;</span> <span data-en="Health &amp; Body" data-es="Salud y Cuerpo">Health &amp; Body</span></h4>
+                        <ul>
+                            <li data-en="Does hand sanitizer kill more germs than soap and water?" data-es="El desinfectante de manos mata mas germenes que el jabon y el agua?">Does hand sanitizer kill more germs than soap and water?</li>
+                            <li data-en="Does exercise affect your heart rate recovery time?" data-es="El ejercicio afecta el tiempo de recuperacion de tu ritmo cardiaco?">Does exercise affect your heart rate recovery time?</li>
+                        </ul>
+                    </div>
+                    <div class="idea-card">
+                        <h4><span class="idea-icon">&#127780;</span> <span data-en="Space &amp; Weather" data-es="Espacio y Clima">Space &amp; Weather</span></h4>
+                        <ul>
+                            <li data-en="Can you predict tomorrow's weather by observing clouds?" data-es="Puedes predecir el clima de manana observando las nubes?">Can you predict tomorrow's weather by observing clouds?</li>
+                            <li data-en="How does the moon's phase affect the tides?" data-es="Como afecta la fase de la luna las mareas?">How does the moon's phase affect the tides?</li>
+                        </ul>
+                    </div>
+                    <div class="idea-card">
+                        <h4><span class="idea-icon">&#128020;</span> <span data-en="Animals &amp; Nature" data-es="Animales y Naturaleza">Animals &amp; Nature</span></h4>
+                        <ul>
+                            <li data-en="Do ants prefer sugar or protein?" data-es="Las hormigas prefieren azucar o proteina?">Do ants prefer sugar or protein?</li>
+                            <li data-en="What time of day are birds most active at your feeder?" data-es="A que hora del dia son mas activos los pajaros en tu comedero?">What time of day are birds most active at your feeder?</li>
+                        </ul>
+                    </div>
+                    <div class="idea-card">
+                        <h4><span class="idea-icon">&#128295;</span> <span data-en="Engineering" data-es="Ingenieria">Engineering</span></h4>
+                        <ul>
+                            <li data-en="What bridge design holds the most weight?" data-es="Que diseno de puente soporta mas peso?">What bridge design holds the most weight?</li>
+                            <li data-en="Can you build a container that keeps an ice cube frozen longest?" data-es="Puedes construir un recipiente que mantenga un cubo de hielo congelado por mas tiempo?">Can you build a container that keeps an ice cube frozen longest?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade-Level Tips -->
+            <div class="subsection">
+                <h3 data-en="Grade-Level Tips" data-es="Consejos por Grado">Grade-Level Tips</h3>
+                <div class="grade-tips">
+                    <div class="grade-tip">
+                        <h4 data-en="Grades K&ndash;2" data-es="Grados K&ndash;2">Grades K&ndash;2</h4>
+                        <p data-en="Keep it simple and fun! Focus on observing the world around you. Use drawings and pictures to show what you found. Your parents can help you write things down."
+                           data-es="Mantenlo simple y divertido! Enfocate en observar el mundo a tu alrededor. Usa dibujos e imagenes para mostrar lo que encontraste. Tus padres pueden ayudarte a escribir las cosas.">Keep it simple and fun! Focus on observing the world around you. Use drawings and pictures to show what you found. Your parents can help you write things down.</p>
+                    </div>
+                    <div class="grade-tip">
+                        <h4 data-en="Grades 3&ndash;4" data-es="Grados 3&ndash;4">Grades 3&ndash;4</h4>
+                        <p data-en="Start measuring and comparing! Use numbers to track your results. Try testing one thing at a time so you know what caused the change. Simple charts and graphs make your data shine."
+                           data-es="Empieza a medir y comparar! Usa numeros para registrar tus resultados. Intenta probar una cosa a la vez para saber que causo el cambio. Graficos y tablas simples hacen que tus datos brillen.">Start measuring and comparing! Use numbers to track your results. Try testing one thing at a time so you know what caused the change. Simple charts and graphs make your data shine.</p>
+                    </div>
+                    <div class="grade-tip">
+                        <h4 data-en="Grades 5&ndash;6" data-es="Grados 5&ndash;6">Grades 5&ndash;6</h4>
+                        <p data-en="Challenge yourself! Write a clear hypothesis and design a fair test with controls. Collect data from multiple trials and use graphs to analyze patterns. Think about what you would do differently next time."
+                           data-es="Desafiate! Escribe una hipotesis clara y disena una prueba justa con controles. Recopila datos de multiples pruebas y usa graficos para analizar patrones. Piensa en que harias diferente la proxima vez.">Challenge yourself! Write a clear hypothesis and design a fair test with controls. Collect data from multiple trials and use graphs to analyze patterns. Think about what you would do differently next time.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. Step 2: Build Your Display -->
+    <section class="guide-section">
+        <div class="section-header">
+            <div class="section-number" data-en="Step 2" data-es="Paso 2">Step 2</div>
+            <h2 data-en="Build Your Display" data-es="Construye Tu Exhibicion">Build Your Display</h2>
+        </div>
+        <div class="section-body">
+
+            <div class="subsection">
+                <h3 data-en="Board Layout" data-es="Diseno del Tablero">Board Layout</h3>
+                <p data-en="Your tri-fold board should follow this layout:" data-es="Tu tablero triptico debe seguir este diseno:">Your tri-fold board should follow this layout:</p>
+                <div class="board-diagram">
+                    <div class="board-panel">
+                        <strong data-en="Left Panel" data-es="Panel Izquierdo">Left Panel</strong>
+                        <span data-en="Introduction, Purpose, Hypothesis, Materials" data-es="Introduccion, Proposito, Hipotesis, Materiales">Introduction, Purpose, Hypothesis, Materials</span>
+                    </div>
+                    <div class="board-panel">
+                        <strong data-en="Center Panel" data-es="Panel Central">Center Panel</strong>
+                        <span data-en="Title (big!), Data, Graphs, Photos of Your Experiment" data-es="Titulo (grande!), Datos, Graficos, Fotos de Tu Experimento">Title (big!), Data, Graphs, Photos of Your Experiment</span>
+                    </div>
+                    <div class="board-panel">
+                        <strong data-en="Right Panel" data-es="Panel Derecho">Right Panel</strong>
+                        <span data-en="Results, Conclusion, What I Learned, What's Next?" data-es="Resultados, Conclusion, Lo Que Aprendi, Que Sigue?">Results, Conclusion, What I Learned, What's Next?</span>
+                    </div>
+                </div>
+                <p class="board-dimensions" data-en="Maximum dimensions: 4 feet wide (122 cm) x 6 feet tall (183 cm)" data-es="Dimensiones maximas: 4 pies de ancho (122 cm) x 6 pies de alto (183 cm)">Maximum dimensions: 4 feet wide (122 cm) x 6 feet tall (183 cm)</p>
+            </div>
+
+            <div class="subsection">
+                <h3 data-en="Tips for a Great Board" data-es="Consejos para un Gran Tablero">Tips for a Great Board</h3>
+                <ul class="tip-list do">
+                    <li data-en="Use large, readable fonts &mdash; people should be able to read your board from a few feet away" data-es="Usa fuentes grandes y legibles &mdash; las personas deben poder leer tu tablero desde unos pasos de distancia">Use large, readable fonts &mdash; people should be able to read your board from a few feet away</li>
+                    <li data-en="Include photos of your experiment in action" data-es="Incluye fotos de tu experimento en accion">Include photos of your experiment in action</li>
+                    <li data-en="Use color to organize sections, but don't overdo it &mdash; keep it clean" data-es="Usa color para organizar las secciones, pero no exageres &mdash; mantenlo limpio">Use color to organize sections, but don't overdo it &mdash; keep it clean</li>
+                    <li data-en="Make your title big and catchy &mdash; it's the first thing people see!" data-es="Haz tu titulo grande y llamativo &mdash; es lo primero que las personas ven!">Make your title big and catchy &mdash; it's the first thing people see!</li>
+                    <li data-en="Add charts or graphs to show your data visually" data-es="Agrega tablas o graficos para mostrar tus datos visualmente">Add charts or graphs to show your data visually</li>
+                    <li data-en="Don't forget to put your name on your board!" data-es="No olvides poner tu nombre en tu tablero!">Don't forget to put your name on your board!</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3 data-en="Common Mistakes to Avoid" data-es="Errores Comunes a Evitar">Common Mistakes to Avoid</h3>
+                <ul class="tip-list dont">
+                    <li data-en="Too much text &mdash; use bullet points and short sentences instead of paragraphs" data-es="Demasiado texto &mdash; usa puntos clave y oraciones cortas en lugar de parrafos">Too much text &mdash; use bullet points and short sentences instead of paragraphs</li>
+                    <li data-en="Hard-to-read handwriting &mdash; type or print neatly if writing by hand" data-es="Escritura dificil de leer &mdash; escribe a maquina o con letra clara si escribes a mano">Hard-to-read handwriting &mdash; type or print neatly if writing by hand</li>
+                    <li data-en="No conclusion &mdash; always tell people what you learned!" data-es="Sin conclusion &mdash; siempre di a las personas lo que aprendiste!">No conclusion &mdash; always tell people what you learned!</li>
+                    <li data-en="Forgetting your name &mdash; make sure your name (and group members) are on the board" data-es="Olvidar tu nombre &mdash; asegurate de que tu nombre (y miembros del grupo) esten en el tablero">Forgetting your name &mdash; make sure your name (and group members) are on the board</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. Step 3: Present Like a Scientist -->
+    <section class="guide-section">
+        <div class="section-header">
+            <div class="section-number" data-en="Step 3" data-es="Paso 3">Step 3</div>
+            <h2 data-en="Present Like a Scientist" data-es="Presenta Como un Cientifico">Present Like a Scientist</h2>
+        </div>
+        <div class="section-body">
+            <p data-en="On the night of the fair, visitors will walk around and look at your project. This is your chance to share what you learned! Here's how to talk about your project like a pro:"
+               data-es="La noche de la feria, los visitantes caminaran y veran tu proyecto. Esta es tu oportunidad de compartir lo que aprendiste! Asi es como hablar de tu proyecto como un profesional:">On the night of the fair, visitors will walk around and look at your project. This is your chance to share what you learned! Here's how to talk about your project like a pro:</p>
+            <ul>
+                <li data-en="<strong>Start with your hypothesis</strong> &mdash; tell them what you wanted to find out and what you predicted" data-es="<strong>Empieza con tu hipotesis</strong> &mdash; diles lo que querias descubrir y lo que predijiste"><strong>Start with your hypothesis</strong> &mdash; tell them what you wanted to find out and what you predicted</li>
+                <li data-en="<strong>Show your favorite result</strong> &mdash; point to your data or a cool photo from the experiment" data-es="<strong>Muestra tu resultado favorito</strong> &mdash; senala tus datos o una foto genial del experimento"><strong>Show your favorite result</strong> &mdash; point to your data or a cool photo from the experiment</li>
+                <li data-en="<strong>Be ready for questions</strong> &mdash; people will be curious! Answer what you can" data-es="<strong>Preparate para preguntas</strong> &mdash; las personas tendran curiosidad! Responde lo que puedas"><strong>Be ready for questions</strong> &mdash; people will be curious! Answer what you can</li>
+            </ul>
+            <div class="talk-bubble">
+                <p data-en="It's totally OK to say: &ldquo;I don't know &mdash; that could be my next experiment!&rdquo; Real scientists say this all the time."
+                   data-es="Esta totalmente bien decir: &ldquo;No lo se &mdash; eso podria ser mi proximo experimento!&rdquo; Los cientificos de verdad dicen esto todo el tiempo.">It's totally OK to say: &ldquo;I don't know &mdash; that could be my next experiment!&rdquo; Real scientists say this all the time.</p>
+            </div>
+            <p data-en="<strong>For younger students:</strong> Practice explaining your project to a family member at home before the fair. It helps a lot with nerves and makes you feel like a real expert!"
+               data-es="<strong>Para estudiantes mas pequenos:</strong> Practica explicar tu proyecto a un familiar en casa antes de la feria. Ayuda mucho con los nervios y te hace sentir como un verdadero experto!"><strong>For younger students:</strong> Practice explaining your project to a family member at home before the fair. It helps a lot with nerves and makes you feel like a real expert!</p>
+        </div>
+    </section>
+
+    <!-- 6. Step 4: Day of the Fair -->
+    <section class="guide-section">
+        <div class="section-header">
+            <div class="section-number" data-en="Step 4" data-es="Paso 4">Step 4</div>
+            <h2 data-en="Day of the Fair" data-es="El Dia de la Feria">Day of the Fair</h2>
+        </div>
+        <div class="section-body">
+            <p data-en="Here's the schedule for April 23, 2026:" data-es="Este es el horario para el 23 de abril de 2026:">Here's the schedule for April 23, 2026:</p>
+            <div class="schedule-strip">
+                <div class="schedule-item">
+                    <div class="time-label">4:45 PM</div>
+                    <div class="time-desc" data-en="Arrive &amp; set up your project" data-es="Llega y monta tu proyecto">Arrive &amp; set up your project</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time-label">5:00 &ndash; 6:00 PM</div>
+                    <div class="time-desc" data-en="Science Fair viewing &amp; presentations" data-es="Exhibicion y presentaciones de la Feria de Ciencias">Science Fair viewing &amp; presentations</div>
+                </div>
+                <div class="schedule-item">
+                    <div class="time-label">6:30 PM</div>
+                    <div class="time-desc" data-en="SD Lab Rats science show!" data-es="Show de ciencias de SD Lab Rats!">SD Lab Rats science show!</div>
+                </div>
+            </div>
+            <p style="margin-top:16px;" data-en="Pick up your project after the event or the next morning. Make sure your name is clearly visible on your display so it's easy to find!"
+               data-es="Recoge tu proyecto despues del evento o la manana siguiente. Asegurate de que tu nombre sea claramente visible en tu exhibicion para que sea facil de encontrar!">Pick up your project after the event or the next morning. Make sure your name is clearly visible on your display so it's easy to find!</p>
+        </div>
+    </section>
+
+    <!-- 7. For Parents -->
+    <section class="guide-section parent-section">
+        <div class="section-header">
+            <h2 data-en="For Parents: How to Help (Without Doing It for Them)" data-es="Para Padres: Como Ayudar (Sin Hacerlo por Ellos)">For Parents: How to Help (Without Doing It for Them)</h2>
+        </div>
+        <div class="section-body">
+            <p data-en="We know it's tempting to jump in and make the board look &ldquo;perfect.&rdquo; But the science fair is about your child's learning journey, not a polished product. Here's how to be the best science fair coach:"
+               data-es="Sabemos que es tentador intervenir y hacer que el tablero se vea &ldquo;perfecto.&rdquo; Pero la feria de ciencias se trata del viaje de aprendizaje de su hijo, no de un producto pulido. Asi es como ser el mejor entrenador de feria de ciencias:">We know it's tempting to jump in and make the board look &ldquo;perfect.&rdquo; But the science fair is about your child's learning journey, not a polished product. Here's how to be the best science fair coach:</p>
+            <ul>
+                <li data-en="<strong>Let your child choose the topic.</strong> They'll be way more excited about a question they actually care about." data-es="<strong>Deje que su hijo elija el tema.</strong> Estaran mucho mas emocionados por una pregunta que realmente les importa."><strong>Let your child choose the topic.</strong> They'll be way more excited about a question they actually care about.</li>
+                <li data-en="<strong>Ask guiding questions instead of giving answers.</strong> &ldquo;What do you think will happen?&rdquo; is better than &ldquo;Here's what's going to happen.&rdquo;" data-es="<strong>Haga preguntas orientadoras en lugar de dar respuestas.</strong> &ldquo;Que crees que pasara?&rdquo; es mejor que &ldquo;Esto es lo que va a pasar.&rdquo;"><strong>Ask guiding questions instead of giving answers.</strong> &ldquo;What do you think will happen?&rdquo; is better than &ldquo;Here's what's going to happen.&rdquo;</li>
+                <li data-en="<strong>Help with materials and logistics</strong> &mdash; buying supplies, setting up the workspace, driving to the store &mdash; but let them do the actual work." data-es="<strong>Ayude con materiales y logistica</strong> &mdash; comprar materiales, preparar el espacio de trabajo, ir a la tienda &mdash; pero dejelos hacer el trabajo real."><strong>Help with materials and logistics</strong> &mdash; buying supplies, setting up the workspace, driving to the store &mdash; but let them do the actual work.</li>
+                <li data-en="<strong>Encourage them to practice explaining their project.</strong> A few run-throughs at the dinner table goes a long way." data-es="<strong>Animelos a practicar explicar su proyecto.</strong> Unas cuantas practicas en la mesa del comedor ayudan mucho."><strong>Encourage them to practice explaining their project.</strong> A few run-throughs at the dinner table goes a long way.</li>
+            </ul>
+            <div class="parent-callout">
+                <p data-en="The messy board made by a kid is better than the perfect board made by a parent. Judges, teachers, and visitors can tell the difference &mdash; and they're cheering for the kids."
+                   data-es="El tablero desordenado hecho por un nino es mejor que el tablero perfecto hecho por un padre. Los jueces, maestros y visitantes notan la diferencia &mdash; y estan apoyando a los ninos.">The messy board made by a kid is better than the perfect board made by a parent. Judges, teachers, and visitors can tell the difference &mdash; and they're cheering for the kids.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Helpful Resources -->
+    <section class="guide-section">
+        <div class="section-header">
+            <h2 data-en="Helpful Resources" data-es="Recursos Utiles">Helpful Resources</h2>
+        </div>
+        <div class="section-body">
+            <ul class="resource-list">
+                <li>
+                    <span class="resource-icon">&#128218;</span>
+                    <div>
+                        <a href="https://www.sciencebuddies.org/" target="_blank" rel="noopener">Science Buddies</a>
+                        <span class="resource-desc" data-en="Project ideas, step-by-step guides, and tips for every grade level" data-es="Ideas de proyectos, guias paso a paso y consejos para cada nivel de grado">Project ideas, step-by-step guides, and tips for every grade level</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="resource-icon">&#127758;</span>
+                    <div>
+                        <a href="https://www.googlesciencefair.com/" target="_blank" rel="noopener">Google Science Fair</a>
+                        <span class="resource-desc" data-en="Browse examples of science fair projects from students around the world" data-es="Explora ejemplos de proyectos de ferias de ciencias de estudiantes de todo el mundo">Browse examples of science fair projects from students around the world</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="resource-icon">&#129469;</span>
+                    <div>
+                        <span style="font-weight:600; color: var(--secondary-dark);" data-en="Ask Ms. Pudvah!" data-es="Preguntale a la Sra. Pudvah!">Ask Ms. Pudvah!</span>
+                        <span class="resource-desc" data-en="Have questions about your project? Our STEM teacher is here to help. Visit her in the Science Lab!" data-es="Tienes preguntas sobre tu proyecto? Nuestra maestra de STEM esta aqui para ayudar. Visitala en el Laboratorio de Ciencias!">Have questions about your project? Our STEM teacher is here to help. Visit her in the Science Lab!</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 9. CTA: Ready to Sign Up? -->
+    <section class="cta-section">
+        <h2 data-en="Ready to Sign Up?" data-es="Listo para Inscribirte?">Ready to Sign Up?</h2>
+        <p data-en="Head to the sign-up page to register your project for the Capri Science Fair 2026."
+           data-es="Ve a la pagina de inscripcion para registrar tu proyecto en la Feria de Ciencias de Capri 2026.">Head to the sign-up page to register your project for the Capri Science Fair 2026.</p>
+        <a href="index.html" class="cta-btn" data-en="Sign Up Now" data-es="Inscribete Ahora">Sign Up Now</a>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <p data-en="Capri Elementary PTA &bull; Science Fair 2026" data-es="PTA de Capri Elementary &bull; Feria de Ciencias 2026">Capri Elementary PTA &bull; Science Fair 2026</p>
+    <p data-en="Science Brings Us Together" data-es="La Ciencia Nos Une">Science Brings Us Together</p>
+</footer>
+
+<script>
+// ===== Language Toggle =====
+let currentLang = 'en';
+
+function setLang(lang) {
+    currentLang = lang;
+
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+    document.querySelectorAll('[data-en]').forEach(function(el) {
+        el.innerHTML = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+    });
+
+    document.documentElement.lang = lang;
+}
+
+// Auto-detect language from browser
+document.addEventListener('DOMContentLoaded', function() {
+    var browserLang = navigator.language || navigator.userLanguage;
+    if (browserLang && browserLang.startsWith('es')) {
+        setLang('es');
+    }
+});
+</script>
+
+</body>
+</html>

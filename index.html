@@ -38,7 +38,7 @@
                         <span class="detail-icon">🕐</span>
                         <span data-en="5:00 PM – 6:30 PM" data-es="5:00 PM – 6:30 PM">5:00 PM – 6:30 PM</span>
                     </div>
-                    <a href="https://www.google.com/maps/search/Capri+Elementary+School+941+Capri+Rd+Encinitas+CA+92024" target="_blank" rel="noopener" class="detail detail-link">
+                    <a href="https://www.google.com/maps/place/33.075319,-117.288282" target="_blank" rel="noopener" class="detail detail-link">
                         <span class="detail-icon">📍</span>
                         <span data-en="Capri Quad" data-es="Patio de Capri">Capri Quad</span>
                     </a>
@@ -105,6 +105,17 @@
                     The Science Fair is open to ALL Capri families — you don't need a project to attend! Come explore, learn, and enjoy the SD Lab Rats interactive stations and science show.
                 </p>
             </div>
+    </div>
+
+    <!-- Quick Start Guide link -->
+    <div class="sidebar-guide">
+        <a href="guide.html" class="guide-link">
+            <span class="guide-icon">📘</span>
+            <div>
+                <strong data-en="Quick Start Guide" data-es="Guía de Inicio Rápido">Quick Start Guide</strong>
+                <small data-en="Project ideas, board tips, and how to get started" data-es="Ideas de proyectos, consejos para el tablero, y cómo empezar">Project ideas, board tips, and how to get started</small>
+            </div>
+        </a>
     </div>
 
     <!-- Schedule in sidebar -->
@@ -248,6 +259,36 @@
                               data-en-placeholder="In a few sentences, what is your project about?"
                               data-es-placeholder="En pocas oraciones, ¿de qué trata tu proyecto?"
                               placeholder="In a few sentences, what is your project about?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label data-en="Does your project use any special materials or activities?" data-es="¿Tu proyecto usa materiales o actividades especiales?">Does your project use any special materials or activities?</label>
+                    <small data-en="For example: chemicals (like vinegar, baking soda, cleaning products), living animals, plants from outside, batteries, magnets, UV lights, rockets, or anything you'd want a grown-up's help with."
+                           data-es="Por ejemplo: químicos (como vinagre, bicarbonato, productos de limpieza), animales vivos, plantas de afuera, baterías, imanes, luces UV, cohetes, o cualquier cosa con la que necesitarías ayuda de un adulto.">
+                        For example: chemicals (like vinegar, baking soda, cleaning products), living animals, plants from outside, batteries, magnets, UV lights, rockets, or anything you'd want a grown-up's help with.
+                    </small>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="hasSafety" value="no" checked class="safety-toggle">
+                            <span data-en="No — just everyday materials" data-es="No — solo materiales comunes">No — just everyday materials</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="hasSafety" value="yes" class="safety-toggle">
+                            <span data-en="Yes — my project involves something on this list" data-es="Sí — mi proyecto incluye algo de esta lista">Yes — my project involves something on this list</span>
+                        </label>
+                    </div>
+                    <small data-en="Most projects don't — this is just so we can help plan ahead." data-es="La mayoría de los proyectos no los necesitan — esto es solo para ayudarnos a planificar.">Most projects don't — this is just so we can help plan ahead.</small>
+                </div>
+
+                <!-- Safety Details (conditional) -->
+                <div id="safety-fields" style="display:none;">
+                    <div class="form-group">
+                        <label for="safety-details" data-en="Please describe the special materials or activities:" data-es="Por favor describe los materiales o actividades especiales:">Please describe the special materials or activities:</label>
+                        <textarea id="safety-details" name="safetyDetails" rows="3"
+                                  data-en-placeholder="Tell us what materials or activities your project involves so we can help make sure everything is safe and ready."
+                                  data-es-placeholder="Cuéntanos qué materiales o actividades incluye tu proyecto para que podamos asegurarnos de que todo sea seguro y esté listo."
+                                  placeholder="Tell us what materials or activities your project involves so we can help make sure everything is safe and ready."></textarea>
+                    </div>
                 </div>
 
                 <div class="form-group">
