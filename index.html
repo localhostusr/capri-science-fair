@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capri Science Fair 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Oswald:wght@700&family=Bangers&family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+    <button id="btn-en" class="lang-btn active" onclick="setLang('en')">English</button>
+    <button id="btn-es" class="lang-btn" onclick="setLang('es')">Español</button>
+</div>
+
+<!-- Hero Section -->
+<header class="hero">
+    <div class="hero-content">
+        <div class="hero-layout">
+            <a href="https://capri.eusd.net/" target="_blank" rel="noopener" class="hero-logo-link">
+                <img src="logo.png" alt="Capri Elementary Stingrays" class="hero-logo">
+            </a>
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span data-en="Capri Elementary" data-es="Escuela Primaria Capri">Capri Elementary</span>
+                </div>
+                <h1 data-en="Science Fair 2026" data-es="Feria de Ciencias 2026">Science Fair 2026</h1>
+                <p class="theme" data-en="&ldquo;Science Brings Us Together&rdquo;" data-es="&ldquo;La Ciencia Nos Une&rdquo;">&ldquo;Science Brings Us Together&rdquo;</p>
+                <div class="event-details">
+                    <div class="detail">
+                        <span class="detail-icon">📅</span>
+                        <span data-en="Wednesday, April 23, 2026" data-es="Miércoles, 23 de abril de 2026">Wednesday, April 23, 2026</span>
+                    </div>
+                    <div class="detail">
+                        <span class="detail-icon">🕐</span>
+                        <span data-en="5:00 PM – 6:30 PM" data-es="5:00 PM – 6:30 PM">5:00 PM – 6:30 PM</span>
+                    </div>
+                    <a href="https://www.google.com/maps/place/Capri+Elementary+School/@33.0558,-117.2933,17z/" target="_blank" rel="noopener" class="detail detail-link">
+                        <span class="detail-icon">📍</span>
+                        <span data-en="Capri Quad" data-es="Patio de Capri">Capri Quad</span>
+                    </a>
+                </div>
+            </div>
+            <a href="https://www.capripta.org/" target="_blank" rel="noopener" class="hero-logo-link hero-logo-right">
+                <div class="pta-logo-wrap">
+                    <img src="logo.png" alt="Capri PTA" class="hero-logo pta-logo-img">
+                    <div class="pta-overlay">
+                        <div class="pta-stack">
+                            <span class="pta-w1">Parent</span>
+                            <span class="pta-w2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 4 148 66" class="pta-svg">
+                                    <defs><style>@import url('https://fonts.googleapis.com/css2?family=Bangers&amp;display=swap');</style></defs>
+                                    <g transform="translate(16,4)"><path fill-rule="evenodd" fill="#1a1a1a" d="M 3,12 L 48,12 C 78,12 78,42 48,42 L 15,42 L 15,64 L 3,64 Z M 15,22 L 44,22 C 62,22 62,32 44,32 L 15,32 Z"/></g>
+                                    <g transform="translate(14,2)"><path fill-rule="evenodd" fill="#0088aa" d="M 3,12 L 48,12 C 78,12 78,42 48,42 L 15,42 L 15,64 L 3,64 Z M 15,22 L 44,22 C 62,22 62,32 44,32 L 15,32 Z"/></g>
+                                    <g transform="translate(12,0)"><path fill-rule="evenodd" fill="#00e5ff" d="M 3,12 L 48,12 C 78,12 78,42 48,42 L 15,42 L 15,64 L 3,64 Z M 15,22 L 44,22 C 62,22 62,32 44,32 L 15,32 Z"/></g>
+                                    <text x="68" y="64" font-family="Bangers,cursive" font-size="74" fill="#1a1a1a" transform="translate(4,4)">T</text>
+                                    <text x="68" y="64" font-family="Bangers,cursive" font-size="74" fill="#0088aa" transform="translate(2,2)">T</text>
+                                    <text x="68" y="64" font-family="Bangers,cursive" font-size="74" fill="#00e5ff">T</text>
+                                    <text x="92" y="64" font-family="Bangers,cursive" font-size="74" fill="#1a1a1a" transform="translate(4,4)">A</text>
+                                    <text x="92" y="64" font-family="Bangers,cursive" font-size="74" fill="#0088aa" transform="translate(2,2)">A</text>
+                                    <text x="92" y="64" font-family="Bangers,cursive" font-size="74" fill="#00e5ff">A</text>
+                                </svg>
+                            </span>
+                            <span class="pta-w3">Teacher</span>
+                            <span class="pta-w4">Association</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content: Sidebar + Form -->
+<div class="page-layout">
+    <div class="content-grid">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="info-stack">
+            <div class="info-card">
+                <div class="info-icon">🧪</div>
+                <h3 data-en="What's Happening" data-es="Qué Va a Pasar">What's Happening</h3>
+                <p data-en="Students showcase their science projects to the community! Browse projects from 5:00–6:00 PM, then enjoy a live science show by SD Lab Rats from 6:00–6:30 PM."
+                   data-es="¡Los estudiantes presentan sus proyectos de ciencias a la comunidad! Vea los proyectos de 5:00–6:00 PM, y luego disfrute de un show de ciencias en vivo por SD Lab Rats de 6:00–6:30 PM.">
+                    Students showcase their science projects to the community! Browse projects from 5:00–6:00 PM, then enjoy a live science show by SD Lab Rats from 6:00–6:30 PM.
+                </p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">👥</div>
+                <h3 data-en="This Year's Focus" data-es="Enfoque de Este Año">This Year's Focus</h3>
+                <p data-en="Group projects are encouraged! Think about community challenges like clean water, energy, food, and sustainability. Work together to explore solutions."
+                   data-es="¡Se animan los proyectos en grupo! Piensen en desafíos comunitarios como agua limpia, energía, alimentos y sostenibilidad. Trabajen juntos para explorar soluciones.">
+                    Group projects are encouraged! Think about community challenges like clean water, energy, food, and sustainability. Work together to explore solutions.
+                </p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🎪</div>
+                <h3 data-en="Everyone's Invited" data-es="Todos Están Invitados">Everyone's Invited</h3>
+                <p data-en="The Science Fair is open to ALL Capri families — you don't need a project to attend! Come explore, learn, and enjoy the SD Lab Rats interactive stations and science show."
+                   data-es="¡La Feria de Ciencias está abierta a TODAS las familias de Capri — no necesitas un proyecto para asistir! Ven a explorar, aprender y disfrutar de las estaciones interactivas y el show de SD Lab Rats.">
+                    The Science Fair is open to ALL Capri families — you don't need a project to attend! Come explore, learn, and enjoy the SD Lab Rats interactive stations and science show.
+                </p>
+            </div>
+    </div>
+
+    <!-- Schedule in sidebar -->
+    <div class="sidebar-schedule">
+        <h3 data-en="Event Schedule" data-es="Horario del Evento">Event Schedule</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="time">4:00 PM</div>
+                <div class="event" data-en="Set-up & help students" data-es="Preparación y ayuda a estudiantes">Set-up & help students</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">5:00 PM</div>
+                <div class="event" data-en="🔬 Present & explore projects" data-es="🔬 Presentar y explorar proyectos">🔬 Present & explore projects</div>
+            </div>
+            <div class="timeline-item">
+                <div class="time">6:30 PM</div>
+                <div class="event" data-en="🐀 SD Lab Rats science show" data-es="🐀 Show de ciencias SD Lab Rats">🐀 SD Lab Rats science show</div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- Main Content: Sign-Up Form -->
+<main class="main-content">
+    <section class="form-section" id="signup">
+        <h2 data-en="Sign Up Your Scientist!" data-es="¡Inscribe a Tu Científico!">Sign Up Your Scientist!</h2>
+        <p class="form-subtitle" data-en="Register your student's science project for the fair. Sign-ups close on the deadline shown below."
+           data-es="Registre el proyecto de ciencias de su estudiante para la feria. Las inscripciones cierran en la fecha indicada abajo.">
+            Register your student's science project for the fair. Sign-ups close on the deadline shown below.
+        </p>
+
+        <!-- Deadline Banner -->
+        <div class="deadline-banner" id="deadline-banner">
+            <span class="deadline-icon">⏰</span>
+            <span data-en="Sign-up deadline: " data-es="Fecha límite de inscripción: ">Sign-up deadline: </span>
+            <strong id="deadline-date">April 11, 2026</strong>
+            <span class="countdown" id="countdown"></span>
+        </div>
+
+        <!-- Form Closed Message -->
+        <div class="form-closed" id="form-closed" style="display:none;">
+            <h3 data-en="Sign-ups are closed" data-es="Las inscripciones están cerradas">Sign-ups are closed</h3>
+            <p data-en="The deadline has passed. If you have questions, please contact us."
+               data-es="La fecha límite ha pasado. Si tiene preguntas, por favor contáctenos.">
+                The deadline has passed. If you have questions, please contact us.
+            </p>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="success-message" style="display:none;">
+            <div class="success-icon">🎉</div>
+            <h3 data-en="You're signed up!" data-es="¡Estás inscrito!">You're signed up!</h3>
+            <p data-en="A confirmation email has been sent. See you at the Science Fair on April 23!"
+               data-es="Se ha enviado un correo de confirmación. ¡Nos vemos en la Feria de Ciencias el 23 de abril!">
+                A confirmation email has been sent. See you at the Science Fair on April 23!
+            </p>
+        </div>
+
+        <form id="signup-form" novalidate>
+            <!-- Student Info -->
+            <fieldset>
+                <legend data-en="Student Information" data-es="Información del Estudiante">Student Information</legend>
+
+                <div class="form-group">
+                    <label for="student-name" data-en="Student Name *" data-es="Nombre del Estudiante *">Student Name *</label>
+                    <input type="text" id="student-name" name="studentName" required
+                           data-en-placeholder="First and Last Name"
+                           data-es-placeholder="Nombre y Apellido"
+                           placeholder="First and Last Name">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="grade" data-en="Grade *" data-es="Grado *">Grade *</label>
+                        <select id="grade" name="grade" required>
+                            <option value="" data-en="Select Grade" data-es="Seleccionar Grado">Select Grade</option>
+                            <option value="TK">TK</option>
+                            <option value="K">K</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacher" data-en="Teacher *" data-es="Maestro/a *">Teacher *</label>
+                        <input type="text" id="teacher" name="teacher" required
+                               data-en-placeholder="Teacher's Last Name"
+                               data-es-placeholder="Apellido del Maestro/a"
+                               placeholder="Teacher's Last Name">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Group Project -->
+            <fieldset>
+                <legend data-en="Project Details" data-es="Detalles del Proyecto">Project Details</legend>
+
+                <div class="form-group">
+                    <label data-en="Is this a group project? *" data-es="¿Es un proyecto en grupo? *">Is this a group project? *</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="isGroup" value="no" checked onchange="toggleGroupFields()">
+                            <span data-en="No — individual project" data-es="No — proyecto individual">No — individual project</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="isGroup" value="yes" onchange="toggleGroupFields()">
+                            <span data-en="Yes — group project" data-es="Sí — proyecto en grupo">Yes — group project</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Group Members (conditional) -->
+                <div class="form-group group-fields" id="group-fields" style="display:none;">
+                    <label for="group-members" data-en="Other Group Members (names and grades)" data-es="Otros Miembros del Grupo (nombres y grados)">Other Group Members (names and grades)</label>
+                    <textarea id="group-members" name="groupMembers" rows="3"
+                              data-en-placeholder="e.g., Jane Smith (3rd), Alex Garcia (3rd)"
+                              data-es-placeholder="ej., Jane Smith (3ro), Alex García (3ro)"
+                              placeholder="e.g., Jane Smith (3rd), Alex Garcia (3rd)"></textarea>
+                    <small data-en="Only one sign-up per group is needed." data-es="Solo se necesita una inscripción por grupo.">Only one sign-up per group is needed.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-title" data-en="Project Title *" data-es="Título del Proyecto *">Project Title *</label>
+                    <input type="text" id="project-title" name="projectTitle" required
+                           data-en-placeholder="What's your project called?"
+                           data-es-placeholder="¿Cómo se llama tu proyecto?"
+                           placeholder="What's your project called?">
+                </div>
+
+                <div class="form-group">
+                    <label for="project-description" data-en="Brief Description *" data-es="Descripción Breve *">Brief Description *</label>
+                    <textarea id="project-description" name="projectDescription" rows="3" required
+                              data-en-placeholder="In a few sentences, what is your project about?"
+                              data-es-placeholder="En pocas oraciones, ¿de qué trata tu proyecto?"
+                              placeholder="In a few sentences, what is your project about?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="category" data-en="Project Category" data-es="Categoría del Proyecto">Project Category</label>
+                    <select id="category" name="category">
+                        <option value="" data-en="Select a category (optional)" data-es="Seleccionar categoría (opcional)">Select a category (optional)</option>
+                        <option value="clean-water" data-en="Clean Water" data-es="Agua Limpia">Clean Water</option>
+                        <option value="energy" data-en="Energy" data-es="Energía">Energy</option>
+                        <option value="food" data-en="Food & Agriculture" data-es="Alimentos y Agricultura">Food & Agriculture</option>
+                        <option value="sustainability" data-en="Sustainability & Recycling" data-es="Sostenibilidad y Reciclaje">Sustainability & Recycling</option>
+                        <option value="health" data-en="Health & Body" data-es="Salud y Cuerpo">Health & Body</option>
+                        <option value="space" data-en="Space & Weather" data-es="Espacio y Clima">Space & Weather</option>
+                        <option value="animals" data-en="Animals & Nature" data-es="Animales y Naturaleza">Animals & Nature</option>
+                        <option value="engineering" data-en="Engineering & Building" data-es="Ingeniería y Construcción">Engineering & Building</option>
+                        <option value="other" data-en="Other" data-es="Otro">Other</option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <!-- Parent Info -->
+            <fieldset>
+                <legend data-en="Parent / Guardian Information" data-es="Información del Padre / Tutor">Parent / Guardian Information</legend>
+
+                <div class="form-group">
+                    <label for="parent-name" data-en="Parent/Guardian Name *" data-es="Nombre del Padre/Tutor *">Parent/Guardian Name *</label>
+                    <input type="text" id="parent-name" name="parentName" required
+                           data-en-placeholder="First and Last Name"
+                           data-es-placeholder="Nombre y Apellido"
+                           placeholder="First and Last Name">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="parent-email" data-en="Email *" data-es="Correo Electrónico *">Email *</label>
+                        <input type="email" id="parent-email" name="parentEmail" required
+                               placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="parent-phone" data-en="Phone" data-es="Teléfono">Phone</label>
+                        <input type="tel" id="parent-phone" name="parentPhone"
+                               placeholder="(555) 555-5555">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Needs -->
+            <fieldset>
+                <legend data-en="Day-Of Details" data-es="Detalles del Día">Day-Of Details</legend>
+
+                <div class="form-group">
+                    <label data-en="Do you need a tri-fold display board?" data-es="¿Necesita un tablero tríptico?">Do you need a tri-fold display board?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="needBoard" value="yes">
+                            <span data-en="Yes, I need a board" data-es="Sí, necesito un tablero">Yes, I need a board</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="needBoard" value="no" checked>
+                            <span data-en="No, I have my own" data-es="No, tengo el mío">No, I have my own</span>
+                        </label>
+                    </div>
+                    <small data-en="Boards are available for pickup from Ms. Pudvah." data-es="Los tableros están disponibles para recoger con la Sra. Pudvah.">Boards are available for pickup from Ms. Pudvah.</small>
+                </div>
+
+                <div class="form-group">
+                    <label data-en="Will you need access to electricity for your project?" data-es="¿Necesitará acceso a electricidad para su proyecto?">Will you need access to electricity for your project?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="needPower" value="yes">
+                            <span data-en="Yes" data-es="Sí">Yes</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="needPower" value="no" checked>
+                            <span data-en="No" data-es="No">No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="special-needs" data-en="Anything else we should know?" data-es="¿Algo más que debamos saber?">Anything else we should know?</label>
+                    <textarea id="special-needs" name="specialNeeds" rows="2"
+                              data-en-placeholder="Special setup needs, accommodations, etc."
+                              data-es-placeholder="Necesidades especiales de montaje, acomodaciones, etc."
+                              placeholder="Special setup needs, accommodations, etc."></textarea>
+                </div>
+            </fieldset>
+
+            <!-- Privacy & Consent -->
+            <fieldset class="privacy-fieldset">
+                <div class="privacy-notice">
+                    <div class="privacy-icon">🔒</div>
+                    <div>
+                        <strong data-en="Your Privacy" data-es="Su Privacidad">Your Privacy</strong>
+                        <p data-en="The information you provide is used solely by Capri Elementary PTA to coordinate Science Fair participation. Your data is stored securely and shared only with event organizers (PTA volunteers and school staff). We do not share your information with third parties. All sign-up data will be deleted within 30 days after the event."
+                           data-es="La información que proporciona se utiliza únicamente por el PTA de Capri Elementary para coordinar la participación en la Feria de Ciencias. Sus datos se almacenan de forma segura y se comparten solo con los organizadores del evento (voluntarios del PTA y personal escolar). No compartimos su información con terceros. Todos los datos de inscripción se eliminarán dentro de los 30 días posteriores al evento.">
+                            The information you provide is used solely by Capri Elementary PTA to coordinate Science Fair participation. Your data is stored securely and shared only with event organizers (PTA volunteers and school staff). We do not share your information with third parties. All sign-up data will be deleted within 30 days after the event.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group consent-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <span data-en="I understand and agree that my information will be used to coordinate Science Fair participation as described above. *"
+                              data-es="Entiendo y acepto que mi información se utilizará para coordinar la participación en la Feria de Ciencias como se describe arriba. *">
+                            I understand and agree that my information will be used to coordinate Science Fair participation as described above. *
+                        </span>
+                    </label>
+                </div>
+            </fieldset>
+
+            <!-- Optional: Support STEM -->
+            <div class="donate-strip">
+                <span class="donate-label" data-en="Inspired? Support STEM at Capri:" data-es="Inspirado? Apoya STEM en Capri:">Inspired? Support STEM at Capri:</span>
+                <div class="donate-links">
+                    <a href="https://caprieef.org/" target="_blank" rel="noopener" class="donate-chip" data-en="Capri EEF" data-es="Capri EEF">Capri EEF</a>
+                    <a href="https://www.capripta.org/fundraisers" target="_blank" rel="noopener" class="donate-chip" data-en="PTA Giving" data-es="Donar al PTA">PTA Giving</a>
+                    <a href="https://www.donorschoose.org/schools/california/encinitas-union-school-district/capri-elementary-school/36382" target="_blank" rel="noopener" class="donate-chip" data-en="DonorsChoose" data-es="DonorsChoose">DonorsChoose</a>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submit-btn">
+                <span data-en="Sign Up for Science Fair!" data-es="¡Inscribirse en la Feria de Ciencias!">Sign Up for Science Fair!</span>
+            </button>
+
+            <p class="form-footer" data-en="Questions? Contact us at capriptapresident@gmail.com"
+               data-es="¿Preguntas? Contáctenos en capriptapresident@gmail.com">
+                Questions? Contact us at capriptapresident@gmail.com
+            </p>
+        </form>
+    </section>
+</main>
+
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p data-en="Capri Elementary PTA • Science Fair 2026" data-es="PTA de Capri Elementary • Feria de Ciencias 2026">Capri Elementary PTA • Science Fair 2026</p>
+    <p data-en="Science Brings Us Together 🔬" data-es="La Ciencia Nos Une 🔬">Science Brings Us Together 🔬</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

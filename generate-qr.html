@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Generator — Capri Science Fair</title>
+    <style>
+        body {
+            font-family: -apple-system, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 { color: #1a6b3c; }
+        #qr-container {
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            display: inline-block;
+            border: 2px solid #1a6b3c;
+            border-radius: 12px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        button {
+            padding: 12px 32px;
+            background: #1a6b3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 8px;
+        }
+        button:hover { background: #2d9254; }
+        .instructions {
+            text-align: left;
+            background: #f0fdf4;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        #printable {
+            display: none;
+        }
+        @media print {
+            body > *:not(#printable) { display: none; }
+            #printable {
+                display: block;
+                text-align: center;
+                padding-top: 40px;
+            }
+            #printable h2 {
+                font-size: 28px;
+                color: #1a6b3c;
+                margin-bottom: 8px;
+            }
+            #printable p {
+                font-size: 18px;
+                margin-bottom: 24px;
+            }
+            #printable .scan-text {
+                font-size: 16px;
+                margin-top: 16px;
+                color: #666;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🔬 QR Code Generator</h1>
+    <p>Generate a QR code for the Capri Science Fair sign-up page</p>
+
+    <input type="url" id="url-input" placeholder="Paste your GitHub Pages URL here"
+           value="https://YOUR-USERNAME.github.io/capri-science-fair/">
+
+    <br>
+    <button onclick="generateQR()">Generate QR Code</button>
+
+    <div id="qr-container" style="display:none;">
+        <canvas id="qr-canvas"></canvas>
+    </div>
+
+    <br>
+    <button id="download-btn" style="display:none;" onclick="downloadQR()">Download QR (PNG)</button>
+    <button id="print-btn" style="display:none;" onclick="printQR()">Print QR Flyer</button>
+
+    <!-- Printable flyer version -->
+    <div id="printable">
+        <h2>🔬 Capri Science Fair 2026</h2>
+        <p>"Science Brings Us Together" / "La Ciencia Nos Une"</p>
+        <p>Wednesday, April 23 • 5:00-6:30 PM • Capri Quad</p>
+        <canvas id="qr-print-canvas"></canvas>
+        <p class="scan-text">Scan to sign up! / ¡Escanea para inscribirte!</p>
+    </div>
+
+    <div class="instructions">
+        <strong>How to use:</strong>
+        <ol>
+            <li>Deploy your sign-up page to GitHub Pages (instructions in SETUP.md)</li>
+            <li>Paste the URL above and click "Generate QR Code"</li>
+            <li>Download the QR image to share digitally, or print the flyer version</li>
+            <li>Share with Jenny for the flyer, or send directly to parents</li>
+        </ol>
+    </div>
+
+    <!-- QR Code library (lightweight, no dependencies) -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script>
+        function generateQR() {
+            const url = document.getElementById('url-input').value;
+            if (!url || url.includes('YOUR-USERNAME')) {
+                alert('Please enter your actual GitHub Pages URL');
+                return;
+            }
+
+            const canvas = document.getElementById('qr-canvas');
+            QRCode.toCanvas(canvas, url, {
+                width: 300,
+                margin: 2,
+                color: { dark: '#1a6b3c', light: '#ffffff' }
+            }, function(error) {
+                if (error) {
+                    console.error(error);
+                    alert('Error generating QR code');
+                    return;
+                }
+                document.getElementById('qr-container').style.display = 'inline-block';
+                document.getElementById('download-btn').style.display = 'inline-block';
+                document.getElementById('print-btn').style.display = 'inline-block';
+
+                // Also generate print version
+                const printCanvas = document.getElementById('qr-print-canvas');
+                QRCode.toCanvas(printCanvas, url, {
+                    width: 400,
+                    margin: 2,
+                    color: { dark: '#1a6b3c', light: '#ffffff' }
+                });
+            });
+        }
+
+        function downloadQR() {
+            const canvas = document.getElementById('qr-canvas');
+            const link = document.createElement('a');
+            link.download = 'capri-science-fair-qr.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function printQR() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
