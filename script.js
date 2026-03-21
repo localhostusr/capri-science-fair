@@ -459,13 +459,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Separate smoke canvas so bolt clearing doesn't kill it
-            var smokeCanvas = bolt.querySelector('.smoke-canvas');
+            // Smoke canvas — appended to body, not inside lightning-full (which fades out)
+            var smokeCanvas = document.querySelector('.smoke-canvas');
             if (!smokeCanvas) {
                 smokeCanvas = document.createElement('canvas');
                 smokeCanvas.className = 'smoke-canvas';
-                smokeCanvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:11;';
-                bolt.appendChild(smokeCanvas);
+                smokeCanvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10000;';
+                document.body.appendChild(smokeCanvas);
             }
             smokeCanvas.width = window.innerWidth;
             smokeCanvas.height = window.innerHeight;
