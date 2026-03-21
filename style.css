@@ -482,6 +482,8 @@ body {
 
 .form-section {
     padding: 0;
+    position: relative;
+    overflow: visible;
 }
 
 .form-section h2 {
@@ -1381,18 +1383,18 @@ footer p + p {
 #form-header {
     position: relative;
     z-index: 1;
-    overflow: hidden;
+    overflow: visible;
     padding-top: 24px;
     padding-bottom: 12px;
 }
 
 .flask-bg {
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 50%;
-    transform: translate(-50%, -42%);
+    transform: translateX(-50%);
     width: 500px;
-    height: 380px;
+    height: 450px;
     z-index: 0;
     pointer-events: none;
 }
