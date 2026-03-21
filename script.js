@@ -471,19 +471,19 @@ document.addEventListener('DOMContentLoaded', function() {
             smokeCanvas.height = window.innerHeight;
             var sctx = smokeCanvas.getContext('2d');
 
-            // Smoke particles
+            // Smoke particles — large, dramatic, billowing
             var smokeParticles = [];
-            for (var si = 0; si < 20; si++) {
+            for (var si = 0; si < 25; si++) {
                 smokeParticles.push({
-                    x: targetX + (Math.random() - 0.5) * 24,
-                    y: targetY + (Math.random() - 0.5) * 8,
-                    vx: (Math.random() - 0.5) * 0.6,
-                    vy: -(0.8 + Math.random() * 1.2),
-                    size: 6 + Math.random() * 10,
-                    growRate: 0.35 + Math.random() * 0.5,
-                    maxOpacity: 0.2 + Math.random() * 0.15,
+                    x: targetX + (Math.random() - 0.5) * 20,
+                    y: targetY,
+                    vx: (Math.random() - 0.5) * 1.0,
+                    vy: -(0.5 + Math.random() * 1.0),
+                    size: 10 + Math.random() * 20,
+                    growRate: 0.5 + Math.random() * 0.6,
+                    maxOpacity: 0.35 + Math.random() * 0.2,
                     age: 0,
-                    life: 90 + Math.random() * 70
+                    life: 120 + Math.random() * 80
                 });
             }
 
@@ -497,28 +497,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     var progress = p.age / p.life;
 
                     var opacity;
-                    if (progress < 0.12) {
-                        opacity = p.maxOpacity * (progress / 0.12);
+                    if (progress < 0.1) {
+                        opacity = p.maxOpacity * (progress / 0.1);
+                    } else if (progress < 0.3) {
+                        opacity = p.maxOpacity;
                     } else {
-                        opacity = p.maxOpacity * (1 - (progress - 0.12) / 0.88);
+                        opacity = p.maxOpacity * (1 - (progress - 0.3) / 0.7);
                     }
 
-                    p.x += p.vx + (Math.random() - 0.5) * 0.4;
+                    // Gentle drift and wobble
+                    p.x += p.vx + Math.sin(p.age * 0.05) * 0.3;
                     p.y += p.vy;
-                    p.vy *= 0.997;
+                    p.vy *= 0.998;
+                    p.vx *= 0.999;
                     p.size += p.growRate;
+                    p.growRate *= 0.995;
 
                     sctx.save();
                     sctx.globalAlpha = opacity;
-                    var grad = sctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
-                    grad.addColorStop(0, 'rgba(80,80,80,0.5)');
-                    grad.addColorStop(0.3, 'rgba(100,100,100,0.25)');
-                    grad.addColorStop(0.6, 'rgba(120,120,120,0.1)');
-                    grad.addColorStop(1, 'rgba(140,140,140,0)');
-                    sctx.fillStyle = grad;
-                    sctx.beginPath();
-                    sctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    sctx.fill();
+                    // Multiple overlapping circles for soft billowy look
+                    for (var layer = 0; layer < 3; layer++) {
+                        var lx = p.x + (Math.random() - 0.5) * p.size * 0.3;
+                        var ly = p.y + (Math.random() - 0.5) * p.size * 0.2;
+                        var ls = p.size * (0.6 + layer * 0.25);
+                        var grad = sctx.createRadialGradient(lx, ly, 0, lx, ly, ls);
+                        grad.addColorStop(0, 'rgba(70,70,70,0.3)');
+                        grad.addColorStop(0.3, 'rgba(90,90,90,0.15)');
+                        grad.addColorStop(0.6, 'rgba(110,110,110,0.06)');
+                        grad.addColorStop(1, 'rgba(130,130,130,0)');
+                        sctx.fillStyle = grad;
+                        sctx.beginPath();
+                        sctx.arc(lx, ly, ls, 0, Math.PI * 2);
+                        sctx.fill();
+                    }
                     sctx.restore();
                 });
                 if (!allDone) {
