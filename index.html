@@ -83,8 +83,12 @@
         <div class="particle atom atom-1"></div>
         <div class="particle atom atom-2"></div>
         <div class="particle atom atom-3"></div>
+        <div class="particle atom atom-4"></div>
+        <div class="particle atom atom-5"></div>
         <div class="particle molecule mol-1"></div>
         <div class="particle molecule mol-2"></div>
+        <div class="particle molecule mol-3"></div>
+        <div class="particle molecule mol-4"></div>
     </div>
 </header>
 
@@ -193,7 +197,7 @@
             <div class="flask-bg" aria-hidden="true">
                 <svg viewBox="-120 -30 440 290" xmlns="http://www.w3.org/2000/svg" class="flask-svg">
                     <!-- Test tubes — left side -->
-                    <g opacity="0.25">
+                    <g opacity="0.45">
                         <!-- Tube 1 — tilted left -->
                         <g transform="translate(-60,60) rotate(-15, 15, 60)">
                             <rect x="8" y="10" width="14" height="100" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
@@ -211,7 +215,7 @@
                     </g>
 
                     <!-- Test tubes — right side -->
-                    <g opacity="0.25">
+                    <g opacity="0.45">
                         <!-- Tube 3 -->
                         <g transform="translate(215,70) rotate(8, 15, 60)">
                             <rect x="8" y="10" width="14" height="95" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
@@ -235,24 +239,24 @@
                     </g>
 
                     <!-- Flask body — center -->
-                    <path d="M80,10 L80,90 L20,220 Q15,235 30,245 L170,245 Q185,235 180,220 L120,90 L120,10" fill="none" stroke="#9cc5d4" stroke-width="3" opacity="0.3"/>
+                    <path d="M80,10 L80,90 L20,220 Q15,235 30,245 L170,245 Q185,235 180,220 L120,90 L120,10" fill="none" stroke="#9cc5d4" stroke-width="3.5" opacity="0.55"/>
                     <!-- Flask rim -->
-                    <line x1="70" y1="10" x2="130" y2="10" stroke="#9cc5d4" stroke-width="3.5" opacity="0.35" stroke-linecap="round"/>
+                    <line x1="70" y1="10" x2="130" y2="10" stroke="#9cc5d4" stroke-width="4" opacity="0.6" stroke-linecap="round"/>
                     <!-- Liquid fill -->
-                    <path d="M38,200 L20,220 Q15,235 30,245 L170,245 Q185,235 180,220 L162,200 Z" fill="#e8611a" opacity="0.12"/>
-                    <path d="M45,190 L25,215 Q18,232 32,243 L168,243 Q182,232 175,215 L155,190 Z" fill="#e8611a" opacity="0.08"/>
+                    <path d="M38,200 L20,220 Q15,235 30,245 L170,245 Q185,235 180,220 L162,200 Z" fill="#e8611a" opacity="0.2"/>
+                    <path d="M45,190 L25,215 Q18,232 32,243 L168,243 Q182,232 175,215 L155,190 Z" fill="#e8611a" opacity="0.12"/>
                     <!-- Liquid surface wave -->
-                    <path d="M38,200 Q60,192 80,200 Q100,208 120,200 Q140,192 162,200" fill="none" stroke="#e8611a" stroke-width="2" opacity="0.2"/>
+                    <path d="M38,200 Q60,192 80,200 Q100,208 120,200 Q140,192 162,200" fill="none" stroke="#e8611a" stroke-width="2" opacity="0.3"/>
                     <!-- Bubbles -->
-                    <circle cx="70" cy="220" r="5" fill="#e8611a" opacity="0.12" class="flask-bubble flask-b1"/>
-                    <circle cx="110" cy="230" r="4" fill="#9cc5d4" opacity="0.15" class="flask-bubble flask-b2"/>
-                    <circle cx="90" cy="215" r="6" fill="#e8611a" opacity="0.1" class="flask-bubble flask-b3"/>
-                    <circle cx="130" cy="225" r="3.5" fill="#9cc5d4" opacity="0.12" class="flask-bubble flask-b4"/>
-                    <circle cx="80" cy="235" r="3" fill="#e8611a" opacity="0.1" class="flask-bubble flask-b5"/>
+                    <circle cx="70" cy="220" r="5" fill="#e8611a" opacity="0.25" class="flask-bubble flask-b1"/>
+                    <circle cx="110" cy="230" r="4" fill="#9cc5d4" opacity="0.3" class="flask-bubble flask-b2"/>
+                    <circle cx="90" cy="215" r="6" fill="#e8611a" opacity="0.2" class="flask-bubble flask-b3"/>
+                    <circle cx="130" cy="225" r="3.5" fill="#9cc5d4" opacity="0.25" class="flask-bubble flask-b4"/>
+                    <circle cx="80" cy="235" r="3" fill="#e8611a" opacity="0.2" class="flask-bubble flask-b5"/>
                     <!-- Steam -->
-                    <path d="M90,8 Q88,0 92,-8 Q96,-16 90,-24" fill="none" stroke="#9cc5d4" stroke-width="1.5" opacity="0.15" class="flask-steam steam-1"/>
-                    <path d="M100,8 Q103,0 98,-8 Q93,-16 100,-24" fill="none" stroke="#9cc5d4" stroke-width="1.5" opacity="0.12" class="flask-steam steam-2"/>
-                    <path d="M110,8 Q108,-2 112,-10 Q116,-18 110,-26" fill="none" stroke="#9cc5d4" stroke-width="1.5" opacity="0.1" class="flask-steam steam-3"/>
+                    <path d="M90,8 Q88,0 92,-8 Q96,-16 90,-24" fill="none" stroke="#9cc5d4" stroke-width="2" opacity="0.3" class="flask-steam steam-1"/>
+                    <path d="M100,8 Q103,0 98,-8 Q93,-16 100,-24" fill="none" stroke="#9cc5d4" stroke-width="2" opacity="0.25" class="flask-steam steam-2"/>
+                    <path d="M110,8 Q108,-2 112,-10 Q116,-18 110,-26" fill="none" stroke="#9cc5d4" stroke-width="2" opacity="0.2" class="flask-steam steam-3"/>
                 </svg>
             </div>
             <h2 data-en="Sign Up Your Scientist!" data-es="¡Inscribe a Tu Científico!">Sign Up Your Scientist!</h2>
@@ -289,13 +293,6 @@
             </p>
         </div>
 
-        <!-- DNA helix form border -->
-        <div class="form-dna-border" aria-hidden="true">
-            <svg viewBox="0 0 800 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="24">
-                <path d="M0,12 Q10,2 20,12 Q30,22 40,12 Q50,2 60,12 Q70,22 80,12 Q90,2 100,12 Q110,22 120,12 Q130,2 140,12 Q150,22 160,12 Q170,2 180,12 Q190,22 200,12 Q210,2 220,12 Q230,22 240,12 Q250,2 260,12 Q270,22 280,12 Q290,2 300,12 Q310,22 320,12 Q330,2 340,12 Q350,22 360,12 Q370,2 380,12 Q390,22 400,12 Q410,2 420,12 Q430,22 440,12 Q450,2 460,12 Q470,22 480,12 Q490,2 500,12 Q510,22 520,12 Q530,2 540,12 Q550,22 560,12 Q570,2 580,12 Q590,22 600,12 Q610,2 620,12 Q630,22 640,12 Q650,2 660,12 Q670,22 680,12 Q690,2 700,12 Q710,22 720,12 Q730,2 740,12 Q750,22 760,12 Q770,2 780,12 Q790,22 800,12" fill="none" stroke="#e8611a" stroke-width="2" opacity="0.35"/>
-                <path d="M0,12 Q10,22 20,12 Q30,2 40,12 Q50,22 60,12 Q70,2 80,12 Q90,22 100,12 Q110,2 120,12 Q130,22 140,12 Q150,2 160,12 Q170,22 180,12 Q190,2 200,12 Q210,22 220,12 Q230,2 240,12 Q250,22 260,12 Q270,2 280,12 Q290,22 300,12 Q310,2 320,12 Q330,22 340,12 Q350,2 360,12 Q370,22 380,12 Q390,2 400,12 Q410,22 420,12 Q430,2 440,12 Q450,22 460,12 Q470,2 480,12 Q490,22 500,12 Q510,2 520,12 Q530,22 540,12 Q550,2 560,12 Q570,22 580,12 Q590,2 600,12 Q610,22 620,12 Q630,2 640,12 Q650,22 660,12 Q670,2 680,12 Q690,22 700,12 Q710,2 720,12 Q730,22 740,12 Q750,2 760,12 Q770,22 780,12 Q790,2 800,12" fill="none" stroke="#9cc5d4" stroke-width="2" opacity="0.35"/>
-            </svg>
-        </div>
         <form id="signup-form" novalidate>
             <!-- Student Info -->
             <fieldset data-aos="fade-up">
@@ -530,9 +527,15 @@
                 </div>
             </div>
 
-            <button type="submit" class="submit-btn" id="submit-btn">
-                <span data-en="Sign Up for Science Fair!" data-es="¡Inscribirse en la Feria de Ciencias!">Sign Up for Science Fair!</span>
-            </button>
+            <div class="submit-orbit-wrap">
+                <div class="orbit-dot orbit-dot-1"></div>
+                <div class="orbit-dot orbit-dot-2"></div>
+                <div class="orbit-dot orbit-dot-3"></div>
+                <div class="orbit-dot orbit-dot-4"></div>
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <span data-en="Sign Up for Science Fair!" data-es="¡Inscribirse en la Feria de Ciencias!">Sign Up for Science Fair!</span>
+                </button>
+            </div>
 
             <p class="form-footer" data-en="Questions? Contact us at capriptapresident@gmail.com"
                data-es="¿Preguntas? Contáctenos en capriptapresident@gmail.com">

@@ -889,8 +889,8 @@ input[type="radio"] {
 /* Submit */
 .submit-btn {
     display: block;
-    width: calc(100% - 64px);
-    margin: 8px 32px 32px;
+    width: 100%;
+    margin: 0;
     padding: 16px;
     background: var(--primary);
     color: white;
@@ -1303,6 +1303,22 @@ footer p + p {
     transform-origin: left center;
 }
 
+.atom-4 {
+    top: 45%;
+    right: 20%;
+    width: 10px;
+    height: 10px;
+    animation: float2 11s ease-in-out infinite reverse;
+}
+
+.atom-5 {
+    bottom: 40%;
+    left: 25%;
+    width: 7px;
+    height: 7px;
+    animation: float3 13s ease-in-out infinite;
+}
+
 .mol-1 {
     top: 35%;
     right: 6%;
@@ -1313,6 +1329,18 @@ footer p + p {
     bottom: 15%;
     right: 25%;
     animation: float2 14s ease-in-out infinite;
+}
+
+.mol-3 {
+    top: 25%;
+    left: 20%;
+    animation: float3 16s ease-in-out infinite;
+}
+
+.mol-4 {
+    bottom: 30%;
+    right: 8%;
+    animation: float1 13s ease-in-out infinite reverse;
 }
 
 @keyframes float1 {
@@ -1337,6 +1365,9 @@ footer p + p {
 #form-header {
     position: relative;
     z-index: 1;
+    overflow: hidden;
+    padding-top: 24px;
+    padding-bottom: 12px;
 }
 
 .flask-bg {
@@ -1419,36 +1450,54 @@ footer p + p {
     height: 100%;
 }
 
-/* Orbital electrons on submit button — always visible, orbiting */
-.submit-btn {
+/* Orbital electrons on submit button — 4 orbiting dots */
+.submit-orbit-wrap {
     position: relative;
-    overflow: visible;
+    margin: 8px 32px 32px;
 }
 
-.submit-btn::before,
-.submit-btn::after {
-    content: '';
+.submit-btn {
+    position: relative;
+    width: 100%;
+}
+
+.orbit-dot {
     position: absolute;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--secondary);
-    box-shadow: 0 0 6px rgba(156,197,212,0.6);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    z-index: 10;
+    pointer-events: none;
 }
 
-.submit-btn::before {
+.orbit-dot-1 {
     background: var(--secondary);
+    box-shadow: 0 0 8px rgba(156,197,212,0.7);
     animation: orbit1 3s linear infinite;
 }
 
-.submit-btn::after {
+.orbit-dot-2 {
     background: var(--primary-light);
     width: 6px;
     height: 6px;
-    box-shadow: 0 0 6px rgba(232,97,26,0.5);
+    box-shadow: 0 0 8px rgba(232,97,26,0.6);
     animation: orbit2 4s linear infinite;
+}
+
+.orbit-dot-3 {
+    background: #ffffff;
+    width: 5px;
+    height: 5px;
+    box-shadow: 0 0 6px rgba(255,255,255,0.5);
+    animation: orbit3 3.5s linear infinite;
+}
+
+.orbit-dot-4 {
+    background: var(--secondary-light);
+    width: 7px;
+    height: 7px;
+    box-shadow: 0 0 8px rgba(156,197,212,0.5);
+    animation: orbit4 5s linear infinite;
 }
 
 @keyframes orbit1 {
@@ -1465,6 +1514,22 @@ footer p + p {
     50% { top: -4px; left: 40%; }
     75% { top: 50%; left: calc(100% + 6px); }
     100% { top: calc(100% + 4px); left: 60%; }
+}
+
+@keyframes orbit3 {
+    0% { top: 50%; left: calc(100% + 6px); }
+    25% { top: -4px; left: 50%; }
+    50% { top: 50%; left: -8px; }
+    75% { top: calc(100% + 4px); left: 30%; }
+    100% { top: 50%; left: calc(100% + 6px); }
+}
+
+@keyframes orbit4 {
+    0% { top: -4px; left: 80%; }
+    25% { top: 50%; left: -8px; }
+    50% { top: calc(100% + 4px); left: 20%; }
+    75% { top: 50%; left: calc(100% + 6px); }
+    100% { top: -4px; left: 80%; }
 }
 
 /* Science watermark background pattern on main content */
