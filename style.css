@@ -584,7 +584,23 @@ form {
 fieldset {
     border: none;
     padding: 32px 32px 24px;
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: none;
+    position: relative;
+}
+
+fieldset::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 20px;
+    margin-top: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 20' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,10 Q10,2 20,10 Q30,18 40,10 Q50,2 60,10 Q70,18 80,10 Q90,2 100,10 Q110,18 120,10 Q130,2 140,10 Q150,18 160,10 Q170,2 180,10 Q190,18 200,10 Q210,2 220,10 Q230,18 240,10 Q250,2 260,10 Q270,18 280,10 Q290,2 300,10 Q310,18 320,10 Q330,2 340,10 Q350,18 360,10 Q370,2 380,10 Q390,18 400,10' fill='none' stroke='%23e8611a' stroke-width='1.8' opacity='0.3'/%3E%3Cpath d='M0,10 Q10,18 20,10 Q30,2 40,10 Q50,18 60,10 Q70,2 80,10 Q90,18 100,10 Q110,2 120,10 Q130,18 140,10 Q150,2 160,10 Q170,18 180,10 Q190,2 200,10 Q210,18 220,10 Q230,2 240,10 Q250,18 260,10 Q270,2 280,10 Q290,18 300,10 Q310,2 320,10 Q330,18 340,10 Q350,2 360,10 Q370,18 380,10 Q390,2 400,10' fill='none' stroke='%239cc5d4' stroke-width='1.8' opacity='0.3'/%3E%3Cg opacity='0.2'%3E%3Cline x1='10' y1='6' x2='10' y2='14' stroke='%23888' stroke-width='1'/%3E%3Ccircle cx='10' cy='6' r='1.2' fill='%23e8611a'/%3E%3Ccircle cx='10' cy='14' r='1.2' fill='%239cc5d4'/%3E%3Cline x1='30' y1='6' x2='30' y2='14' stroke='%23888' stroke-width='1'/%3E%3Ccircle cx='30' cy='14' r='1.2' fill='%23e8611a'/%3E%3Ccircle cx='30' cy='6' r='1.2' fill='%239cc5d4'/%3E%3Cline x1='50' y1='6' x2='50' y2='14' stroke='%23888' stroke-width='1'/%3E%3Ccircle cx='50' cy='6' r='1.2' fill='%23e8611a'/%3E%3Ccircle cx='50' cy='14' r='1.2' fill='%239cc5d4'/%3E%3Cline x1='70' y1='6' x2='70' y2='14' stroke='%23888' stroke-width='1'/%3E%3Ccircle cx='70' cy='14' r='1.2' fill='%23e8611a'/%3E%3Ccircle cx='70' cy='6' r='1.2' fill='%239cc5d4'/%3E%3Cline x1='90' y1='6' x2='90' y2='14' stroke='%23888' stroke-width='1'/%3E%3Ccircle cx='90' cy='6' r='1.2' fill='%23e8611a'/%3E%3Ccircle cx='90' cy='14' r='1.2' fill='%239cc5d4'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 200px 20px;
+}
+
+fieldset:last-of-type::after {
+    display: none;
 }
 
 fieldset:last-of-type {
