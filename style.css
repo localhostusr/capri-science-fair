@@ -962,6 +962,52 @@ input[type="radio"] {
     100% { opacity: 0; transform: scale(1.5); }
 }
 
+/* Smoke / smolder after lightning */
+.smoke-puff {
+    position: absolute;
+    bottom: -5px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(120,120,120,0.5) 0%, rgba(80,80,80,0.2) 40%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 11;
+}
+
+.smoke-2 {
+    left: -4px;
+    width: 12px;
+    height: 12px;
+}
+
+.smoke-3 {
+    left: 8px;
+    width: 10px;
+    height: 10px;
+}
+
+.lightning-zone.struck .smoke-1 {
+    animation: smokeRise 2s ease-out 0.5s forwards;
+}
+
+.lightning-zone.struck .smoke-2 {
+    animation: smokeRise 2.2s ease-out 0.7s forwards;
+}
+
+.lightning-zone.struck .smoke-3 {
+    animation: smokeRise 1.8s ease-out 0.9s forwards;
+}
+
+@keyframes smokeRise {
+    0% { opacity: 0; transform: translateY(0) scale(0.5); }
+    15% { opacity: 0.5; transform: translateY(-8px) scale(0.8); }
+    40% { opacity: 0.35; transform: translateY(-25px) scale(1.2); }
+    70% { opacity: 0.15; transform: translateY(-45px) scale(1.6); }
+    100% { opacity: 0; transform: translateY(-65px) scale(2); }
+}
+
 /* Submit */
 .submit-btn {
     display: block;
