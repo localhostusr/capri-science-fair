@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Oswald:wght@700&family=Bangers&family=Anton&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
@@ -18,33 +19,38 @@
 
 <!-- Hero Section -->
 <header class="hero">
+    <!-- Explosion flash -->
+    <div class="hero-flash" id="hero-flash" aria-hidden="true"></div>
+    <!-- Explosion sparks -->
+    <div class="sparks-container" id="sparks-container" aria-hidden="true"></div>
+
     <div class="hero-content">
         <div class="hero-layout">
-            <a href="https://capri.eusd.net/" target="_blank" rel="noopener" class="hero-logo-link">
+            <a href="https://capri.eusd.net/" target="_blank" rel="noopener" class="hero-logo-link hero-anim hero-anim-logo-left">
                 <img src="logo.png" alt="Capri Elementary Stingrays" class="hero-logo">
             </a>
             <div class="hero-text">
-                <div class="hero-badge">
+                <div class="hero-badge hero-anim hero-anim-badge">
                     <span data-en="Capri Elementary" data-es="Escuela Primaria Capri">Capri Elementary</span>
                 </div>
-                <h1 data-en="Science Fair 2026" data-es="Feria de Ciencias 2026">Science Fair 2026</h1>
-                <p class="theme" data-en="&ldquo;Science Brings Us Together&rdquo;" data-es="&ldquo;La Ciencia Nos Une&rdquo;">&ldquo;Science Brings Us Together&rdquo;</p>
+                <h1 class="hero-anim hero-anim-title" data-en="Science Fair 2026" data-es="Feria de Ciencias 2026">Science Fair 2026</h1>
+                <p class="theme hero-anim hero-anim-theme" data-en="&ldquo;Science Brings Us Together&rdquo;" data-es="&ldquo;La Ciencia Nos Une&rdquo;">&ldquo;Science Brings Us Together&rdquo;</p>
                 <div class="event-details">
-                    <div class="detail">
+                    <div class="detail hero-anim hero-anim-detail-1">
                         <span class="detail-icon">📅</span>
                         <span data-en="Wednesday, April 23, 2026" data-es="Miércoles, 23 de abril de 2026">Wednesday, April 23, 2026</span>
                     </div>
-                    <div class="detail">
+                    <div class="detail hero-anim hero-anim-detail-2">
                         <span class="detail-icon">🕐</span>
                         <span data-en="5:00 PM – 6:30 PM" data-es="5:00 PM – 6:30 PM">5:00 PM – 6:30 PM</span>
                     </div>
-                    <a href="https://www.google.com/maps/place/33.075319,-117.288282" target="_blank" rel="noopener" class="detail detail-link">
+                    <a href="https://www.google.com/maps/place/33.075319,-117.288282" target="_blank" rel="noopener" class="detail detail-link hero-anim hero-anim-detail-3">
                         <span class="detail-icon">📍</span>
                         <span data-en="Capri Quad" data-es="Patio de Capri">Capri Quad</span>
                     </a>
                 </div>
             </div>
-            <a href="https://www.capripta.org/" target="_blank" rel="noopener" class="hero-logo-link hero-logo-right">
+            <a href="https://www.capripta.org/" target="_blank" rel="noopener" class="hero-logo-link hero-logo-right hero-anim hero-anim-logo-right">
                 <div class="pta-logo-wrap">
                     <img src="logo.png" alt="Capri PTA" class="hero-logo pta-logo-img">
                     <div class="pta-overlay">
@@ -89,7 +95,7 @@
 <!-- Sidebar -->
 <aside class="sidebar">
     <div class="info-stack">
-            <div class="info-card">
+            <div class="info-card" data-aos="fade-right" data-aos-delay="100">
                 <div class="info-icon">🧪</div>
                 <h3 data-en="What's Happening" data-es="Qué Va a Pasar">What's Happening</h3>
                 <p data-en="Students showcase their science projects, then enjoy a live show by SD Lab Rats!"
@@ -97,7 +103,7 @@
                     Students showcase their science projects, then enjoy a live show by SD Lab Rats!
                 </p>
             </div>
-            <div class="info-card">
+            <div class="info-card" data-aos="fade-right" data-aos-delay="200">
                 <div class="info-icon">👥</div>
                 <h3 data-en="This Year's Focus" data-es="Enfoque de Este Año">This Year's Focus</h3>
                 <p data-en="Group projects are encouraged! Think about community challenges like clean water, energy, food, and sustainability. Work together to explore solutions."
@@ -105,7 +111,7 @@
                     Group projects are encouraged! Think about community challenges like clean water, energy, food, and sustainability. Work together to explore solutions.
                 </p>
             </div>
-            <div class="info-card">
+            <div class="info-card" data-aos="fade-right" data-aos-delay="300">
                 <div class="info-icon">🎪</div>
                 <h3 data-en="Everyone's Invited" data-es="Todos Están Invitados">Everyone's Invited</h3>
                 <p data-en="The Science Fair is open to ALL Capri families — you don't need a project to attend! Come explore, learn, and enjoy the SD Lab Rats interactive stations and science show."
@@ -195,7 +201,7 @@
 
         <form id="signup-form" novalidate>
             <!-- Student Info -->
-            <fieldset>
+            <fieldset data-aos="fade-up">
                 <legend data-en="Student Information" data-es="Información del Estudiante">Student Information</legend>
 
                 <div class="form-group">
@@ -231,7 +237,7 @@
             </fieldset>
 
             <!-- Group Project -->
-            <fieldset>
+            <fieldset data-aos="fade-up">
                 <legend data-en="Project Details" data-es="Detalles del Proyecto">Project Details</legend>
 
                 <div class="form-group">
@@ -326,7 +332,7 @@
             </fieldset>
 
             <!-- Parent Info -->
-            <fieldset>
+            <fieldset data-aos="fade-up">
                 <legend data-en="Parent / Guardian Information" data-es="Información del Padre / Tutor">Parent / Guardian Information</legend>
 
                 <div class="form-group">
@@ -352,7 +358,7 @@
             </fieldset>
 
             <!-- Needs -->
-            <fieldset>
+            <fieldset data-aos="fade-up">
                 <legend data-en="Day-Of Details" data-es="Detalles del Día">Day-Of Details</legend>
 
                 <div class="form-group">
@@ -448,6 +454,78 @@
     <p data-en="Science Brings Us Together 🔬" data-es="La Ciencia Nos Une 🔬">Science Brings Us Together 🔬</p>
 </footer>
 
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="script.js"></script>
+<script>
+// AOS scroll animations
+AOS.init({ duration: 600, once: true, offset: 50 });
+
+// Hero entrance sequence
+(function() {
+    var flash = document.getElementById('hero-flash');
+    var sparksContainer = document.getElementById('sparks-container');
+
+    // Generate sparks
+    function createSparks() {
+        for (var i = 0; i < 30; i++) {
+            var spark = document.createElement('div');
+            spark.className = 'spark';
+            var angle = (Math.random() * 360) * (Math.PI / 180);
+            var distance = 80 + Math.random() * 200;
+            var x = Math.cos(angle) * distance;
+            var y = Math.sin(angle) * distance;
+            var size = 3 + Math.random() * 5;
+            var color = Math.random() > 0.5 ? '#9cc5d4' : '#ffffff';
+            if (Math.random() > 0.7) color = '#e8611a';
+            spark.style.cssText = 'width:' + size + 'px;height:' + size + 'px;background:' + color +
+                ';--tx:' + x + 'px;--ty:' + y + 'px;animation-delay:' + (Math.random() * 0.2) + 's;';
+            sparksContainer.appendChild(spark);
+        }
+    }
+
+    // Trigger sequence
+    setTimeout(function() {
+        // Flash
+        flash.classList.add('flash-active');
+        createSparks();
+        sparksContainer.classList.add('sparks-active');
+
+        // Title materializes from glow
+        setTimeout(function() {
+            document.querySelector('.hero-anim-title').classList.add('anim-in');
+        }, 300);
+
+        // Badge fades in
+        setTimeout(function() {
+            document.querySelector('.hero-anim-badge').classList.add('anim-in');
+        }, 600);
+
+        // Theme types in
+        setTimeout(function() {
+            document.querySelector('.hero-anim-theme').classList.add('anim-in');
+        }, 900);
+
+        // Details pop in one by one
+        setTimeout(function() {
+            document.querySelector('.hero-anim-detail-1').classList.add('anim-in');
+        }, 1200);
+        setTimeout(function() {
+            document.querySelector('.hero-anim-detail-2').classList.add('anim-in');
+        }, 1400);
+        setTimeout(function() {
+            document.querySelector('.hero-anim-detail-3').classList.add('anim-in');
+        }, 1600);
+
+        // Logos slide in from sides
+        setTimeout(function() {
+            var left = document.querySelector('.hero-anim-logo-left');
+            var right = document.querySelector('.hero-anim-logo-right');
+            if (left) left.classList.add('anim-in');
+            if (right) right.classList.add('anim-in');
+        }, 500);
+
+    }, 400);
+})();
+</script>
 </body>
 </html>

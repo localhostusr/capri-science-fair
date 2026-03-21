@@ -1087,6 +1087,141 @@ footer p + p {
     animation-delay: 0.16s;
 }
 
+/* ===== Hero Entrance Animation ===== */
+
+/* All hero elements start invisible */
+.hero-anim {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease, text-shadow 0.6s ease;
+}
+
+.hero-anim.anim-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Title — materializes with glow */
+.hero-anim-title {
+    transform: scale(0.8) translateY(30px);
+    filter: blur(8px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease, text-shadow 1s ease;
+}
+
+.hero-anim-title.anim-in {
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+    text-shadow: 0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(156,197,212,0.3), 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Glow fades out after landing */
+.hero-anim-title.anim-in {
+    animation: titleGlowFade 2s ease 0.8s forwards;
+}
+
+@keyframes titleGlowFade {
+    0% { text-shadow: 0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(156,197,212,0.3), 0 2px 8px rgba(0,0,0,0.15); }
+    100% { text-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+}
+
+/* Badge slides down from above */
+.hero-anim-badge {
+    transform: translateY(-20px);
+}
+
+/* Theme fades in with slight scale */
+.hero-anim-theme {
+    transform: translateY(10px) scale(0.95);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.hero-anim-theme.anim-in {
+    transform: translateY(0) scale(1);
+}
+
+/* Details pop in with a slight bounce */
+.hero-anim-detail-1,
+.hero-anim-detail-2,
+.hero-anim-detail-3 {
+    transform: scale(0.5) translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-anim-detail-1.anim-in,
+.hero-anim-detail-2.anim-in,
+.hero-anim-detail-3.anim-in {
+    transform: scale(1) translateY(0);
+}
+
+/* Logos slide in from the sides */
+.hero-anim-logo-left {
+    transform: translateX(-80px) scale(0.8);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.hero-anim-logo-left.anim-in {
+    transform: translateX(0) scale(1);
+}
+
+.hero-anim-logo-right {
+    transform: translateX(80px) scale(0.8);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.hero-anim-logo-right.anim-in {
+    transform: translateX(0) scale(1);
+}
+
+/* Flash explosion */
+.hero-flash {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(156,197,212,0.4) 40%, transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.hero-flash.flash-active {
+    animation: flashBoom 1s ease-out forwards;
+}
+
+@keyframes flashBoom {
+    0% { width: 0; height: 0; opacity: 1; }
+    30% { width: 600px; height: 600px; opacity: 0.8; }
+    100% { width: 1200px; height: 1200px; opacity: 0; }
+}
+
+/* Sparks */
+.sparks-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.spark {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.sparks-active .spark {
+    animation: sparkFly 0.8s ease-out forwards;
+}
+
+@keyframes sparkFly {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    70% { opacity: 0.8; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+
 /* ===== Science-Themed Elements ===== */
 
 /* Floating particles in hero */
