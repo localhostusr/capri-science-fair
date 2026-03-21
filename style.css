@@ -685,6 +685,71 @@ input[type="radio"] {
     height: 16px;
 }
 
+/* Group Members */
+.group-note {
+    margin-bottom: 16px;
+}
+
+.group-note small {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.group-member-row {
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--secondary);
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.group-member-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--secondary-dark);
+}
+
+.remove-member-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 18px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.remove-member-btn:hover {
+    border-color: var(--error);
+    color: var(--error);
+}
+
+.add-member-btn {
+    background: none;
+    border: 1px dashed var(--border);
+    color: var(--secondary-dark);
+    padding: 10px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.15s ease;
+    margin-top: 4px;
+}
+
+.add-member-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: #fff8f0;
+}
+
 /* Privacy & Consent */
 .privacy-fieldset {
     background: #f8f8f6;

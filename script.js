@@ -74,10 +74,86 @@ function updateCountdown() {
 }
 
 // ===== Group Project Toggle =====
+let groupMemberCount = 0;
+
 function toggleGroupFields() {
     const isGroup = document.querySelector('input[name="isGroup"]:checked').value === 'yes';
     const groupFields = document.getElementById('group-fields');
     groupFields.style.display = isGroup ? 'block' : 'none';
+    // Auto-add first member row if none exist
+    if (isGroup && groupMemberCount === 0) {
+        addGroupMember();
+    }
+}
+
+function addGroupMember() {
+    groupMemberCount++;
+    const list = document.getElementById('group-members-list');
+    const n = groupMemberCount;
+    const isEs = currentLang === 'es';
+
+    const member = document.createElement('div');
+    member.className = 'group-member-row';
+    member.id = 'group-member-' + n;
+    member.innerHTML = `
+        <div class="group-member-header">
+            <strong>${isEs ? 'Miembro' : 'Member'} ${n}</strong>
+            <button type="button" class="remove-member-btn" onclick="removeGroupMember(${n})">&times;</button>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>${isEs ? 'Nombre del Estudiante' : 'Student Name'}</label>
+                <input type="text" name="gm${n}_studentName" placeholder="${isEs ? 'Nombre y Apellido' : 'First and Last Name'}">
+            </div>
+            <div class="form-group">
+                <label>${isEs ? 'Grado' : 'Grade'}</label>
+                <select name="gm${n}_grade">
+                    <option value="">${isEs ? 'Grado' : 'Grade'}</option>
+                    <option value="K">K</option>
+                    <option value="1">1</option><option value="2">2</option>
+                    <option value="3">3</option><option value="4">4</option>
+                    <option value="5">5</option><option value="6">6</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>${isEs ? 'Nombre del Padre/Tutor' : 'Parent/Guardian Name'}</label>
+                <input type="text" name="gm${n}_parentName" placeholder="${isEs ? 'Nombre y Apellido' : 'First and Last Name'}">
+            </div>
+            <div class="form-group">
+                <label>${isEs ? 'Correo Electrónico' : 'Email'}</label>
+                <input type="email" name="gm${n}_parentEmail" placeholder="email@example.com">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>${isEs ? 'Teléfono' : 'Phone'}</label>
+            <input type="tel" name="gm${n}_parentPhone" placeholder="(555) 555-5555">
+        </div>
+    `;
+    list.appendChild(member);
+}
+
+function removeGroupMember(n) {
+    const el = document.getElementById('group-member-' + n);
+    if (el) el.remove();
+}
+
+function collectGroupMembers() {
+    const rows = document.querySelectorAll('.group-member-row');
+    const members = [];
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll('input, select');
+        const member = {};
+        inputs.forEach(input => {
+            const name = input.name.replace(/^gm\d+_/, '');
+            member[name] = input.value.trim();
+        });
+        if (member.studentName) {
+            members.push(member);
+        }
+    });
+    return JSON.stringify(members);
 }
 
 // ===== Form Validation =====
@@ -162,7 +238,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
         grade: document.getElementById('grade').value,
         teacher: document.getElementById('teacher').value.trim(),
         isGroup: document.querySelector('input[name="isGroup"]:checked').value,
-        groupMembers: document.getElementById('group-members').value.trim(),
+        groupMembers: collectGroupMembers(),
         projectTitle: document.getElementById('project-title').value.trim(),
         projectDescription: document.getElementById('project-description').value.trim(),
         category: document.getElementById('category').value,

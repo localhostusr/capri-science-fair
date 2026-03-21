@@ -219,13 +219,17 @@
                 </div>
 
                 <!-- Group Members (conditional) -->
-                <div class="form-group group-fields" id="group-fields" style="display:none;">
-                    <label for="group-members" data-en="Other Group Members (names and grades)" data-es="Otros Miembros del Grupo (nombres y grados)">Other Group Members (names and grades)</label>
-                    <textarea id="group-members" name="groupMembers" rows="3"
-                              data-en-placeholder="e.g., Jane Smith (3rd), Alex Garcia (3rd)"
-                              data-es-placeholder="ej., Jane Smith (3ro), Alex García (3ro)"
-                              placeholder="e.g., Jane Smith (3rd), Alex Garcia (3rd)"></textarea>
-                    <small data-en="Only one sign-up per group is needed." data-es="Solo se necesita una inscripción por grupo.">Only one sign-up per group is needed.</small>
+                <div class="group-fields" id="group-fields" style="display:none;">
+                    <div class="group-note">
+                        <small data-en="The student above is the project lead. Add each additional group member below."
+                               data-es="El estudiante de arriba es el líder del proyecto. Agregue cada miembro adicional del grupo abajo.">
+                            The student above is the project lead. Add each additional group member below.
+                        </small>
+                    </div>
+                    <div id="group-members-list"></div>
+                    <button type="button" class="add-member-btn" onclick="addGroupMember()">
+                        <span data-en="+ Add Group Member" data-es="+ Agregar Miembro">+ Add Group Member</span>
+                    </button>
                 </div>
 
                 <div class="form-group">
