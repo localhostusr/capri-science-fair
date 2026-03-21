@@ -280,6 +280,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
 function showSuccess() {
     document.getElementById('signup-form').style.display = 'none';
     document.getElementById('deadline-banner').style.display = 'none';
+    document.getElementById('form-header').style.display = 'none';
     document.getElementById('success-message').style.display = 'block';
     document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
