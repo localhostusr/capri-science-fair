@@ -885,6 +885,17 @@ footer p + p {
         display: none;
     }
 
+    .donate-strip {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 20px;
+    }
+
+    .donate-links {
+        flex-wrap: wrap;
+    }
+
     .event-details {
         flex-direction: column;
         gap: 1px;
