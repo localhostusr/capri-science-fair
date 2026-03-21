@@ -881,17 +881,8 @@ footer p + p {
         margin: 0;
     }
 
-    .hero-logo {
-        max-height: 120px;
-    }
-
-    .pta-stack {
-        transform: rotate(-3deg) scale(0.4);
-        margin-top: -20px;
-    }
-
     .hero-logo-right {
-        order: -1;
+        display: none;
     }
 
     .event-details {
