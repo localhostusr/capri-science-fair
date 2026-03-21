@@ -14,7 +14,7 @@
 
 // ===== Configuration =====
 const SPREADSHEET_NAME = 'Capri Science Fair 2026 — Sign-Ups';
-const ADMIN_EMAILS = ['capriptapresident@gmail.com', 'christopher.kohl@gmail.com', 'tracykohl06@gmail.com'];
+const ADMIN_EMAILS = ['capriptapresident@gmail.com', 'christopher.kohl@gmail.com', 'tracykohl06@gmail.com', 'vasunanduri@gmail.com'];
 const DEADLINE = new Date('2026-04-11T23:59:59');
 
 // ===== Setup (run once) =====
