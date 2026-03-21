@@ -459,27 +459,74 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Position smoke and impact elements
-            var impact = bolt.querySelector('.lightning-impact');
-            impact.style.left = targetX + 'px';
-            impact.style.top = targetY + 'px';
-            impact.style.bottom = 'auto';
-            impact.style.transform = 'translate(-50%, -50%)';
+            // Smoke particles — canvas-drawn translucent puffs
+            var smokeParticles = [];
+            for (var si = 0; si < 18; si++) {
+                smokeParticles.push({
+                    x: targetX + (Math.random() - 0.5) * 30,
+                    y: targetY,
+                    vx: (Math.random() - 0.5) * 0.8,
+                    vy: -(1.2 + Math.random() * 1.5),
+                    size: 8 + Math.random() * 15,
+                    growRate: 0.3 + Math.random() * 0.4,
+                    opacity: 0,
+                    maxOpacity: 0.25 + Math.random() * 0.2,
+                    delay: Math.random() * 30,
+                    age: 0,
+                    life: 80 + Math.random() * 60
+                });
+            }
 
-            bolt.querySelectorAll('.smoke-puff').forEach(function(s) {
-                s.style.left = (targetX - 15 + (Math.random() * 40 - 5)) + 'px';
-                s.style.top = (targetY - 5 + (Math.random() * 10)) + 'px';
-                s.style.bottom = 'auto';
-            });
+            var smokeFrame = 0;
+            function animateSmoke() {
+                // Don't clear — draw on top of existing (bolt may still be fading)
+                var allDone = true;
+                smokeParticles.forEach(function(p) {
+                    if (smokeFrame < p.delay) { allDone = false; return; }
+                    p.age++;
+                    if (p.age > p.life) return;
+                    allDone = false;
+                    var progress = p.age / p.life;
+
+                    // Fade in then out
+                    if (progress < 0.15) {
+                        p.opacity = p.maxOpacity * (progress / 0.15);
+                    } else {
+                        p.opacity = p.maxOpacity * (1 - (progress - 0.15) / 0.85);
+                    }
+
+                    p.x += p.vx + (Math.random() - 0.5) * 0.3;
+                    p.y += p.vy;
+                    p.vy *= 0.995;
+                    p.size += p.growRate;
+
+                    ctx.save();
+                    ctx.globalAlpha = p.opacity;
+                    var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+                    grad.addColorStop(0, 'rgba(90,90,90,0.6)');
+                    grad.addColorStop(0.4, 'rgba(110,110,110,0.3)');
+                    grad.addColorStop(0.7, 'rgba(130,130,130,0.1)');
+                    grad.addColorStop(1, 'rgba(150,150,150,0)');
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                });
+                smokeFrame++;
+                if (!allDone) requestAnimationFrame(animateSmoke);
+            }
 
             bolt.classList.remove('struck');
             void bolt.offsetWidth;
             bolt.classList.add('struck');
             animateBolt();
+            // Start smoke after bolt is mostly done
+            setTimeout(function() { animateSmoke(); }, 300);
             setTimeout(function() {
                 bolt.classList.remove('struck');
                 if (canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }, 3500);
+            }, 5000);
         });
     }
 
