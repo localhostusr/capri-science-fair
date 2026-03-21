@@ -333,6 +333,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Lightning strike on consent checkbox
+    var consentBox = document.getElementById('consent');
+    if (consentBox) {
+        consentBox.addEventListener('change', function() {
+            if (this.checked) {
+                var zone = this.closest('.lightning-zone');
+                if (zone) {
+                    zone.classList.remove('struck');
+                    void zone.offsetWidth; // force reflow
+                    zone.classList.add('struck');
+                }
+            }
+        });
+    }
+
     // Auto-detect language from browser
     const browserLang = navigator.language || navigator.userLanguage;
     if (browserLang.startsWith('es')) {

@@ -78,17 +78,38 @@
             </a>
         </div>
     </div>
-    <!-- Floating science particles -->
+    <!-- Floating science particles — 3 speed tiers: slow (18-25s), medium (12-16s), fast (7-10s) -->
     <div class="science-particles" aria-hidden="true">
-        <div class="particle atom atom-1"></div>
-        <div class="particle atom atom-2"></div>
-        <div class="particle atom atom-3"></div>
-        <div class="particle atom atom-4"></div>
-        <div class="particle atom atom-5"></div>
-        <div class="particle molecule mol-1"></div>
-        <div class="particle molecule mol-2"></div>
-        <div class="particle molecule mol-3"></div>
-        <div class="particle molecule mol-4"></div>
+        <!-- Slow drifters -->
+        <div class="particle atom p-slow-1"></div>
+        <div class="particle atom p-slow-2"></div>
+        <div class="particle atom p-slow-3"></div>
+        <div class="particle molecule p-slow-4"></div>
+        <div class="particle molecule p-slow-5"></div>
+        <div class="particle atom p-slow-6"></div>
+        <div class="particle hexagon p-slow-7"></div>
+        <div class="particle molecule p-slow-8"></div>
+        <div class="particle atom p-slow-9"></div>
+        <!-- Medium floaters -->
+        <div class="particle atom p-med-1"></div>
+        <div class="particle molecule p-med-2"></div>
+        <div class="particle atom p-med-3"></div>
+        <div class="particle hexagon p-med-4"></div>
+        <div class="particle molecule p-med-5"></div>
+        <div class="particle atom p-med-6"></div>
+        <div class="particle molecule p-med-7"></div>
+        <div class="particle atom p-med-8"></div>
+        <div class="particle hexagon p-med-9"></div>
+        <!-- Gentle quick movers -->
+        <div class="particle atom p-fast-1"></div>
+        <div class="particle molecule p-fast-2"></div>
+        <div class="particle atom p-fast-3"></div>
+        <div class="particle atom p-fast-4"></div>
+        <div class="particle molecule p-fast-5"></div>
+        <div class="particle hexagon p-fast-6"></div>
+        <div class="particle atom p-fast-7"></div>
+        <div class="particle molecule p-fast-8"></div>
+        <div class="particle atom p-fast-9"></div>
     </div>
 </header>
 
@@ -513,7 +534,14 @@
 
                 <div class="form-group consent-group">
                     <label class="checkbox-label">
-                        <input type="checkbox" id="consent" name="consent" required>
+                        <div class="lightning-zone">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <svg class="lightning-bolt" viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M22,0 L8,35 L18,35 L12,80 L35,30 L24,30 Z" fill="#fbbf24" opacity="0.9"/>
+                                <path d="M22,0 L8,35 L18,35 L12,80 L35,30 L24,30 Z" fill="#ffffff" opacity="0.4"/>
+                            </svg>
+                            <div class="lightning-flash"></div>
+                        </div>
                         <span data-en="I understand and agree that my information will be used to coordinate Science Fair participation as described above. *"
                               data-es="Entiendo y acepto que mi información se utilizará para coordinar la participación en la Feria de Ciencias como se describe arriba. *">
                             I understand and agree that my information will be used to coordinate Science Fair participation as described above. *

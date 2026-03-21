@@ -904,6 +904,64 @@ input[type="radio"] {
     background: #fff8f0;
 }
 
+/* Lightning strike on consent checkbox */
+.lightning-zone {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+}
+
+.lightning-bolt {
+    position: absolute;
+    top: -50px;
+    left: -5px;
+    width: 30px;
+    height: 60px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    filter: drop-shadow(0 0 8px rgba(251,191,36,0.8)) drop-shadow(0 0 20px rgba(251,191,36,0.4));
+}
+
+.lightning-flash {
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(251,191,36,0.6) 0%, rgba(255,255,255,0.3) 30%, transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9;
+}
+
+.lightning-zone.struck .lightning-bolt {
+    animation: lightningStrike 0.6s ease-out forwards;
+}
+
+.lightning-zone.struck .lightning-flash {
+    animation: lightningGlow 0.5s ease-out forwards;
+}
+
+@keyframes lightningStrike {
+    0% { opacity: 0; transform: translateY(-10px) scaleY(0.5); }
+    10% { opacity: 1; transform: translateY(0) scaleY(1); }
+    20% { opacity: 0.3; }
+    30% { opacity: 1; }
+    40% { opacity: 0.2; }
+    50% { opacity: 0.9; }
+    100% { opacity: 0; transform: translateY(5px) scaleY(0.8); }
+}
+
+@keyframes lightningGlow {
+    0% { opacity: 0; transform: scale(0.3); }
+    15% { opacity: 0.8; transform: scale(1.2); }
+    30% { opacity: 0.2; }
+    45% { opacity: 0.6; }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+
 /* Submit */
 .submit-btn {
     display: block;
@@ -1259,52 +1317,23 @@ footer p + p {
     border-radius: 50%;
 }
 
-/* Atoms — small circles with orbital rings */
+/* Particle shapes */
 .atom {
-    width: 12px;
-    height: 12px;
     background: rgba(156,197,212,0.4);
-    box-shadow: 0 0 0 3px rgba(156,197,212,0.15), 0 0 0 8px rgba(156,197,212,0.07);
+    box-shadow: 0 0 0 3px rgba(156,197,212,0.12), 0 0 0 7px rgba(156,197,212,0.05);
 }
 
-.atom-1 {
-    top: 20%;
-    left: 8%;
-    animation: float1 12s ease-in-out infinite;
-}
-
-.atom-2 {
-    top: 60%;
-    right: 12%;
-    animation: float2 15s ease-in-out infinite;
-}
-
-.atom-3 {
-    bottom: 25%;
-    left: 15%;
-    width: 8px;
-    height: 8px;
-    animation: float3 10s ease-in-out infinite;
-}
-
-/* Molecules — connected dots */
 .molecule {
-    width: 6px;
-    height: 6px;
     background: rgba(255,255,255,0.3);
-    box-shadow:
-        18px -8px 0 rgba(255,255,255,0.25),
-        10px 14px 0 rgba(255,255,255,0.2);
+    box-shadow: 14px -6px 0 rgba(255,255,255,0.2), 8px 12px 0 rgba(255,255,255,0.15);
 }
 
 .molecule::before {
     content: '';
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 16px;
-    height: 1px;
-    background: rgba(255,255,255,0.15);
+    top: 3px; left: 3px;
+    width: 12px; height: 1px;
+    background: rgba(255,255,255,0.12);
     transform: rotate(-25deg);
     transform-origin: left center;
 }
@@ -1312,71 +1341,75 @@ footer p + p {
 .molecule::after {
     content: '';
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 14px;
-    height: 1px;
-    background: rgba(255,255,255,0.12);
+    top: 3px; left: 3px;
+    width: 10px; height: 1px;
+    background: rgba(255,255,255,0.1);
     transform: rotate(65deg);
     transform-origin: left center;
 }
 
-.atom-4 {
-    top: 45%;
-    right: 20%;
-    width: 10px;
-    height: 10px;
-    animation: float2 11s ease-in-out infinite reverse;
+/* Hexagon — benzene ring shape */
+.hexagon {
+    width: 14px;
+    height: 14px;
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    transform: rotate(30deg);
 }
 
-.atom-5 {
-    bottom: 40%;
-    left: 25%;
-    width: 7px;
-    height: 7px;
-    animation: float3 13s ease-in-out infinite;
-}
+/* === SLOW particles (18-25s) — large, lazy drift === */
+.p-slow-1 { width: 14px; height: 14px; top: 15%; left: 5%; animation: floatA 22s ease-in-out infinite; }
+.p-slow-2 { width: 10px; height: 10px; top: 55%; right: 8%; animation: floatB 25s ease-in-out infinite; }
+.p-slow-3 { width: 12px; height: 12px; bottom: 20%; left: 12%; animation: floatC 20s ease-in-out infinite; }
+.p-slow-4 { width: 6px; height: 6px; top: 30%; right: 15%; animation: floatA 24s ease-in-out infinite reverse; }
+.p-slow-5 { width: 5px; height: 5px; bottom: 35%; left: 22%; animation: floatB 21s ease-in-out infinite; }
+.p-slow-6 { width: 8px; height: 8px; top: 70%; left: 8%; animation: floatC 23s ease-in-out infinite reverse; }
+.p-slow-7 { top: 40%; right: 5%; animation: floatA 19s ease-in-out infinite; }
+.p-slow-8 { width: 5px; height: 5px; bottom: 10%; right: 20%; animation: floatB 24s ease-in-out infinite reverse; }
+.p-slow-9 { width: 9px; height: 9px; top: 80%; right: 30%; animation: floatC 22s ease-in-out infinite; }
 
-.mol-1 {
-    top: 35%;
-    right: 6%;
-    animation: float1 18s ease-in-out infinite reverse;
-}
+/* === MEDIUM particles (12-16s) — mid-size, moderate drift === */
+.p-med-1 { width: 10px; height: 10px; top: 25%; left: 18%; animation: floatB 14s ease-in-out infinite; }
+.p-med-2 { width: 5px; height: 5px; top: 45%; right: 22%; animation: floatC 13s ease-in-out infinite reverse; }
+.p-med-3 { width: 8px; height: 8px; bottom: 30%; right: 10%; animation: floatA 15s ease-in-out infinite; }
+.p-med-4 { top: 60%; left: 28%; animation: floatB 12s ease-in-out infinite reverse; }
+.p-med-5 { width: 4px; height: 4px; top: 18%; right: 30%; animation: floatC 16s ease-in-out infinite; }
+.p-med-6 { width: 7px; height: 7px; bottom: 45%; left: 6%; animation: floatA 14s ease-in-out infinite reverse; }
+.p-med-7 { width: 5px; height: 5px; top: 75%; right: 15%; animation: floatB 13s ease-in-out infinite; }
+.p-med-8 { width: 11px; height: 11px; bottom: 15%; left: 30%; animation: floatC 15s ease-in-out infinite reverse; }
+.p-med-9 { top: 35%; left: 35%; animation: floatA 12s ease-in-out infinite; }
 
-.mol-2 {
-    bottom: 15%;
-    right: 25%;
-    animation: float2 14s ease-in-out infinite;
-}
+/* === FAST particles (7-10s) — small, gentle quick movement === */
+.p-fast-1 { width: 6px; height: 6px; top: 20%; left: 25%; animation: floatC 9s ease-in-out infinite; }
+.p-fast-2 { width: 4px; height: 4px; top: 50%; right: 18%; animation: floatA 8s ease-in-out infinite reverse; }
+.p-fast-3 { width: 7px; height: 7px; bottom: 25%; left: 15%; animation: floatB 10s ease-in-out infinite; }
+.p-fast-4 { width: 5px; height: 5px; top: 65%; right: 25%; animation: floatC 7s ease-in-out infinite reverse; }
+.p-fast-5 { width: 3px; height: 3px; top: 35%; left: 10%; animation: floatA 9s ease-in-out infinite; }
+.p-fast-6 { top: 50%; left: 20%; animation: floatB 8s ease-in-out infinite reverse; }
+.p-fast-7 { width: 5px; height: 5px; bottom: 40%; right: 5%; animation: floatC 10s ease-in-out infinite; }
+.p-fast-8 { width: 4px; height: 4px; top: 10%; right: 35%; animation: floatA 7s ease-in-out infinite reverse; }
+.p-fast-9 { width: 6px; height: 6px; bottom: 50%; left: 32%; animation: floatB 9s ease-in-out infinite; }
 
-.mol-3 {
-    top: 25%;
-    left: 20%;
-    animation: float3 16s ease-in-out infinite;
-}
-
-.mol-4 {
-    bottom: 30%;
-    right: 8%;
-    animation: float1 13s ease-in-out infinite reverse;
-}
-
-@keyframes float1 {
+/* Float animations — 3 distinct paths */
+@keyframes floatA {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
     25% { transform: translate(15px, -20px) rotate(90deg); }
     50% { transform: translate(-10px, -35px) rotate(180deg); }
     75% { transform: translate(20px, -15px) rotate(270deg); }
 }
 
-@keyframes float2 {
+@keyframes floatB {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
     33% { transform: translate(-20px, 15px) rotate(120deg); }
     66% { transform: translate(10px, -20px) rotate(240deg); }
 }
 
-@keyframes float3 {
-    0%, 100% { transform: translate(0, 0); opacity: 0.4; }
-    50% { transform: translate(25px, -30px); opacity: 0.8; }
+@keyframes floatC {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+    25% { transform: translate(18px, -12px) rotate(60deg); opacity: 0.6; }
+    50% { transform: translate(-8px, -28px) rotate(180deg); opacity: 0.4; }
+    75% { transform: translate(12px, 8px) rotate(300deg); opacity: 0.5; }
 }
 
 /* Large Erlenmeyer flask behind form header */
