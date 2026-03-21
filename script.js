@@ -337,40 +337,149 @@ document.addEventListener('DOMContentLoaded', function() {
     var consentBox = document.getElementById('consent');
     if (consentBox) {
         consentBox.addEventListener('change', function() {
-            if (this.checked) {
-                var bolt = document.getElementById('lightning-full');
-                if (bolt) {
-                    var rect = consentBox.getBoundingClientRect();
-                    var centerX = rect.left + rect.width / 2;
-                    var targetY = rect.top + rect.height / 2;
+            if (!this.checked) return;
+            var bolt = document.getElementById('lightning-full');
+            if (!bolt) return;
 
-                    // Size and position the SVG to go from top of viewport to the checkbox
-                    var svg = bolt.querySelector('.lightning-full-svg');
-                    svg.style.left = (centerX - 130) + 'px';
-                    svg.style.width = '300px';
-                    svg.style.top = '0';
-                    svg.style.height = targetY + 'px';
+            var rect = consentBox.getBoundingClientRect();
+            var targetX = rect.left + rect.width / 2;
+            var targetY = rect.top + rect.height / 2;
 
-                    // Position impact at the checkbox
-                    var impact = bolt.querySelector('.lightning-impact');
-                    impact.style.left = centerX + 'px';
-                    impact.style.top = targetY + 'px';
-                    impact.style.bottom = 'auto';
-                    impact.style.transform = 'translate(-50%, -50%)';
+            // Generate a procedural lightning bolt path
+            var canvas = bolt.querySelector('.lightning-canvas');
+            if (!canvas) {
+                canvas = document.createElement('canvas');
+                canvas.className = 'lightning-canvas';
+                canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;';
+                bolt.appendChild(canvas);
+            }
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            var ctx = canvas.getContext('2d');
 
-                    // Position smoke at the checkbox — spread them out for billowy effect
-                    bolt.querySelectorAll('.smoke-puff').forEach(function(s) {
-                        s.style.left = (centerX - 15 + (Math.random() * 40 - 5)) + 'px';
-                        s.style.top = (targetY - 5 + (Math.random() * 10)) + 'px';
-                        s.style.bottom = 'auto';
-                    });
+            // Generate bolt segments procedurally
+            function generateBolt(x1, y1, x2, y2, depth) {
+                var segments = [];
+                var dx = x2 - x1;
+                var dy = y2 - y1;
+                var len = Math.sqrt(dx*dx + dy*dy);
+                if (len < 10 || depth > 5) {
+                    segments.push({x1:x1, y1:y1, x2:x2, y2:y2, depth:depth});
+                    return segments;
+                }
+                // Midpoint with random offset perpendicular to the line
+                var mx = (x1+x2)/2 + (Math.random()-0.5) * len * 0.25;
+                var my = (y1+y2)/2 + (Math.random()-0.5) * len * 0.08;
+                var left = generateBolt(x1, y1, mx, my, depth);
+                var right = generateBolt(mx, my, x2, y2, depth);
+                segments = segments.concat(left, right);
+                // Random branch
+                if (depth < 3 && Math.random() < 0.3) {
+                    var bx = mx + (Math.random()-0.5) * len * 0.5;
+                    var by = my + len * (0.15 + Math.random()*0.2);
+                    var branch = generateBolt(mx, my, bx, by, depth+2);
+                    segments = segments.concat(branch);
+                }
+                return segments;
+            }
 
-                    bolt.classList.remove('struck');
-                    void bolt.offsetWidth;
-                    bolt.classList.add('struck');
-                    setTimeout(function() { bolt.classList.remove('struck'); }, 3000);
+            // Start from top center-ish, slight random offset, land on checkbox
+            var startX = targetX + (Math.random()-0.3) * 100;
+            var segments = generateBolt(startX, 0, targetX, targetY, 0);
+
+            // Draw the bolt with multiple passes for glow effect
+            function drawBolt(opacity) {
+                // Outer glow
+                ctx.strokeStyle = 'rgba(200,200,100,' + (0.15 * opacity) + ')';
+                ctx.lineWidth = 12;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.beginPath();
+                segments.forEach(function(s) {
+                    if (s.depth < 3) { ctx.moveTo(s.x1, s.y1); ctx.lineTo(s.x2, s.y2); }
+                });
+                ctx.stroke();
+                // Mid glow — neon yellow
+                ctx.strokeStyle = 'rgba(255,255,80,' + (0.5 * opacity) + ')';
+                ctx.lineWidth = 5;
+                ctx.beginPath();
+                segments.forEach(function(s) {
+                    ctx.moveTo(s.x1, s.y1); ctx.lineTo(s.x2, s.y2);
+                });
+                ctx.stroke();
+                // Hot core — bright white-yellow
+                ctx.strokeStyle = 'rgba(255,255,220,' + (0.9 * opacity) + ')';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                segments.forEach(function(s) {
+                    if (s.depth < 4) { ctx.moveTo(s.x1, s.y1); ctx.lineTo(s.x2, s.y2); }
+                });
+                ctx.stroke();
+            }
+
+            // Animate the strike with flicker
+            var frame = 0;
+            var totalFrames = 30;
+            function animateBolt() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (frame < totalFrames) {
+                    var progress = frame / totalFrames;
+                    var opacity;
+                    if (progress < 0.1) opacity = 1;
+                    else if (progress < 0.15) opacity = 0.2;
+                    else if (progress < 0.25) opacity = 0.9;
+                    else if (progress < 0.3) opacity = 0.15;
+                    else if (progress < 0.4) opacity = 0.7;
+                    else opacity = Math.max(0, 1 - (progress - 0.4) / 0.6);
+
+                    // Dark background flash
+                    if (progress < 0.2) {
+                        ctx.fillStyle = 'rgba(0,0,0,' + (0.3 * (1-progress*5)) + ')';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    }
+
+                    drawBolt(opacity);
+
+                    // Impact glow at checkbox
+                    if (progress < 0.5) {
+                        var glowSize = 40 + progress * 80;
+                        var glowOpacity = 0.8 * (1 - progress * 2);
+                        var grad = ctx.createRadialGradient(targetX, targetY, 0, targetX, targetY, glowSize);
+                        grad.addColorStop(0, 'rgba(255,255,180,' + glowOpacity + ')');
+                        grad.addColorStop(0.3, 'rgba(255,255,80,' + (glowOpacity*0.5) + ')');
+                        grad.addColorStop(1, 'rgba(255,255,80,0)');
+                        ctx.fillStyle = grad;
+                        ctx.beginPath();
+                        ctx.arc(targetX, targetY, glowSize, 0, Math.PI*2);
+                        ctx.fill();
+                    }
+
+                    frame++;
+                    requestAnimationFrame(animateBolt);
                 }
             }
+
+            // Position smoke and impact elements
+            var impact = bolt.querySelector('.lightning-impact');
+            impact.style.left = targetX + 'px';
+            impact.style.top = targetY + 'px';
+            impact.style.bottom = 'auto';
+            impact.style.transform = 'translate(-50%, -50%)';
+
+            bolt.querySelectorAll('.smoke-puff').forEach(function(s) {
+                s.style.left = (targetX - 15 + (Math.random() * 40 - 5)) + 'px';
+                s.style.top = (targetY - 5 + (Math.random() * 10)) + 'px';
+                s.style.bottom = 'auto';
+            });
+
+            bolt.classList.remove('struck');
+            void bolt.offsetWidth;
+            bolt.classList.add('struck');
+            animateBolt();
+            setTimeout(function() {
+                bolt.classList.remove('struck');
+                if (canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }, 3500);
         });
     }
 

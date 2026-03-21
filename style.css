@@ -923,11 +923,7 @@ input[type="radio"] {
 }
 
 .lightning-full-svg {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 300px;
-    filter: drop-shadow(0 0 10px rgba(255,255,100,0.8)) drop-shadow(0 0 30px rgba(255,255,50,0.4)) drop-shadow(0 0 60px rgba(200,200,255,0.15));
+    display: none;
 }
 
 .bolt-path {
