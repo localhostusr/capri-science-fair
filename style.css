@@ -877,14 +877,22 @@ footer p + p {
         padding: 0 12px;
     }
 
+    .hero-logo-link {
+        margin: 0;
+    }
+
+    .hero-logo {
+        max-height: 120px;
+    }
+
+    .pta-stack {
+        transform: rotate(-3deg) scale(0.4);
+        margin-top: -20px;
+    }
+
     .hero-logo-right {
         order: -1;
     }
-
-    .pta-w1 { font-size: 22px; }
-    .pta-w2 { font-size: 80px; }
-    .pta-w3 { font-size: 20px; }
-    .pta-w4 { font-size: 11px; }
 
     .event-details {
         flex-direction: column;
