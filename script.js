@@ -340,19 +340,30 @@ document.addEventListener('DOMContentLoaded', function() {
             if (this.checked) {
                 var bolt = document.getElementById('lightning-full');
                 if (bolt) {
-                    // Position the SVG bolt so it lands on the checkbox
                     var rect = consentBox.getBoundingClientRect();
                     var centerX = rect.left + rect.width / 2;
+                    var targetY = rect.top + rect.height / 2;
+
+                    // Size and position the SVG to go from top of viewport to the checkbox
                     var svg = bolt.querySelector('.lightning-full-svg');
-                    svg.style.left = (centerX - 60) + 'px';
-                    // Position impact and smoke at the checkbox
+                    svg.style.left = (centerX - 100) + 'px';
+                    svg.style.top = '0';
+                    svg.style.height = targetY + 'px';
+
+                    // Position impact at the checkbox
                     var impact = bolt.querySelector('.lightning-impact');
                     impact.style.left = centerX + 'px';
-                    impact.style.bottom = (window.innerHeight - rect.bottom - 10) + 'px';
+                    impact.style.top = targetY + 'px';
+                    impact.style.bottom = 'auto';
+                    impact.style.transform = 'translate(-50%, -50%)';
+
+                    // Position smoke at the checkbox
                     bolt.querySelectorAll('.smoke-puff').forEach(function(s) {
                         s.style.left = (centerX - 5 + (Math.random() * 20 - 10)) + 'px';
-                        s.style.bottom = (window.innerHeight - rect.bottom) + 'px';
+                        s.style.top = targetY + 'px';
+                        s.style.bottom = 'auto';
                     });
+
                     bolt.classList.remove('struck');
                     void bolt.offsetWidth;
                     bolt.classList.add('struck');
