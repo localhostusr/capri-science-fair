@@ -210,11 +210,11 @@
                     <label data-en="Is this a group project? *" data-es="¿Es un proyecto en grupo? *">Is this a group project? *</label>
                     <div class="radio-group">
                         <label class="radio-label">
-                            <input type="radio" name="isGroup" value="no" checked onchange="toggleGroupFields()">
+                            <input type="radio" name="isGroup" value="no" checked class="group-toggle">
                             <span data-en="No — individual project" data-es="No — proyecto individual">No — individual project</span>
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="isGroup" value="yes" onchange="toggleGroupFields()">
+                            <input type="radio" name="isGroup" value="yes" class="group-toggle">
                             <span data-en="Yes — group project" data-es="Sí — proyecto en grupo">Yes — group project</span>
                         </label>
                     </div>
@@ -223,13 +223,13 @@
                 <!-- Group Members (conditional) -->
                 <div class="group-fields" id="group-fields" style="display:none;">
                     <div class="group-note">
-                        <small data-en="The student above is the project lead. Add each additional group member below."
-                               data-es="El estudiante de arriba es el líder del proyecto. Agregue cada miembro adicional del grupo abajo.">
-                            The student above is the project lead. Add each additional group member below.
+                        <small data-en="The student above is the project lead. Add each additional group member below. Only one sign-up per group project is needed."
+                               data-es="El estudiante de arriba es el líder del proyecto. Agregue cada miembro adicional abajo. Solo se necesita una inscripción por proyecto de grupo.">
+                            The student above is the project lead. Add each additional group member below. Only one sign-up per group project is needed.
                         </small>
                     </div>
                     <div id="group-members-list"></div>
-                    <button type="button" class="add-member-btn" onclick="addGroupMember()">
+                    <button type="button" class="add-member-btn" id="add-member-btn">
                         <span data-en="+ Add Group Member" data-es="+ Agregar Miembro">+ Add Group Member</span>
                     </button>
                 </div>

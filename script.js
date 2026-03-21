@@ -305,6 +305,20 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCountdown();
     setInterval(updateCountdown, 60000); // Update every minute
 
+    // Group project toggle
+    document.querySelectorAll('.group-toggle').forEach(function(radio) {
+        radio.addEventListener('change', toggleGroupFields);
+    });
+
+    // Add group member button
+    var addBtn = document.getElementById('add-member-btn');
+    if (addBtn) {
+        addBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            addGroupMember();
+        });
+    }
+
     // Auto-detect language from browser
     const browserLang = navigator.language || navigator.userLanguage;
     if (browserLang.startsWith('es')) {
