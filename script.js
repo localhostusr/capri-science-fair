@@ -346,7 +346,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     // Size and position the SVG to go from top of viewport to the checkbox
                     var svg = bolt.querySelector('.lightning-full-svg');
-                    svg.style.left = (centerX - 100) + 'px';
+                    svg.style.left = (centerX - 130) + 'px';
+                    svg.style.width = '300px';
                     svg.style.top = '0';
                     svg.style.height = targetY + 'px';
 
@@ -357,10 +358,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     impact.style.bottom = 'auto';
                     impact.style.transform = 'translate(-50%, -50%)';
 
-                    // Position smoke at the checkbox
+                    // Position smoke at the checkbox — spread them out for billowy effect
                     bolt.querySelectorAll('.smoke-puff').forEach(function(s) {
-                        s.style.left = (centerX - 5 + (Math.random() * 20 - 10)) + 'px';
-                        s.style.top = targetY + 'px';
+                        s.style.left = (centerX - 15 + (Math.random() * 40 - 5)) + 'px';
+                        s.style.top = (targetY - 5 + (Math.random() * 10)) + 'px';
                         s.style.bottom = 'auto';
                     });
 

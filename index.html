@@ -535,33 +535,47 @@
                 <div class="form-group consent-group" style="position:relative;">
                     <!-- Full-height lightning bolt overlay -->
                     <div class="lightning-full" id="lightning-full" aria-hidden="true">
-                        <svg class="lightning-full-svg" viewBox="0 0 200 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Outer glow layer -->
-                            <path class="bolt-path bolt-outer" d="M100,0 L95,30 L108,55 L92,85 L105,110 L88,145 L102,170 L85,210 L98,240 L82,280 L96,310 L78,350 L95,380 L80,420 L97,450 L75,495 L93,525 L78,565 L95,590 L72,635 L90,665 L75,705 L92,735 L70,780 L88,810 L73,850 L90,880 L78,920 L92,955 L85,1000" fill="none" stroke="#8888ff" stroke-width="12" opacity="0.3"/>
-                            <!-- Mid glow layer -->
-                            <path class="bolt-path bolt-mid" d="M100,0 L95,30 L108,55 L92,85 L105,110 L88,145 L102,170 L85,210 L98,240 L82,280 L96,310 L78,350 L95,380 L80,420 L97,450 L75,495 L93,525 L78,565 L95,590 L72,635 L90,665 L75,705 L92,735 L70,780 L88,810 L73,850 L90,880 L78,920 L92,955 L85,1000" fill="none" stroke="#bbbbff" stroke-width="6" opacity="0.6"/>
-                            <!-- Bright white core -->
-                            <path class="bolt-path bolt-core" d="M100,0 L95,30 L108,55 L92,85 L105,110 L88,145 L102,170 L85,210 L98,240 L82,280 L96,310 L78,350 L95,380 L80,420 L97,450 L75,495 L93,525 L78,565 L95,590 L72,635 L90,665 L75,705 L92,735 L70,780 L88,810 L73,850 L90,880 L78,920 L92,955 L85,1000" fill="none" stroke="#ffffff" stroke-width="3"/>
-                            <!-- Branch 1 — left fork -->
-                            <path class="bolt-path bolt-branch" d="M88,145 L68,180 L55,195 L48,230 L40,250" fill="none" stroke="#bbbbff" stroke-width="4" opacity="0.5"/>
-                            <path class="bolt-path bolt-branch" d="M88,145 L68,180 L55,195 L48,230 L40,250" fill="none" stroke="#ffffff" stroke-width="1.5"/>
-                            <!-- Branch 2 — right fork -->
-                            <path class="bolt-path bolt-branch" d="M96,310 L118,340 L130,370 L138,400" fill="none" stroke="#bbbbff" stroke-width="4" opacity="0.5"/>
-                            <path class="bolt-path bolt-branch" d="M96,310 L118,340 L130,370 L138,400" fill="none" stroke="#ffffff" stroke-width="1.5"/>
-                            <!-- Branch 3 — left fork lower -->
-                            <path class="bolt-path bolt-branch" d="M75,495 L55,520 L42,555" fill="none" stroke="#bbbbff" stroke-width="3" opacity="0.4"/>
-                            <path class="bolt-path bolt-branch" d="M75,495 L55,520 L42,555" fill="none" stroke="#ffffff" stroke-width="1"/>
-                            <!-- Branch 4 — right fork lower -->
-                            <path class="bolt-path bolt-branch" d="M90,665 L112,690 L125,720 L130,745" fill="none" stroke="#bbbbff" stroke-width="3" opacity="0.4"/>
-                            <path class="bolt-path bolt-branch" d="M90,665 L112,690 L125,720 L130,745" fill="none" stroke="#ffffff" stroke-width="1"/>
-                            <!-- Branch 5 — small left -->
-                            <path class="bolt-path bolt-branch" d="M70,780 L52,800 L45,825" fill="none" stroke="#bbbbff" stroke-width="2" opacity="0.3"/>
-                            <path class="bolt-path bolt-branch" d="M70,780 L52,800 L45,825" fill="none" stroke="#ffffff" stroke-width="1"/>
+                        <svg class="lightning-full-svg" viewBox="0 0 300 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Traced from reference photo — main bolt starts upper-right, angles down-left with tight zigzags -->
+
+                            <!-- Outer glow -->
+                            <path class="bolt-path bolt-outer" d="M195,0 L190,15 L200,30 L185,50 L195,65 L180,85 L192,100 L175,125 L188,140 L170,165 L182,180 L165,205 L178,220 L158,248 L172,265 L152,290 L165,305 L145,335 L160,350 L140,378 L155,395 L132,425 L148,440 L125,470 L142,488 L120,515 L135,530 L112,560 L128,578 L108,605 L122,620 L102,650 L118,668 L98,695 L112,710 L92,740 L108,758 L90,785 L105,800 L88,830 L102,845 L85,875 L98,892 L82,920 L95,938 L80,965 L90,985 L85,1000" fill="none" stroke="#9999bb" stroke-width="16" opacity="0.12" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Mid glow -->
+                            <path class="bolt-path bolt-mid" d="M195,0 L190,15 L200,30 L185,50 L195,65 L180,85 L192,100 L175,125 L188,140 L170,165 L182,180 L165,205 L178,220 L158,248 L172,265 L152,290 L165,305 L145,335 L160,350 L140,378 L155,395 L132,425 L148,440 L125,470 L142,488 L120,515 L135,530 L112,560 L128,578 L108,605 L122,620 L102,650 L118,668 L98,695 L112,710 L92,740 L108,758 L90,785 L105,800 L88,830 L102,845 L85,875 L98,892 L82,920 L95,938 L80,965 L90,985 L85,1000" fill="none" stroke="#ffff66" stroke-width="7" opacity="0.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- White hot core -->
+                            <path class="bolt-path bolt-core" d="M195,0 L190,15 L200,30 L185,50 L195,65 L180,85 L192,100 L175,125 L188,140 L170,165 L182,180 L165,205 L178,220 L158,248 L172,265 L152,290 L165,305 L145,335 L160,350 L140,378 L155,395 L132,425 L148,440 L125,470 L142,488 L120,515 L135,530 L112,560 L128,578 L108,605 L122,620 L102,650 L118,668 L98,695 L112,710 L92,740 L108,758 L90,785 L105,800 L88,830 L102,845 L85,875 L98,892 L82,920 L95,938 L80,965 L90,985 L85,1000" fill="none" stroke="#ffffcc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- Major left fork at ~28% — long branch going far left -->
+                            <path class="bolt-path bolt-branch" d="M158,248 L140,262 L128,270 L115,285 L100,298 L88,315 L72,330 L60,348 L45,365 L35,385 L25,410" fill="none" stroke="#9999aa" stroke-width="8" opacity="0.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path class="bolt-path bolt-branch" d="M158,248 L140,262 L128,270 L115,285 L100,298 L88,315 L72,330 L60,348 L45,365 L35,385 L25,410" fill="none" stroke="#ffff66" stroke-width="4" opacity="0.45" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path class="bolt-path bolt-branch" d="M158,248 L140,262 L128,270 L115,285 L100,298 L88,315 L72,330 L60,348 L45,365 L35,385 L25,410" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- Sub-branch off the major fork -->
+                            <path class="bolt-path bolt-branch" d="M100,298 L85,305 L72,298 L58,310 L48,305" fill="none" stroke="#ffff66" stroke-width="2" opacity="0.3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path class="bolt-path bolt-branch" d="M100,298 L85,305 L72,298 L58,310 L48,305" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- Right fork at ~55% -->
+                            <path class="bolt-path bolt-branch" d="M120,515 L138,528 L150,545 L162,560 L170,580" fill="none" stroke="#9999aa" stroke-width="5" opacity="0.2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path class="bolt-path bolt-branch" d="M120,515 L138,528 L150,545 L162,560 L170,580" fill="none" stroke="#ffff66" stroke-width="3" opacity="0.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path class="bolt-path bolt-branch" d="M120,515 L138,528 L150,545 L162,560 L170,580" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- Small left fork at ~70% -->
+                            <path class="bolt-path bolt-branch" d="M98,695 L82,708 L68,718 L58,735" fill="none" stroke="#ffff66" stroke-width="2.5" opacity="0.3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path class="bolt-path bolt-branch" d="M98,695 L82,708 L68,718 L58,735" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- Small right fork at ~85% -->
+                            <path class="bolt-path bolt-branch" d="M88,830 L105,842 L115,858" fill="none" stroke="#ffff66" stroke-width="2" opacity="0.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path class="bolt-path bolt-branch" d="M88,830 L105,842 L115,858" fill="none" stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+                            <!-- Tiny fork at ~42% -->
+                            <path class="bolt-path bolt-branch" d="M140,378 L125,388 L118,400" fill="none" stroke="#ffff66" stroke-width="1.5" opacity="0.2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <div class="lightning-impact"></div>
                         <div class="smoke-puff smoke-1"></div>
                         <div class="smoke-puff smoke-2"></div>
                         <div class="smoke-puff smoke-3"></div>
+                        <div class="smoke-puff smoke-4"></div>
+                        <div class="smoke-puff smoke-5"></div>
+                        <div class="smoke-puff smoke-6"></div>
                     </div>
                     <label class="checkbox-label">
                         <input type="checkbox" id="consent" name="consent" required>
