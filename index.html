@@ -532,19 +532,25 @@
                     </div>
                 </div>
 
-                <div class="form-group consent-group">
+                <div class="form-group consent-group" style="position:relative;">
+                    <!-- Full-height lightning bolt overlay -->
+                    <div class="lightning-full" id="lightning-full" aria-hidden="true">
+                        <svg class="lightning-full-svg" viewBox="0 0 120 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Main jagged bolt -->
+                            <path class="bolt-path" d="M60,0 L55,120 L75,150 L50,300 L70,340 L45,500 L68,540 L40,700 L65,740 L48,850 L60,1000" fill="none" stroke="#fbbf24" stroke-width="4"/>
+                            <path class="bolt-path bolt-glow" d="M60,0 L55,120 L75,150 L50,300 L70,340 L45,500 L68,540 L40,700 L65,740 L48,850 L60,1000" fill="none" stroke="#ffffff" stroke-width="2"/>
+                            <!-- Branch 1 -->
+                            <path class="bolt-path bolt-branch" d="M50,300 L30,380 L25,420" fill="none" stroke="#fbbf24" stroke-width="2"/>
+                            <!-- Branch 2 -->
+                            <path class="bolt-path bolt-branch" d="M68,540 L88,600 L85,640" fill="none" stroke="#fbbf24" stroke-width="2"/>
+                        </svg>
+                        <div class="lightning-impact"></div>
+                        <div class="smoke-puff smoke-1"></div>
+                        <div class="smoke-puff smoke-2"></div>
+                        <div class="smoke-puff smoke-3"></div>
+                    </div>
                     <label class="checkbox-label">
-                        <div class="lightning-zone">
-                            <input type="checkbox" id="consent" name="consent" required>
-                            <svg class="lightning-bolt" viewBox="0 0 40 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M22,0 L8,35 L18,35 L12,80 L35,30 L24,30 Z" fill="#fbbf24" opacity="0.9"/>
-                                <path d="M22,0 L8,35 L18,35 L12,80 L35,30 L24,30 Z" fill="#ffffff" opacity="0.4"/>
-                            </svg>
-                            <div class="lightning-flash"></div>
-                            <div class="smoke-puff smoke-1"></div>
-                            <div class="smoke-puff smoke-2"></div>
-                            <div class="smoke-puff smoke-3"></div>
-                        </div>
+                        <input type="checkbox" id="consent" name="consent" required>
                         <span data-en="I understand and agree that my information will be used to coordinate Science Fair participation as described above. *"
                               data-es="Entiendo y acepto que mi información se utilizará para coordinar la participación en la Feria de Ciencias como se describe arriba. *">
                             I understand and agree that my information will be used to coordinate Science Fair participation as described above. *

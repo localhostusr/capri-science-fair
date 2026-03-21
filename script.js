@@ -338,11 +338,25 @@ document.addEventListener('DOMContentLoaded', function() {
     if (consentBox) {
         consentBox.addEventListener('change', function() {
             if (this.checked) {
-                var zone = this.closest('.lightning-zone');
-                if (zone) {
-                    zone.classList.remove('struck');
-                    void zone.offsetWidth; // force reflow
-                    zone.classList.add('struck');
+                var bolt = document.getElementById('lightning-full');
+                if (bolt) {
+                    // Position the SVG bolt so it lands on the checkbox
+                    var rect = consentBox.getBoundingClientRect();
+                    var centerX = rect.left + rect.width / 2;
+                    var svg = bolt.querySelector('.lightning-full-svg');
+                    svg.style.left = (centerX - 60) + 'px';
+                    // Position impact and smoke at the checkbox
+                    var impact = bolt.querySelector('.lightning-impact');
+                    impact.style.left = centerX + 'px';
+                    impact.style.bottom = (window.innerHeight - rect.bottom - 10) + 'px';
+                    bolt.querySelectorAll('.smoke-puff').forEach(function(s) {
+                        s.style.left = (centerX - 5 + (Math.random() * 20 - 10)) + 'px';
+                        s.style.bottom = (window.innerHeight - rect.bottom) + 'px';
+                    });
+                    bolt.classList.remove('struck');
+                    void bolt.offsetWidth;
+                    bolt.classList.add('struck');
+                    setTimeout(function() { bolt.classList.remove('struck'); }, 3000);
                 }
             }
         });
