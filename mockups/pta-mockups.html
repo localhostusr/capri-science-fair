@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTA Logo Mockups</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Bungee+Inline&family=Luckiest+Guy&family=Oswald:wght@700&family=Anton&family=Rubik+Mono+One&family=Black+Ops+One&family=Bangers&family=Passion+One:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+        }
+        h1 { text-align: center; margin-bottom: 40px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.5; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .mockup {
+            position: relative;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #333;
+        }
+        .mockup img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: contain;
+            filter: saturate(0.15) brightness(1.4) opacity(0.35);
+        }
+        .overlay {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        .label {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 12px;
+            opacity: 0.4;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ===== MOCK 1: Bungee — classic block, straight stacked ===== */
+        .m1 .overlay {
+            line-height: 0.75;
+        }
+        .m1 .w-parent {
+            font-family: 'Oswald', sans-serif;
+            font-size: 28px;
+            color: #ffffff;
+            letter-spacing: 0.3em;
+            display: block;
+            text-shadow: 2px 2px 0 #1a1a1a;
+            -webkit-text-stroke: 1px #1a1a1a;
+        }
+        .m1 .w-pta {
+            font-family: 'Bungee', sans-serif;
+            font-size: 110px;
+            color: #fbbf24;
+            display: block;
+            text-shadow: 5px 5px 0 #1a1a1a;
+            -webkit-text-stroke: 2px #1a1a1a;
+            line-height: 0.85;
+        }
+        .m1 .w-teacher {
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            color: #e87fbf;
+            letter-spacing: 0.15em;
+            display: block;
+            text-shadow: 2px 2px 0 #1a1a1a;
+        }
+        .m1 .w-assoc {
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            color: #9cc5d4;
+            letter-spacing: 0.35em;
+            display: block;
+            text-shadow: 1px 1px 0 #1a1a1a;
+        }
+
+        /* ===== MOCK 2: Bungee Shade — PTA with dimension, diagonal energy ===== */
+        .m2 .overlay {
+            transform: rotate(-6deg);
+            line-height: 0.7;
+        }
+        .m2 .w-parent {
+            font-family: 'Bangers', sans-serif;
+            font-size: 32px;
+            color: #ffffff;
+            letter-spacing: 0.15em;
+            display: block;
+            text-shadow: 2px 2px 0 #1a1a1a;
+        }
+        .m2 .w-pta {
+            font-family: 'Bungee Shade', sans-serif;
+            font-size: 88px;
+            color: #fbbf24;
+            display: block;
+            line-height: 0.9;
+            filter: drop-shadow(3px 3px 0 #1a1a1a);
+        }
+        .m2 .w-teacher {
+            font-family: 'Bangers', sans-serif;
+            font-size: 36px;
+            color: #e87fbf;
+            letter-spacing: 0.08em;
+            display: block;
+            text-shadow: 2px 2px 0 #1a1a1a;
+        }
+        .m2 .w-assoc {
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            color: #9cc5d4;
+            letter-spacing: 0.4em;
+            display: block;
+            text-shadow: 1px 1px 0 #1a1a1a;
+        }
+
+        /* ===== MOCK 3: Luckiest Guy — fat, friendly, comic book ===== */
+        .m3 .overlay {
+            line-height: 0.8;
+        }
+        .m3 .w-parent {
+            font-family: 'Passion One', sans-serif;
+            font-size: 30px;
+            font-weight: 900;
+            color: #9cc5d4;
+            letter-spacing: 0.2em;
+            display: block;
+            text-shadow: 2px 2px 0 #1a1a1a;
+            -webkit-text-stroke: 1px #1a1a1a;
+        }
+        .m3 .w-pta {
+            font-family: 'Luckiest Guy', sans-serif;
+            font-size: 120px;
+            color: #ffffff;
+            display: block;
+            text-shadow: 5px 5px 0 #e8611a, 8px 8px 0 #1a1a1a;
+            line-height: 0.85;
+        }
+        .m3 .w-teacher {
+            font-family: 'Passion One', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: #fbbf24;
+            letter-spacing: 0.12em;
+            display: block;
+            text-shadow: 2px 2px 0 #1a1a1a;
+            -webkit-text-stroke: 1px #1a1a1a;
+        }
+        .m3 .w-assoc {
+            font-family: 'Passion One', sans-serif;
+            font-size: 20px;
+            color: #e87fbf;
+            letter-spacing: 0.25em;
+            display: block;
+            text-shadow: 1px 1px 0 #1a1a1a;
+        }
+
+        /* ===== MOCK 4: Bangers — comic/graffiti, tilted, raw ===== */
+        .m4 .overlay {
+            line-height: 0.75;
+            transform: rotate(-3deg);
+        }
+        .m4 .w-parent {
+            font-family: 'Anton', sans-serif;
+            font-size: 36px;
+            color: #e87fbf;
+            letter-spacing: 0.08em;
+            display: block;
+            text-shadow: 3px 3px 0 #1a1a1a;
+            transform: rotate(2deg);
+        }
+        .m4 .w-pta {
+            font-family: 'Bangers', sans-serif;
+            font-size: 130px;
+            color: #fbbf24;
+            display: block;
+            text-shadow: 4px 4px 0 #e8611a, 7px 7px 0 #1a1a1a;
+            line-height: 0.8;
+            letter-spacing: 0.05em;
+            transform: rotate(-1deg);
+        }
+        .m4 .w-teacher {
+            font-family: 'Anton', sans-serif;
+            font-size: 30px;
+            color: #ffffff;
+            letter-spacing: 0.1em;
+            display: block;
+            text-shadow: 2px 2px 0 #1a1a1a;
+            transform: rotate(1deg);
+        }
+        .m4 .w-assoc {
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            color: #9cc5d4;
+            letter-spacing: 0.3em;
+            display: block;
+            text-shadow: 1px 1px 0 #1a1a1a;
+        }
+
+        /* ===== MOCK 5: Rubik Mono One — geometric, heavy, 90s tech ===== */
+        .m5 .overlay {
+            line-height: 0.82;
+        }
+        .m5 .w-parent {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+            color: #9cc5d4;
+            letter-spacing: 0.5em;
+            display: block;
+            text-shadow: 2px 2px 0 #1a1a1a;
+        }
+        .m5 .w-pta {
+            font-family: 'Rubik Mono One', sans-serif;
+            font-size: 90px;
+            color: #ffffff;
+            display: block;
+            text-shadow: 4px 4px 0 #e8611a, 7px 7px 0 #1a1a1a;
+            line-height: 0.9;
+            -webkit-text-stroke: 2px #1a1a1a;
+            paint-order: stroke fill;
+        }
+        .m5 .w-teacher {
+            font-family: 'Oswald', sans-serif;
+            font-size: 28px;
+            color: #fbbf24;
+            letter-spacing: 0.12em;
+            display: block;
+            text-shadow: 2px 2px 0 #1a1a1a;
+            -webkit-text-stroke: 1px #1a1a1a;
+        }
+        .m5 .w-assoc {
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            color: #e87fbf;
+            letter-spacing: 0.4em;
+            display: block;
+            text-shadow: 1px 1px 0 #1a1a1a;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PTA Logo Overlay Mockups — pick your fighter</h1>
+    <div class="grid">
+
+        <!-- Mock 1 -->
+        <div>
+            <div class="mockup m1">
+                <img src="logo.png" alt="">
+                <div class="overlay">
+                    <span class="w-parent">PARENT</span>
+                    <span class="w-pta">PTA</span>
+                    <span class="w-teacher">TEACHER</span>
+                    <span class="w-assoc">ASSOCIATION</span>
+                </div>
+            </div>
+            <p class="label">1 — Bungee Block (straight stack)</p>
+        </div>
+
+        <!-- Mock 2 -->
+        <div>
+            <div class="mockup m2">
+                <img src="logo.png" alt="">
+                <div class="overlay">
+                    <span class="w-parent">PARENT</span>
+                    <span class="w-pta">PTA</span>
+                    <span class="w-teacher">TEACHER</span>
+                    <span class="w-assoc">ASSOCIATION</span>
+                </div>
+            </div>
+            <p class="label">2 — Bungee Shade + Bangers (tilted)</p>
+        </div>
+
+        <!-- Mock 3 -->
+        <div>
+            <div class="mockup m3">
+                <img src="logo.png" alt="">
+                <div class="overlay">
+                    <span class="w-parent">PARENT</span>
+                    <span class="w-pta">PTA</span>
+                    <span class="w-teacher">TEACHER</span>
+                    <span class="w-assoc">ASSOCIATION</span>
+                </div>
+            </div>
+            <p class="label">3 — Luckiest Guy (comic book, orange 3D)</p>
+        </div>
+
+        <!-- Mock 4 -->
+        <div>
+            <div class="mockup m4">
+                <img src="logo.png" alt="">
+                <div class="overlay">
+                    <span class="w-parent">PARENT</span>
+                    <span class="w-pta">PTA</span>
+                    <span class="w-teacher">TEACHER</span>
+                    <span class="w-assoc">ASSOCIATION</span>
+                </div>
+            </div>
+            <p class="label">4 — Bangers + Anton (graffiti, raw)</p>
+        </div>
+
+        <!-- Mock 5 -->
+        <div>
+            <div class="mockup m5">
+                <img src="logo.png" alt="">
+                <div class="overlay">
+                    <span class="w-parent">PARENT</span>
+                    <span class="w-pta">PTA</span>
+                    <span class="w-teacher">TEACHER</span>
+                    <span class="w-assoc">ASSOCIATION</span>
+                </div>
+            </div>
+            <p class="label">5 — Rubik Mono One (geometric, heavy)</p>
+        </div>
+
+    </div>
+</body>
+</html>

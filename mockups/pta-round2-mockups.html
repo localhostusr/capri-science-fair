@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PTA Logo — Round 2 Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Oswald:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #111;
+    color: #ccc;
+    font-family: sans-serif;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    color: #666;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+  .mockup-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .mockup-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 0.05em;
+    text-align: center;
+    max-width: 300px;
+  }
+  .box {
+    width: 300px;
+    height: 300px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .box .bg-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    filter: saturate(0.2) brightness(1.3) opacity(0.4);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .stack {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .stack .parent {
+    font-family: 'Anton', sans-serif;
+    color: #b8e02a;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px #1a1a1a;
+    text-shadow: 2px 2px 0 #1a1a1a;
+    margin: 0;
+    padding: 0;
+  }
+  .stack .pta {
+    font-family: 'Bangers', cursive;
+    color: #00e5ff;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 0 #0088aa, 5px 5px 0 #1a1a1a;
+    margin: 0;
+    padding: 0;
+  }
+  .stack .teacher {
+    font-family: 'Anton', sans-serif;
+    color: #ff2d9b;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px #1a1a1a;
+    text-shadow: 2px 2px 0 #1a1a1a;
+    margin: 0;
+    padding: 0;
+  }
+  .stack .association {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    text-shadow: 2px 2px 0 #1a1a1a;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>PTA Logo — Round 2 Size/Spacing Calibrations</h1>
+
+<div class="grid">
+
+  <!-- Mockup 1 -->
+  <div class="mockup-wrap">
+    <div class="box">
+      <img class="bg-logo" src="logo.png" alt="">
+      <div class="stack" style="transform: rotate(-3deg); line-height: 0.72;">
+        <div class="parent" style="font-size: 28px; transform: rotate(2deg);">Parent</div>
+        <div class="pta" style="font-size: 72px; letter-spacing: -0.03em; transform: rotate(-1deg);">PTA</div>
+        <div class="teacher" style="font-size: 24px; transform: rotate(1deg);">Teacher</div>
+        <div class="association" style="font-size: 11px;">Association</div>
+      </div>
+    </div>
+    <div class="mockup-label">1 — Tight & Balanced</div>
+  </div>
+
+  <!-- Mockup 2 -->
+  <div class="mockup-wrap">
+    <div class="box">
+      <img class="bg-logo" src="logo.png" alt="">
+      <div class="stack" style="transform: rotate(-3deg); line-height: 0.70;">
+        <div class="parent" style="font-size: 24px; transform: rotate(2deg);">Parent</div>
+        <div class="pta" style="font-size: 80px; letter-spacing: -0.04em; transform: rotate(-1deg);">PTA</div>
+        <div class="teacher" style="font-size: 22px; transform: rotate(1deg);">Teacher</div>
+        <div class="association" style="font-size: 10px;">Association</div>
+      </div>
+    </div>
+    <div class="mockup-label">2 — PTA Dominant but Compact</div>
+  </div>
+
+  <!-- Mockup 3 -->
+  <div class="mockup-wrap">
+    <div class="box">
+      <img class="bg-logo" src="logo.png" alt="">
+      <div class="stack" style="transform: rotate(-3deg); line-height: 0.68;">
+        <div class="parent" style="font-size: 26px; transform: rotate(2deg);">Parent</div>
+        <div class="pta" style="font-size: 76px; letter-spacing: -0.05em; transform: rotate(-1deg);">PTA</div>
+        <div class="teacher" style="font-size: 28px; margin-top: -2px; transform: rotate(1deg);">Teacher</div>
+        <div class="association" style="font-size: 12px;">Association</div>
+      </div>
+    </div>
+    <div class="mockup-label">3 — Most NKOTB-like (compressed block)</div>
+  </div>
+
+  <!-- Mockup 4 -->
+  <div class="mockup-wrap">
+    <div class="box">
+      <img class="bg-logo" src="logo.png" alt="">
+      <div class="stack" style="transform: rotate(-3deg); line-height: 0.72;">
+        <div class="parent" style="font-size: 30px; letter-spacing: 0.15em; transform: rotate(2deg);">Parent</div>
+        <div class="pta" style="font-size: 74px; letter-spacing: -0.06em; transform: rotate(-1deg);">PTA</div>
+        <div class="teacher" style="font-size: 26px; letter-spacing: 0.08em; transform: rotate(1deg);">Teacher</div>
+        <div class="association" style="font-size: 13px;">Association</div>
+      </div>
+    </div>
+    <div class="mockup-label">4 — Extra tight PTA, wider supporting text</div>
+  </div>
+
+  <!-- Mockup 5 -->
+  <div class="mockup-wrap">
+    <div class="box">
+      <img class="bg-logo" src="logo.png" alt="">
+      <div class="stack" style="transform: rotate(-3deg); line-height: 0.74;">
+        <div class="parent" style="font-size: 32px; transform: rotate(2deg);">Parent</div>
+        <div class="pta" style="font-size: 68px; letter-spacing: -0.04em; transform: rotate(-1deg);">PTA</div>
+        <div class="teacher" style="font-size: 30px; transform: rotate(1deg);">Teacher</div>
+        <div class="association" style="font-size: 14px;">Association</div>
+      </div>
+    </div>
+    <div class="mockup-label">5 — Smallest ratio difference</div>
+  </div>
+
+</div>
+
+</body>
+</html>

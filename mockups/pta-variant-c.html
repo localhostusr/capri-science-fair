@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variant C — Refined proportional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            opacity: 0.4;
+            margin-bottom: 50px;
+            font-weight: 400;
+        }
+        .stage {
+            position: relative;
+            width: 440px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .stage .bg-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 340px;
+            height: auto;
+            filter: saturate(0.2) brightness(1.3) opacity(0.4);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .stack {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            transform: rotate(-3deg);
+            line-height: 0.75;
+        }
+        .w-parent {
+            font-family: 'Anton', sans-serif;
+            font-size: 38px;
+            color: #b8e02a;
+            display: block;
+            transform: rotate(2deg);
+            text-shadow: 3px 3px 0 #1a1a1a;
+        }
+        .w-pta {
+            display: block;
+            transform: rotate(-1deg);
+            margin: 4px 0;
+        }
+        .w-pta svg {
+            width: 400px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .w-teacher {
+            font-family: 'Anton', sans-serif;
+            font-size: 32px;
+            color: #ff2d9b;
+            display: block;
+            transform: rotate(1deg);
+            text-shadow: 3px 3px 0 #1a1a1a;
+        }
+        .w-assoc {
+            font-family: 'Oswald', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.35em;
+            display: block;
+            text-shadow: 1px 1px 0 #1a1a1a;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Variant C &mdash; Refined proportional</h1>
+    <div class="stage">
+        <img class="bg-logo" src="logo.png" alt="">
+        <div class="stack">
+            <span class="w-parent">PARENT</span>
+            <span class="w-pta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -10 316 132">
+
+                    <!-- ==================== P ==================== -->
+                    <!-- P: stem 30x110, bowl puffy — extends ~60px right, peeks above/below stem -->
+
+                    <!-- P shadow 2 (deepest: #1a1a1a, offset 7,7) -->
+                    <g transform="translate(7,7)" fill="#1a1a1a">
+                        <rect x="0" y="0" width="30" height="110" rx="4"/>
+                        <path d="
+                            M 28,-2
+                            C 40,-10, 65,-14, 78,-10
+                            C 92,-5, 95,8, 95,22
+                            C 95,38, 93,52, 85,62
+                            C 76,73, 58,76, 42,74
+                            C 33,73, 28,68, 28,62
+                            Z
+                        "/>
+                    </g>
+
+                    <!-- P shadow 1 (#0088aa, offset 4,4) -->
+                    <g transform="translate(4,4)" fill="#0088aa">
+                        <rect x="0" y="0" width="30" height="110" rx="4"/>
+                        <path d="
+                            M 28,-2
+                            C 40,-10, 65,-14, 78,-10
+                            C 92,-5, 95,8, 95,22
+                            C 95,38, 93,52, 85,62
+                            C 76,73, 58,76, 42,74
+                            C 33,73, 28,68, 28,62
+                            Z
+                        "/>
+                    </g>
+
+                    <!-- P main stem (#00e5ff) -->
+                    <rect x="0" y="0" width="30" height="110" rx="4" fill="#00e5ff"/>
+
+                    <!-- P main bowl (#33eeff — brighter/lighter cyan for emphasis) -->
+                    <path d="
+                        M 28,-2
+                        C 40,-10, 65,-14, 78,-10
+                        C 92,-5, 95,8, 95,22
+                        C 95,38, 93,52, 85,62
+                        C 76,73, 58,76, 42,74
+                        C 33,73, 28,68, 28,62
+                        Z
+                    " fill="#33eeff"/>
+
+
+                    <!-- ==================== T ==================== -->
+                    <!-- T: crossbar 75x22 at top, vertical stem 30x110 centered -->
+
+                    <!-- T shadow 2 (#1a1a1a, offset 7,7) -->
+                    <g transform="translate(7,7)" fill="#1a1a1a">
+                        <rect x="108" y="0" width="75" height="22" rx="4"/>
+                        <rect x="130" y="0" width="30" height="110" rx="4"/>
+                    </g>
+
+                    <!-- T shadow 1 (#0088aa, offset 4,4) -->
+                    <g transform="translate(4,4)" fill="#0088aa">
+                        <rect x="108" y="0" width="75" height="22" rx="4"/>
+                        <rect x="130" y="0" width="30" height="110" rx="4"/>
+                    </g>
+
+                    <!-- T main -->
+                    <rect x="108" y="0" width="75" height="22" rx="4" fill="#00e5ff"/>
+                    <rect x="130" y="0" width="30" height="110" rx="4" fill="#00e5ff"/>
+
+
+                    <!-- ==================== A ==================== -->
+                    <!-- A: two angled legs with crossbar, Bangers-style bold -->
+
+                    <!-- A shadow 2 (#1a1a1a, offset 7,7) -->
+                    <g transform="translate(7,7)" fill="#1a1a1a">
+                        <!-- Outer shape -->
+                        <path d="
+                            M 200,110 L 222,0 L 258,0 L 280,110 L 255,110
+                            L 250,88 L 230,88 L 225,110 Z
+                        "/>
+                        <!-- Crossbar gap (will be punched out on main) -->
+                    </g>
+
+                    <!-- A shadow 1 (#0088aa, offset 4,4) -->
+                    <g transform="translate(4,4)" fill="#0088aa">
+                        <path d="
+                            M 200,110 L 222,0 L 258,0 L 280,110 L 255,110
+                            L 250,88 L 230,88 L 225,110 Z
+                        "/>
+                    </g>
+
+                    <!-- A main -->
+                    <path d="
+                        M 200,110 L 222,0 L 258,0 L 280,110 L 255,110
+                        L 250,88 L 230,88 L 225,110 Z
+                    " fill="#00e5ff"/>
+
+                    <!-- A counter (triangular hole at top) -->
+                    <path d="
+                        M 234,22 L 240,48 L 247,48 L 253,22 Z
+                    " fill="#000"/>
+
+                    <!-- A crossbar cutout -->
+                    <rect x="228" y="56" width="36" height="16" rx="2" fill="#000"/>
+
+                </svg>
+            </span>
+            <span class="w-teacher">TEACHER</span>
+            <span class="w-assoc">ASSOCIATION</span>
+        </div>
+    </div>
+</body>
+</html>

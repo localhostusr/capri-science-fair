@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Outer ring — Capri orange -->
+  <circle cx="200" cy="200" r="190" fill="#e8611a" />
+  <circle cx="200" cy="200" r="170" fill="#6a9aad" />
+
+  <!-- Inner circle — dark blue-grey -->
+  <circle cx="200" cy="200" r="155" fill="#4a7d8f" />
+
+  <!-- Wave pattern — decorative, echoing the school logo -->
+  <path d="M40 220 Q80 190 120 220 Q160 250 200 220 Q240 190 280 220 Q320 250 360 220"
+        fill="none" stroke="#9cc5d4" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <path d="M40 250 Q80 220 120 250 Q160 280 200 250 Q240 220 280 250 Q320 280 360 250"
+        fill="none" stroke="#9cc5d4" stroke-width="6" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- CAPRI text — top arc -->
+  <defs>
+    <path id="topArc" d="M90,200 A110,110 0 0,1 310,200" />
+    <path id="bottomArc" d="M100,215 A100,100 0 0,0 300,215" />
+  </defs>
+
+  <text font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-weight="900"
+        font-size="38" fill="#ffffff" letter-spacing="10">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">CAPRI</textPath>
+  </text>
+
+  <!-- PTA — large center text -->
+  <text x="200" y="215" text-anchor="middle" dominant-baseline="central"
+        font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="900" font-size="88" fill="#ffffff"
+        stroke="#1a1a1a" stroke-width="3" paint-order="stroke">PTA</text>
+
+  <!-- PARENT TEACHER ASSOCIATION — bottom arc -->
+  <text font-family="'Arial', 'Helvetica Neue', sans-serif" font-weight="700"
+        font-size="16" fill="#ffffff" letter-spacing="3" opacity="0.9">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">PARENT TEACHER ASSOC.</textPath>
+  </text>
+
+  <!-- Stingray silhouette — small, top center -->
+  <g transform="translate(200, 95) scale(0.35)" opacity="0.9">
+    <!-- Simplified stingray shape -->
+    <path d="M0,-40 C-30,-20 -60,5 -45,15 C-30,25 -15,10 0,20 C15,10 30,25 45,15 C60,5 30,-20 0,-40 Z"
+          fill="#ffffff" />
+    <!-- Tail -->
+    <path d="M0,20 Q2,45 -3,65" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Outer ring stroke for definition -->
+  <circle cx="200" cy="200" r="190" fill="none" stroke="#1a1a1a" stroke-width="4" />
+  <circle cx="200" cy="200" r="170" fill="none" stroke="#1a1a1a" stroke-width="2" opacity="0.3" />
+</svg>

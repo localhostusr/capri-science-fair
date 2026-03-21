@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTA Logo — Final</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+            color: #fff;
+        }
+        h1 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.45;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        .container {
+            position: relative;
+            width: 380px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bg-logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: saturate(0.2) brightness(1.3) opacity(0.4);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .stack {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            line-height: 0.72;
+            transform: rotate(-3deg);
+            margin-top: -37px;
+        }
+        .w-parent {
+            font-family: 'Anton', sans-serif;
+            font-size: 40px;
+            color: #b8e02a;
+            display: block;
+            transform: rotate(2deg);
+            text-shadow: 2px 2px 0 #1a1a1a;
+            -webkit-text-stroke: 1px #1a1a1a;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin: 0;
+            padding: 0;
+        }
+        .w-pta {
+            display: block;
+            transform: rotate(-1deg);
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+        }
+        .w-pta svg {
+            display: block;
+            margin: 0 auto;
+        }
+        .w-teacher {
+            font-family: 'Anton', sans-serif;
+            font-size: 34px;
+            color: #ff2d9b;
+            display: block;
+            transform: rotate(1deg);
+            text-shadow: 2px 2px 0 #1a1a1a;
+            -webkit-text-stroke: 1px #1a1a1a;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin: 0;
+            padding: 0;
+        }
+        .w-association {
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.25em;
+            display: block;
+            text-shadow: 1px 1px 0 #1a1a1a;
+            text-transform: uppercase;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>PTA Logo — Mockup 4 + Custom P</h1>
+    <div class="container">
+        <img src="logo.png" alt="" class="bg-logo">
+        <div class="stack">
+            <span class="w-parent">Parent</span>
+            <span class="w-pta">
+                <!--
+                    Custom P with exaggerated bowl + Bangers TA
+                    Scaled so P height matches Bangers 74px cap height (~54px in SVG units)
+                    P stem width ~12px to match Bangers stroke weight at this size
+                    Letters packed tight: T starts right after P bowl, A right after T
+                    font-size 74 Bangers ≈ cap height of 54px in SVG coords
+                -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 4 148 66" width="310" height="138">
+                    <defs>
+                        <style>
+                            @import url('https://fonts.googleapis.com/css2?family=Bangers&amp;display=swap');
+                        </style>
+                    </defs>
+
+                    <!-- P: stem 12px wide, height 54px (y=10 to y=64), bowl extends to x=62 -->
+
+                    <!--
+                        Block letter P — NKOTB "D" style.
+                        Bowl = flat top, flat bottom, big smooth capsule curve on right.
+                        Counter (hole) = same shape inset, flat left edge, rounded right.
+                        Stem extends below bowl.
+                    -->
+
+                    <!-- P: bowl stretched wider (to x=78), shifted up (y=8 to y=40), stem continues to y=64 -->
+
+                    <!-- P: top y=12 to match Bangers cap height, bottom y=64 at baseline -->
+                    <!-- Bowl from y=12 to y=42, stem continues to y=64 -->
+                    <!-- Bowl extends to x=78 for the stretched NKOTB look -->
+
+                    <!-- P shifted right 12px total toward A -->
+                    <!-- P shadow 2 -->
+                    <g transform="translate(16,4)">
+                        <path fill-rule="evenodd" fill="#1a1a1a" d="
+                            M 3,12 L 48,12 C 78,12 78,42 48,42 L 15,42 L 15,64 L 3,64 Z
+                            M 15,22 L 44,22 C 62,22 62,32 44,32 L 15,32 Z
+                        "/>
+                    </g>
+
+                    <!-- P shadow 1 -->
+                    <g transform="translate(14,2)">
+                        <path fill-rule="evenodd" fill="#0088aa" d="
+                            M 3,12 L 48,12 C 78,12 78,42 48,42 L 15,42 L 15,64 L 3,64 Z
+                            M 15,22 L 44,22 C 62,22 62,32 44,32 L 15,32 Z
+                        "/>
+                    </g>
+
+                    <!-- P main -->
+                    <g transform="translate(12,0)">
+                        <path fill-rule="evenodd" fill="#00e5ff" d="
+                            M 3,12 L 48,12 C 78,12 78,42 48,42 L 15,42 L 15,64 L 3,64 Z
+                            M 15,22 L 44,22 C 62,22 62,32 44,32 L 15,32 Z
+                        "/>
+                    </g>
+
+                    <!-- T shifted right 12px total toward A -->
+                    <text x="68" y="64" font-family="Bangers, cursive" font-size="74" fill="#1a1a1a" transform="translate(4,4)">T</text>
+                    <text x="68" y="64" font-family="Bangers, cursive" font-size="74" fill="#0088aa" transform="translate(2,2)">T</text>
+                    <text x="68" y="64" font-family="Bangers, cursive" font-size="74" fill="#00e5ff">T</text>
+
+                    <!-- A — back to original position -->
+                    <text x="92" y="64" font-family="Bangers, cursive" font-size="74" fill="#1a1a1a" transform="translate(4,4)">A</text>
+                    <text x="92" y="64" font-family="Bangers, cursive" font-size="74" fill="#0088aa" transform="translate(2,2)">A</text>
+                    <text x="92" y="64" font-family="Bangers, cursive" font-size="74" fill="#00e5ff">A</text>
+                </svg>
+            </span>
+            <span class="w-teacher">Teacher</span>
+            <span class="w-association">Association</span>
+        </div>
+    </div>
+</body>
+</html>
