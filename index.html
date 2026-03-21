@@ -134,30 +134,34 @@
 
     <!-- DNA helix divider -->
     <div class="dna-divider" aria-hidden="true">
-        <svg viewBox="0 0 400 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,10 Q10,0 20,10 Q30,20 40,10 Q50,0 60,10 Q70,20 80,10 Q90,0 100,10 Q110,20 120,10 Q130,0 140,10 Q150,20 160,10 Q170,0 180,10 Q190,20 200,10 Q210,0 220,10 Q230,20 240,10 Q250,0 260,10 Q270,20 280,10 Q290,0 300,10 Q310,20 320,10 Q330,0 340,10 Q350,20 360,10 Q370,0 380,10 Q390,20 400,10" fill="none" stroke="#e8611a" stroke-width="1.5" opacity="0.5"/>
-            <path d="M0,10 Q10,20 20,10 Q30,0 40,10 Q50,20 60,10 Q70,0 80,10 Q90,20 100,10 Q110,0 120,10 Q130,20 140,10 Q150,0 160,10 Q170,20 180,10 Q190,0 200,10 Q210,20 220,10 Q230,0 240,10 Q250,20 260,10 Q270,0 280,10 Q290,20 300,10 Q310,0 320,10 Q330,20 340,10 Q350,0 360,10 Q370,20 380,10 Q390,0 400,10" fill="none" stroke="#9cc5d4" stroke-width="1.5" opacity="0.5"/>
-            <!-- Rungs connecting the two strands -->
-            <line x1="10" y1="5" x2="10" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="30" y1="5" x2="30" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
-            <line x1="50" y1="5" x2="50" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="70" y1="5" x2="70" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
-            <line x1="90" y1="5" x2="90" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="110" y1="5" x2="110" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
-            <line x1="130" y1="5" x2="130" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="150" y1="5" x2="150" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
-            <line x1="170" y1="5" x2="170" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="190" y1="5" x2="190" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
-            <line x1="210" y1="5" x2="210" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="230" y1="5" x2="230" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
-            <line x1="250" y1="5" x2="250" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="270" y1="5" x2="270" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
-            <line x1="290" y1="5" x2="290" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="310" y1="5" x2="310" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
-            <line x1="330" y1="5" x2="330" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="350" y1="5" x2="350" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
-            <line x1="370" y1="5" x2="370" y2="15" stroke="#e8611a" stroke-width="0.8" opacity="0.2"/>
-            <line x1="390" y1="5" x2="390" y2="15" stroke="#9cc5d4" stroke-width="0.8" opacity="0.2"/>
+        <svg viewBox="0 0 400 28" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Strand 1 — orange -->
+            <path d="M0,14 Q10,2 20,14 Q30,26 40,14 Q50,2 60,14 Q70,26 80,14 Q90,2 100,14 Q110,26 120,14 Q130,2 140,14 Q150,26 160,14 Q170,2 180,14 Q190,26 200,14 Q210,2 220,14 Q230,26 240,14 Q250,2 260,14 Q270,26 280,14 Q290,2 300,14 Q310,26 320,14 Q330,2 340,14 Q350,26 360,14 Q370,2 380,14 Q390,26 400,14" fill="none" stroke="#e8611a" stroke-width="2.5" opacity="0.4"/>
+            <!-- Strand 2 — blue (inverted) -->
+            <path d="M0,14 Q10,26 20,14 Q30,2 40,14 Q50,26 60,14 Q70,2 80,14 Q90,26 100,14 Q110,2 120,14 Q130,26 140,14 Q150,2 160,14 Q170,26 180,14 Q190,2 200,14 Q210,26 220,14 Q230,2 240,14 Q250,26 260,14 Q270,2 280,14 Q290,26 300,14 Q310,2 320,14 Q330,26 340,14 Q350,2 360,14 Q370,26 380,14 Q390,2 400,14" fill="none" stroke="#9cc5d4" stroke-width="2.5" opacity="0.4"/>
+            <!-- Base pair rungs with dots at ends -->
+            <g opacity="0.3">
+                <line x1="10" y1="8" x2="10" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="10" cy="8" r="1.5" fill="#e8611a"/><circle cx="10" cy="20" r="1.5" fill="#9cc5d4"/>
+                <line x1="30" y1="8" x2="30" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="30" cy="20" r="1.5" fill="#e8611a"/><circle cx="30" cy="8" r="1.5" fill="#9cc5d4"/>
+                <line x1="50" y1="8" x2="50" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="50" cy="8" r="1.5" fill="#e8611a"/><circle cx="50" cy="20" r="1.5" fill="#9cc5d4"/>
+                <line x1="70" y1="8" x2="70" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="70" cy="20" r="1.5" fill="#e8611a"/><circle cx="70" cy="8" r="1.5" fill="#9cc5d4"/>
+                <line x1="90" y1="8" x2="90" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="90" cy="8" r="1.5" fill="#e8611a"/><circle cx="90" cy="20" r="1.5" fill="#9cc5d4"/>
+                <line x1="110" y1="8" x2="110" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="110" cy="20" r="1.5" fill="#e8611a"/><circle cx="110" cy="8" r="1.5" fill="#9cc5d4"/>
+                <line x1="130" y1="8" x2="130" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="130" cy="8" r="1.5" fill="#e8611a"/><circle cx="130" cy="20" r="1.5" fill="#9cc5d4"/>
+                <line x1="150" y1="8" x2="150" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="150" cy="20" r="1.5" fill="#e8611a"/><circle cx="150" cy="8" r="1.5" fill="#9cc5d4"/>
+                <line x1="170" y1="8" x2="170" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="170" cy="8" r="1.5" fill="#e8611a"/><circle cx="170" cy="20" r="1.5" fill="#9cc5d4"/>
+                <line x1="190" y1="8" x2="190" y2="20" stroke="#888" stroke-width="1.2"/>
+                <circle cx="190" cy="20" r="1.5" fill="#e8611a"/><circle cx="190" cy="8" r="1.5" fill="#9cc5d4"/>
+            </g>
         </svg>
     </div>
 
@@ -185,28 +189,70 @@
 <main class="main-content">
     <section class="form-section" id="signup">
         <div id="form-header">
-            <!-- Large Erlenmeyer flask floating behind text -->
+            <!-- Large Erlenmeyer flask with test tubes floating behind text -->
             <div class="flask-bg" aria-hidden="true">
-                <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg" class="flask-svg">
-                    <!-- Flask body -->
-                    <path d="M80,10 L80,90 L20,220 Q15,235 30,245 L170,245 Q185,235 180,220 L120,90 L120,10" fill="none" stroke="#9cc5d4" stroke-width="2.5" opacity="0.2"/>
+                <svg viewBox="-120 -30 440 290" xmlns="http://www.w3.org/2000/svg" class="flask-svg">
+                    <!-- Test tubes — left side -->
+                    <g opacity="0.25">
+                        <!-- Tube 1 — tilted left -->
+                        <g transform="translate(-60,60) rotate(-15, 15, 60)">
+                            <rect x="8" y="10" width="14" height="100" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="4" y="8" width="22" height="4" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="10" y="70" width="10" height="38" rx="0" fill="#e8611a" opacity="0.4"/>
+                            <circle cx="15" cy="90" r="2" fill="#fff" opacity="0.4" class="flask-bubble flask-b1"/>
+                        </g>
+                        <!-- Tube 2 -->
+                        <g transform="translate(-30,80) rotate(-5, 15, 60)">
+                            <rect x="8" y="10" width="14" height="90" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="4" y="8" width="22" height="4" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="10" y="55" width="10" height="43" rx="0" fill="#9cc5d4" opacity="0.3"/>
+                            <circle cx="15" cy="75" r="1.5" fill="#fff" opacity="0.3" class="flask-bubble flask-b3"/>
+                        </g>
+                    </g>
+
+                    <!-- Test tubes — right side -->
+                    <g opacity="0.25">
+                        <!-- Tube 3 -->
+                        <g transform="translate(215,70) rotate(8, 15, 60)">
+                            <rect x="8" y="10" width="14" height="95" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="4" y="8" width="22" height="4" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="10" y="60" width="10" height="43" rx="0" fill="#e8611a" opacity="0.35"/>
+                            <circle cx="15" cy="80" r="2" fill="#fff" opacity="0.35" class="flask-bubble flask-b2"/>
+                        </g>
+                        <!-- Tube 4 — tilted right -->
+                        <g transform="translate(250,55) rotate(18, 15, 60)">
+                            <rect x="8" y="10" width="14" height="100" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="4" y="8" width="22" height="4" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="10" y="50" width="10" height="48" rx="0" fill="#9cc5d4" opacity="0.3"/>
+                            <circle cx="15" cy="70" r="1.5" fill="#fff" opacity="0.3" class="flask-bubble flask-b4"/>
+                        </g>
+                        <!-- Tube 5 — far right -->
+                        <g transform="translate(280,90) rotate(12, 15, 60)">
+                            <rect x="8" y="10" width="14" height="80" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="4" y="8" width="22" height="4" rx="0" fill="none" stroke="#9cc5d4" stroke-width="2"/>
+                            <rect x="10" y="50" width="10" height="38" rx="0" fill="#e8611a" opacity="0.25"/>
+                        </g>
+                    </g>
+
+                    <!-- Flask body — center -->
+                    <path d="M80,10 L80,90 L20,220 Q15,235 30,245 L170,245 Q185,235 180,220 L120,90 L120,10" fill="none" stroke="#9cc5d4" stroke-width="3" opacity="0.3"/>
                     <!-- Flask rim -->
-                    <line x1="70" y1="10" x2="130" y2="10" stroke="#9cc5d4" stroke-width="3" opacity="0.25" stroke-linecap="round"/>
+                    <line x1="70" y1="10" x2="130" y2="10" stroke="#9cc5d4" stroke-width="3.5" opacity="0.35" stroke-linecap="round"/>
                     <!-- Liquid fill -->
-                    <path d="M38,200 L20,220 Q15,235 30,245 L170,245 Q185,235 180,220 L162,200 Z" fill="#e8611a" opacity="0.08"/>
-                    <path d="M45,190 L25,215 Q18,232 32,243 L168,243 Q182,232 175,215 L155,190 Z" fill="#e8611a" opacity="0.06"/>
+                    <path d="M38,200 L20,220 Q15,235 30,245 L170,245 Q185,235 180,220 L162,200 Z" fill="#e8611a" opacity="0.12"/>
+                    <path d="M45,190 L25,215 Q18,232 32,243 L168,243 Q182,232 175,215 L155,190 Z" fill="#e8611a" opacity="0.08"/>
                     <!-- Liquid surface wave -->
-                    <path d="M38,200 Q60,192 80,200 Q100,208 120,200 Q140,192 162,200" fill="none" stroke="#e8611a" stroke-width="1.5" opacity="0.15"/>
+                    <path d="M38,200 Q60,192 80,200 Q100,208 120,200 Q140,192 162,200" fill="none" stroke="#e8611a" stroke-width="2" opacity="0.2"/>
                     <!-- Bubbles -->
-                    <circle cx="70" cy="220" r="4" fill="#e8611a" opacity="0.1" class="flask-bubble flask-b1"/>
-                    <circle cx="110" cy="230" r="3" fill="#9cc5d4" opacity="0.12" class="flask-bubble flask-b2"/>
-                    <circle cx="90" cy="215" r="5" fill="#e8611a" opacity="0.08" class="flask-bubble flask-b3"/>
-                    <circle cx="130" cy="225" r="3" fill="#9cc5d4" opacity="0.1" class="flask-bubble flask-b4"/>
-                    <circle cx="80" cy="235" r="2.5" fill="#e8611a" opacity="0.09" class="flask-bubble flask-b5"/>
-                    <!-- Steam/vapor lines -->
-                    <path d="M90,8 Q88,0 92,-8 Q96,-16 90,-24" fill="none" stroke="#9cc5d4" stroke-width="1" opacity="0.12" class="flask-steam steam-1"/>
-                    <path d="M100,8 Q103,0 98,-8 Q93,-16 100,-24" fill="none" stroke="#9cc5d4" stroke-width="1" opacity="0.1" class="flask-steam steam-2"/>
-                    <path d="M110,8 Q108,-2 112,-10 Q116,-18 110,-26" fill="none" stroke="#9cc5d4" stroke-width="1" opacity="0.08" class="flask-steam steam-3"/>
+                    <circle cx="70" cy="220" r="5" fill="#e8611a" opacity="0.12" class="flask-bubble flask-b1"/>
+                    <circle cx="110" cy="230" r="4" fill="#9cc5d4" opacity="0.15" class="flask-bubble flask-b2"/>
+                    <circle cx="90" cy="215" r="6" fill="#e8611a" opacity="0.1" class="flask-bubble flask-b3"/>
+                    <circle cx="130" cy="225" r="3.5" fill="#9cc5d4" opacity="0.12" class="flask-bubble flask-b4"/>
+                    <circle cx="80" cy="235" r="3" fill="#e8611a" opacity="0.1" class="flask-bubble flask-b5"/>
+                    <!-- Steam -->
+                    <path d="M90,8 Q88,0 92,-8 Q96,-16 90,-24" fill="none" stroke="#9cc5d4" stroke-width="1.5" opacity="0.15" class="flask-steam steam-1"/>
+                    <path d="M100,8 Q103,0 98,-8 Q93,-16 100,-24" fill="none" stroke="#9cc5d4" stroke-width="1.5" opacity="0.12" class="flask-steam steam-2"/>
+                    <path d="M110,8 Q108,-2 112,-10 Q116,-18 110,-26" fill="none" stroke="#9cc5d4" stroke-width="1.5" opacity="0.1" class="flask-steam steam-3"/>
                 </svg>
             </div>
             <h2 data-en="Sign Up Your Scientist!" data-es="¡Inscribe a Tu Científico!">Sign Up Your Scientist!</h2>
