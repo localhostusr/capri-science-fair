@@ -194,7 +194,7 @@ Necesita electricidad: ${data.needPower === 'yes' ? 'Sí' : 'No'}
 
 📅 DETALLES DEL EVENTO:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Fecha: Miércoles, 23 de abril de 2026
+Fecha: Jueves, 23 de abril de 2026
 Hora: 5:00 PM – 6:30 PM
 Lugar: Patio de Capri Elementary
 
@@ -234,7 +234,7 @@ Needs electricity: ${data.needPower === 'yes' ? 'Yes' : 'No'}
 
 📅 EVENT DETAILS:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Date: Wednesday, April 23, 2026
+Date: Thursday, April 23, 2026
 Time: 5:00 PM – 6:30 PM
 Location: Capri Elementary Quad
 
