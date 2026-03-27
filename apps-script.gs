@@ -199,8 +199,8 @@ Hora: 5:00 PM – 6:30 PM
 Lugar: Patio de Capri Elementary
 
 HORARIO:
-• 5:00 PM — La Feria de Ciencias abre
-• 6:00 PM — Show de SD Lab Rats
+• 5:00 PM — Proyectos y estaciones interactivas de SD Lab Rats
+• 6:00 PM — Show de ciencias de SD Lab Rats
 • 6:30 PM — Fin del evento
 
 📌 QUÉ TRAER:
@@ -208,6 +208,11 @@ HORARIO:
 • Su proyecto de ciencias completado
 ${data.needBoard === 'yes' ? '• Recoja su tablero tríptico de la Sra. Pudvah antes del evento' : '• Su propio tablero de exhibición'}
 • Llegue a las 4:45 PM para montar su proyecto
+
+📘 GUÍA DE INICIO RÁPIDO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+¿Necesita ayuda con su proyecto? Nuestra guía tiene ideas de proyectos, consejos para el tablero y más:
+https://localhostusr.github.io/capri-science-fair/guide.html
 
 🔒 PRIVACIDAD: Su información se utiliza únicamente para coordinar la Feria de Ciencias y se eliminará dentro de los 30 días posteriores al evento.
 
@@ -239,7 +244,7 @@ Time: 5:00 PM – 6:30 PM
 Location: Capri Elementary Quad
 
 SCHEDULE:
-• 5:00 PM — Science Fair opens
+• 5:00 PM — Projects & SD Lab Rats interactive stations
 • 6:00 PM — SD Lab Rats science show
 • 6:30 PM — Event ends
 
@@ -248,6 +253,11 @@ SCHEDULE:
 • Your completed science project
 ${data.needBoard === 'yes' ? '• Pick up your tri-fold board from Ms. Pudvah before the event' : '• Your own display board'}
 • Arrive by 4:45 PM to set up your project
+
+📘 QUICK START GUIDE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Need help with your project? Our guide has project ideas, board tips, and more:
+https://localhostusr.github.io/capri-science-fair/guide.html
 
 🔒 PRIVACY: Your information is used solely to coordinate Science Fair participation and will be deleted within 30 days after the event.
 
