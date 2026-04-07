@@ -25,70 +25,11 @@ const NOTIFY_EMAILS = ['christopher.kohl@gmail.com'];
 const DEADLINE = new Date('2026-04-11T23:59:59');
 
 // ===== Setup (DISABLED — spreadsheet already exists and is locked by ID) =====
+// This function is intentionally a no-op that throws. The original setup logic
+// has been removed to prevent accidental sheet creation. If you need to recreate
+// the sheet, do it manually and update SPREADSHEET_ID above.
 function setup() {
-    throw new Error('setup() is disabled. The spreadsheet is already locked to ID: ' + SPREADSHEET_ID + '. If you really need to re-run setup, remove this guard manually.');
-    // Original code preserved below for reference:
-    const ss = SpreadsheetApp.create(SPREADSHEET_NAME);
-    const sheet = ss.getActiveSheet();
-    sheet.setName('Sign-Ups');
-
-    // Headers
-    const headers = [
-        'Timestamp',
-        'Student Name',
-        'Grade',
-        'Teacher',
-        'Group Project?',
-        'Group Members',
-        'Project Title',
-        'Project Description',
-        'Category',
-        'Parent Name',
-        'Parent Email',
-        'Parent Phone',
-        'Needs Board?',
-        'Needs Power?',
-        'Special Needs',
-        'Language',
-        'Confirmation Sent?'
-    ];
-
-    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-    sheet.getRange(1, 1, 1, headers.length)
-        .setFontWeight('bold')
-        .setBackground('#1a6b3c')
-        .setFontColor('white');
-
-    // Freeze header row
-    sheet.setFrozenRows(1);
-
-    // Auto-resize columns
-    headers.forEach((_, i) => sheet.autoResizeColumn(i + 1));
-
-    // Create Summary sheet
-    const summary = ss.insertSheet('Summary');
-    summary.getRange('A1').setValue('Total Sign-Ups');
-    summary.getRange('A2').setValue('Group Projects');
-    summary.getRange('A3').setValue('Individual Projects');
-    summary.getRange('A4').setValue('Boards Needed');
-    summary.getRange('A5').setValue('Power Needed');
-    summary.getRange('B1').setFormula('=COUNTA(\'Sign-Ups\'!A:A)-1');
-    summary.getRange('B2').setFormula('=COUNTIF(\'Sign-Ups\'!E:E,"yes")');
-    summary.getRange('B3').setFormula('=COUNTIF(\'Sign-Ups\'!E:E,"no")');
-    summary.getRange('B4').setFormula('=COUNTIF(\'Sign-Ups\'!M:M,"yes")');
-    summary.getRange('B5').setFormula('=COUNTIF(\'Sign-Ups\'!N:N,"yes")');
-
-    Logger.log('Spreadsheet created: ' + ss.getUrl());
-    Logger.log('Share this URL with your team!');
-
-    // Share with admins
-    ADMIN_EMAILS.forEach(email => {
-        try {
-            ss.addEditor(email);
-        } catch (e) {
-            Logger.log('Could not share with ' + email + ': ' + e.message);
-        }
-    });
+    throw new Error('setup() is disabled. Spreadsheet is locked to ID: ' + SPREADSHEET_ID);
 }
 
 // ===== Web App Entry Point =====
@@ -187,9 +128,7 @@ function doGet(e) {
         try {
             recordVisit({
                 sid: params.sid || '',
-                team: params.team === '1',
-                page: params.page || 'unknown',
-                ua: (e && e.headers && e.headers['User-Agent']) || ''
+                page: params.page || 'unknown'
             });
         } catch (err) { /* silent */ }
         return jsonOut({ ok: true });
@@ -288,8 +227,8 @@ function getVisitsSheet() {
     let sheet = ss.getSheetByName('Visits');
     if (!sheet) {
         sheet = ss.insertSheet('Visits');
-        sheet.getRange(1, 1, 1, 5).setValues([['Timestamp','SessionID','IsTeam','Page','UserAgent']]);
-        sheet.getRange(1, 1, 1, 5).setFontWeight('bold').setBackground('#1a6b3c').setFontColor('white');
+        sheet.getRange(1, 1, 1, 3).setValues([['Timestamp','SessionID','Page']]);
+        sheet.getRange(1, 1, 1, 3).setFontWeight('bold').setBackground('#1a6b3c').setFontColor('white');
         sheet.setFrozenRows(1);
     }
     return sheet;
@@ -297,7 +236,7 @@ function getVisitsSheet() {
 
 function recordVisit(v) {
     const sheet = getVisitsSheet();
-    sheet.appendRow([new Date(), v.sid, v.team ? 'yes' : 'no', v.page, v.ua]);
+    sheet.appendRow([new Date(), v.sid, v.page]);
 }
 
 // ===== Organizer Stats — deeper analytics =====
@@ -331,7 +270,7 @@ function getOrganizerStats() {
     };
 
     if (vLast >= 2) {
-        const visits = visitsSheet.getRange(2, 1, vLast - 1, 5).getValues();
+        const visits = visitsSheet.getRange(2, 1, vLast - 1, 3).getValues();
         const firstSeen = {}; // sid -> earliest timestamp
         visits.forEach(row => {
             const ts = row[0];
@@ -373,12 +312,19 @@ function getOrganizerStats() {
     const dailyRate = daysSinceFirstSignup > 0 ? baseStats.total / daysSinceFirstSignup : 0;
     const projectedTotal = Math.round(baseStats.total + (dailyRate * daysRemaining));
 
-    // Recommendations — under-represented grades & categories
+    // Recommendations — under-represented grades & empty categories
+    // Only generate "under-represented" recommendations with enough data (>=7 entries)
+    // so we don't say "6 grades under-represented" with 1 sign-up
     const totalGradeEntries = Object.values(baseStats.byGrade).reduce((a, b) => a + b, 0);
-    const expectedPerGrade = totalGradeEntries > 0 ? totalGradeEntries / 7 : 0;
-    const underGrades = ['K','1','2','3','4','5','6'].filter(g => (baseStats.byGrade[g] || 0) < expectedPerGrade);
+    let underGrades = [];
+    if (totalGradeEntries >= 7) {
+        const expectedPerGrade = totalGradeEntries / 7;
+        underGrades = ['K','1','2','3','4','5','6'].filter(g => (baseStats.byGrade[g] || 0) < expectedPerGrade);
+    } else {
+        // Below threshold — list grades that are completely empty
+        underGrades = ['K','1','2','3','4','5','6'].filter(g => !(baseStats.byGrade[g] > 0));
+    }
 
-    const totalCatEntries = Object.values(baseStats.byCategory).reduce((a, b) => a + b, 0);
     const allCats = ['clean-water','energy','food','sustainability','health','space','animals','engineering','other'];
     const emptyCats = allCats.filter(c => !(baseStats.byCategory[c] > 0));
 
