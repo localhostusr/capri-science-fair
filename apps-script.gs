@@ -13,12 +13,18 @@
  */
 
 // ===== Configuration =====
+// LOCKED to a specific spreadsheet ID so the script can never accidentally
+// create or attach to a different sheet. DO NOT change this without also
+// updating the actual sheet it points to.
+const SPREADSHEET_ID = '1MdSP6gHM4ARZlQekV2MleN_z81r0hbm0IkBb4UYpA-E';
 const SPREADSHEET_NAME = 'Capri Science Fair 2026 — Sign-Ups';
 const ADMIN_EMAILS = ['capriptapresident@gmail.com', 'christopher.kohl@gmail.com', 'tracykohl06@gmail.com', 'vasunanduri@gmail.com'];
 const DEADLINE = new Date('2026-04-11T23:59:59');
 
-// ===== Setup (run once) =====
+// ===== Setup (DISABLED — spreadsheet already exists and is locked by ID) =====
 function setup() {
+    throw new Error('setup() is disabled. The spreadsheet is already locked to ID: ' + SPREADSHEET_ID + '. If you really need to re-run setup, remove this guard manually.');
+    // Original code preserved below for reference:
     const ss = SpreadsheetApp.create(SPREADSHEET_NAME);
     const sheet = ss.getActiveSheet();
     sheet.setName('Sign-Ups');
@@ -292,10 +298,7 @@ function notifyAdmins(count) {
 
 // ===== Helpers =====
 function getSheet() {
-    const files = DriveApp.getFilesByName(SPREADSHEET_NAME);
-    if (!files.hasNext()) {
-        throw new Error('Spreadsheet not found. Run setup() first.');
-    }
-    const ss = SpreadsheetApp.open(files.next());
+    // Lock to specific spreadsheet ID — no searching by name
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     return ss.getSheetByName('Sign-Ups');
 }
