@@ -18,7 +18,10 @@
 // updating the actual sheet it points to.
 const SPREADSHEET_ID = '1MdSP6gHM4ARZlQekV2MleN_z81r0hbm0IkBb4UYpA-E';
 const SPREADSHEET_NAME = 'Capri Science Fair 2026 — Sign-Ups';
+// Admins who have access to the spreadsheet (used for sharing on setup)
 const ADMIN_EMAILS = ['capriptapresident@gmail.com', 'christopher.kohl@gmail.com', 'tracykohl06@gmail.com', 'vasunanduri@gmail.com'];
+// Notification recipients — only Chris gets sign-up notification emails
+const NOTIFY_EMAILS = ['christopher.kohl@gmail.com'];
 const DEADLINE = new Date('2026-04-11T23:59:59');
 
 // ===== Setup (DISABLED — spreadsheet already exists and is locked by ID) =====
@@ -283,11 +286,12 @@ Capri Elementary PTA
 }
 
 // ===== Admin Notification =====
+// Only Chris gets these (NOTIFY_EMAILS) to avoid spamming Rose, Tracy, Mr. Nanduri.
 function notifyAdmins(count) {
     const subject = `🔬 Science Fair Update: ${count} sign-up${count !== 1 ? 's' : ''}!`;
     const body = `The Capri Science Fair 2026 sign-up page has received ${count} registration${count !== 1 ? 's' : ''}.\n\nView all sign-ups in the spreadsheet.`;
 
-    ADMIN_EMAILS.forEach(email => {
+    NOTIFY_EMAILS.forEach(email => {
         try {
             MailApp.sendEmail(email, subject, body);
         } catch (e) {
