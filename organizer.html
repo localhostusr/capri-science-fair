@@ -389,26 +389,14 @@ const CATEGORY_LABELS = {
     'animals':'Animals','engineering':'Engineering','other':'Other'
 };
 
-// Mark this browser as a team member (organizer)
-function markTeam() {
-    localStorage.setItem('csf-team', '1');
-    alert('You are now marked as a team member. Your visits will be excluded from public counts.');
-}
-
-// Allow team-flag via URL: ?team=1
-if (new URLSearchParams(location.search).get('team') === '1') {
-    localStorage.setItem('csf-team', '1');
-}
-
-// Send a tracked visit ping (organizers are tagged)
+// Send a visit ping — counts the browser as unique once
 function pingVisit() {
     let sid = localStorage.getItem('csf-sid');
     if (!sid) {
         sid = 'sid-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
         localStorage.setItem('csf-sid', sid);
     }
-    const isTeam = localStorage.getItem('csf-team') === '1' ? '1' : '0';
-    fetch(APPS_SCRIPT_URL + '?action=visit&sid=' + encodeURIComponent(sid) + '&team=' + isTeam + '&page=organizer', { mode: 'no-cors' });
+    fetch(APPS_SCRIPT_URL + '?action=visit&sid=' + encodeURIComponent(sid) + '&page=organizer', { mode: 'no-cors' });
 }
 
 async function loadStats() {
@@ -465,12 +453,11 @@ function renderOrganizer(data) {
             <div class="kpi amber"><div class="kpi-label">Days Left</div><div class="kpi-value">${data.daysRemaining || 0}</div><div class="kpi-sub">until deadline</div></div>
         </div>
 
-        <div class="section-header">Visitor Metrics <span class="pill">team excluded</span></div>
+        <div class="section-header">Visitor Metrics <span class="pill">unique browsers only</span></div>
         <div class="kpi-grid">
-            <div class="kpi cyan"><div class="kpi-label">Unique Visitors</div><div class="kpi-value">${visits.uniqueNonTeam || 0}</div><div class="kpi-sub">${visits.publicPings || 0} total page loads</div></div>
-            <div class="kpi"><div class="kpi-label">Today</div><div class="kpi-value">${visits.today || 0}</div><div class="kpi-sub">visits today (public)</div></div>
-            <div class="kpi green"><div class="kpi-label">Last 7 Days</div><div class="kpi-value">${visits.last7Days || 0}</div><div class="kpi-sub">public visits</div></div>
-            <div class="kpi amber"><div class="kpi-label">Team Pings</div><div class="kpi-value">${visits.teamPings || 0}</div><div class="kpi-sub">your testing visits</div></div>
+            <div class="kpi cyan"><div class="kpi-label">Unique Visitors</div><div class="kpi-value">${visits.uniqueVisitors || 0}</div><div class="kpi-sub">distinct browsers, ever</div></div>
+            <div class="kpi"><div class="kpi-label">New Today</div><div class="kpi-value">${visits.firstSeenToday || 0}</div><div class="kpi-sub">first-time visits today</div></div>
+            <div class="kpi green"><div class="kpi-label">New This Week</div><div class="kpi-value">${visits.firstSeenLast7Days || 0}</div><div class="kpi-sub">first-time visits, 7 days</div></div>
         </div>
 
         <div class="section-header">Recommendations <span class="pill">action items</span></div>
@@ -509,9 +496,6 @@ function renderOrganizer(data) {
             </div>
         </div>
 
-        <div style="text-align:center; margin-top: 24px; font-family: 'VT323', monospace; font-size: 14px; color: var(--text-muted);">
-            <button class="refresh-btn" onclick="markTeam()" style="background:var(--secondary); margin-top: 8px;">Tag this browser as TEAM</button>
-        </div>
     `;
 
     renderCharts(data);

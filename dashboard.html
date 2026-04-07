@@ -462,20 +462,14 @@
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyajxk_HCGo8p6E0b2YUadPD9onpyoVvMmNutIhPqsRVLKeDfBnt-MBh_u0Wj5c0j-1/exec';
 
-// Allow team-flag via URL: ?team=1
-if (new URLSearchParams(location.search).get('team') === '1') {
-    localStorage.setItem('csf-team', '1');
-}
-
-// Visit tracking ping
+// Visit tracking ping — counts each browser as unique once
 (function pingVisit() {
     let sid = localStorage.getItem('csf-sid');
     if (!sid) {
         sid = 'sid-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
         localStorage.setItem('csf-sid', sid);
     }
-    const isTeam = localStorage.getItem('csf-team') === '1' ? '1' : '0';
-    fetch(APPS_SCRIPT_URL + '?action=visit&sid=' + encodeURIComponent(sid) + '&team=' + isTeam + '&page=dashboard', { mode: 'no-cors' });
+    fetch(APPS_SCRIPT_URL + '?action=visit&sid=' + encodeURIComponent(sid) + '&page=dashboard', { mode: 'no-cors' });
 })();
 
 const PALETTE = {

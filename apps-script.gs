@@ -320,59 +320,45 @@ function getOrganizerStats() {
         });
     }
 
-    // Visit metrics
+    // Visit metrics — count UNIQUE browsers only (one per session ID, ever)
     const visitsSheet = getVisitsSheet();
     const vLast = visitsSheet.getLastRow();
     const visitMetrics = {
-        totalPings: 0,
-        uniqueAll: 0,
-        uniqueNonTeam: 0,
-        teamPings: 0,
-        publicPings: 0,
-        today: 0,
-        last7Days: 0,
-        byDay: {}
+        uniqueVisitors: 0,
+        firstSeenToday: 0,
+        firstSeenLast7Days: 0,
+        firstSeenByDay: {}
     };
 
     if (vLast >= 2) {
         const visits = visitsSheet.getRange(2, 1, vLast - 1, 5).getValues();
-        const allSids = {};
-        const nonTeamSids = {};
+        const firstSeen = {}; // sid -> earliest timestamp
+        visits.forEach(row => {
+            const ts = row[0];
+            const sid = String(row[1] || '');
+            if (!sid) return;
+            const d = (ts instanceof Date) ? ts : new Date(ts);
+            if (isNaN(d.getTime())) return;
+            if (!firstSeen[sid] || d < firstSeen[sid]) firstSeen[sid] = d;
+        });
+
         const now = new Date();
         const todayStr = Utilities.formatDate(now, Session.getScriptTimeZone(), 'yyyy-MM-dd');
         const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-        visits.forEach(row => {
-            const ts = row[0];
-            const sid = String(row[1] || '');
-            const isTeam = String(row[2] || '').toLowerCase() === 'yes';
-            const d = (ts instanceof Date) ? ts : new Date(ts);
-            if (isNaN(d.getTime())) return;
-
-            visitMetrics.totalPings++;
-            if (sid) allSids[sid] = true;
-            if (isTeam) {
-                visitMetrics.teamPings++;
-            } else {
-                visitMetrics.publicPings++;
-                if (sid) nonTeamSids[sid] = true;
-            }
-
+        Object.keys(firstSeen).forEach(sid => {
+            const d = firstSeen[sid];
+            visitMetrics.uniqueVisitors++;
             const dayKey = Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd');
-            if (!isTeam) {
-                visitMetrics.byDay[dayKey] = (visitMetrics.byDay[dayKey] || 0) + 1;
-                if (dayKey === todayStr) visitMetrics.today++;
-                if (d >= sevenDaysAgo) visitMetrics.last7Days++;
-            }
+            visitMetrics.firstSeenByDay[dayKey] = (visitMetrics.firstSeenByDay[dayKey] || 0) + 1;
+            if (dayKey === todayStr) visitMetrics.firstSeenToday++;
+            if (d >= sevenDaysAgo) visitMetrics.firstSeenLast7Days++;
         });
-
-        visitMetrics.uniqueAll = Object.keys(allSids).length;
-        visitMetrics.uniqueNonTeam = Object.keys(nonTeamSids).length;
     }
 
-    // Conversion rate
-    const conversion = visitMetrics.uniqueNonTeam > 0
-        ? (baseStats.total / visitMetrics.uniqueNonTeam * 100)
+    // Conversion rate (sign-ups / unique visitors)
+    const conversion = visitMetrics.uniqueVisitors > 0
+        ? (baseStats.total / visitMetrics.uniqueVisitors * 100)
         : 0;
 
     // Days remaining + projected total at current rate
