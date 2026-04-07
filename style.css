@@ -1828,27 +1828,67 @@ footer p + p {
 
 /* Print styles for QR code flyer */
 @media print {
-    /* Hide everything except the confirmation card when printing */
-    body * {
-        visibility: hidden;
+    /* Reset everything */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
     }
 
-    .confirmation-card,
-    .confirmation-card * {
-        visibility: visible;
+    /* Hide everything by default */
+    body > * {
+        display: none !important;
+    }
+
+    /* Show only the success message wrapper, but make it position-friendly */
+    .form-section,
+    .main-content,
+    .page-layout,
+    .content-grid {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: none !important;
+    }
+
+    /* Hide everything inside form-section except the success message */
+    .form-section > *:not(#success-message) {
+        display: none !important;
+    }
+
+    /* Hide everything inside success-message except the confirmation card */
+    #success-message > *:not(.confirmation-card) {
+        display: none !important;
+    }
+
+    #success-message {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: none !important;
+        box-shadow: none !important;
     }
 
     .confirmation-card {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        max-width: 100%;
+        display: block !important;
+        position: static !important;
+        margin: 0 !important;
+        padding: 16px !important;
+        max-width: 100% !important;
+        width: 100% !important;
         border: 2px solid #000 !important;
         box-shadow: none !important;
         page-break-inside: avoid;
+        font-size: 11px;
     }
+
+    .confirmation-card h4 { font-size: 14px !important; }
+    .confirmation-card h5 { font-size: 11px !important; margin: 12px 0 6px !important; }
+    .conf-header { padding-bottom: 10px !important; margin-bottom: 12px !important; }
+    .conf-logo { width: 50px !important; }
+    .conf-event { padding: 10px 14px !important; margin-bottom: 12px !important; }
+    .conf-details { font-size: 11px !important; gap: 4px 12px !important; }
+    .conf-bring, .conf-schedule { font-size: 11px !important; line-height: 1.5 !important; }
 
     .no-print {
         display: none !important;
@@ -1856,5 +1896,6 @@ footer p + p {
 
     @page {
         margin: 0.5in;
+        size: letter;
     }
 }
