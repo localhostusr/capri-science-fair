@@ -1,7 +1,7 @@
 // ===== Configuration =====
 const CONFIG = {
     // UPDATE THIS: Your Google Apps Script Web App URL after deploying
-    APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycby6vQPTZRSUbpMbbLYL4eHIqGPUMVcHycVaOIqxtbyI4hHQrXnfwKaztFB2vXlBNW8v/exec',
+    APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyajxk_HCGo8p6E0b2YUadPD9onpyoVvMmNutIhPqsRVLKeDfBnt-MBh_u0Wj5c0j-1/exec',
 
     // Sign-up deadline (midnight on this date = closed)
     DEADLINE: new Date('2026-04-11T23:59:59'),
