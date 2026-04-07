@@ -169,21 +169,44 @@ function doPost(e) {
 
 // Handle GET requests
 function doGet(e) {
-    const action = e && e.parameter ? e.parameter.action : null;
+    const params = (e && e.parameter) ? e.parameter : {};
+    const action = params.action || null;
 
-    // Stats endpoint — returns aggregated, anonymized counts only
+    // Stats endpoint — public, returns aggregated counts only
     if (action === 'stats') {
-        return ContentService.createTextOutput(JSON.stringify(getStats()))
-            .setMimeType(ContentService.MimeType.JSON);
+        return jsonOut(getStats());
+    }
+
+    // Organizer stats — deeper analytics + visit tracking metrics
+    if (action === 'organizer-stats') {
+        return jsonOut(getOrganizerStats());
+    }
+
+    // Visit tracking — fire-and-forget ping from browsers
+    if (action === 'visit') {
+        try {
+            recordVisit({
+                sid: params.sid || '',
+                team: params.team === '1',
+                page: params.page || 'unknown',
+                ua: (e && e.headers && e.headers['User-Agent']) || ''
+            });
+        } catch (err) { /* silent */ }
+        return jsonOut({ ok: true });
     }
 
     // Default health check
-    return ContentService.createTextOutput(JSON.stringify({
+    return jsonOut({
         status: 'ok',
         message: 'Capri Science Fair API is running',
         deadline: DEADLINE.toISOString(),
         signups: getSheet().getLastRow() - 1
-    })).setMimeType(ContentService.MimeType.JSON);
+    });
+}
+
+function jsonOut(obj) {
+    return ContentService.createTextOutput(JSON.stringify(obj))
+        .setMimeType(ContentService.MimeType.JSON);
 }
 
 // ===== Aggregated Stats (no PII) =====
@@ -257,6 +280,137 @@ function getStats() {
     });
 
     return stats;
+}
+
+// ===== Visit Tracking =====
+function getVisitsSheet() {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    let sheet = ss.getSheetByName('Visits');
+    if (!sheet) {
+        sheet = ss.insertSheet('Visits');
+        sheet.getRange(1, 1, 1, 5).setValues([['Timestamp','SessionID','IsTeam','Page','UserAgent']]);
+        sheet.getRange(1, 1, 1, 5).setFontWeight('bold').setBackground('#1a6b3c').setFontColor('white');
+        sheet.setFrozenRows(1);
+    }
+    return sheet;
+}
+
+function recordVisit(v) {
+    const sheet = getVisitsSheet();
+    sheet.appendRow([new Date(), v.sid, v.team ? 'yes' : 'no', v.page, v.ua]);
+}
+
+// ===== Organizer Stats — deeper analytics =====
+function getOrganizerStats() {
+    const baseStats = getStats();
+    const signupsSheet = getSheet();
+    const lastRow = signupsSheet.getLastRow();
+
+    // Daily sign-up trend
+    const byDay = {};
+    if (lastRow >= 2) {
+        const data = signupsSheet.getRange(2, 1, lastRow - 1, 17).getValues();
+        data.forEach(row => {
+            const ts = row[0];
+            if (!ts) return;
+            const d = (ts instanceof Date) ? ts : new Date(ts);
+            if (isNaN(d.getTime())) return;
+            const key = Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+            byDay[key] = (byDay[key] || 0) + 1;
+        });
+    }
+
+    // Visit metrics
+    const visitsSheet = getVisitsSheet();
+    const vLast = visitsSheet.getLastRow();
+    const visitMetrics = {
+        totalPings: 0,
+        uniqueAll: 0,
+        uniqueNonTeam: 0,
+        teamPings: 0,
+        publicPings: 0,
+        today: 0,
+        last7Days: 0,
+        byDay: {}
+    };
+
+    if (vLast >= 2) {
+        const visits = visitsSheet.getRange(2, 1, vLast - 1, 5).getValues();
+        const allSids = {};
+        const nonTeamSids = {};
+        const now = new Date();
+        const todayStr = Utilities.formatDate(now, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+        const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+        visits.forEach(row => {
+            const ts = row[0];
+            const sid = String(row[1] || '');
+            const isTeam = String(row[2] || '').toLowerCase() === 'yes';
+            const d = (ts instanceof Date) ? ts : new Date(ts);
+            if (isNaN(d.getTime())) return;
+
+            visitMetrics.totalPings++;
+            if (sid) allSids[sid] = true;
+            if (isTeam) {
+                visitMetrics.teamPings++;
+            } else {
+                visitMetrics.publicPings++;
+                if (sid) nonTeamSids[sid] = true;
+            }
+
+            const dayKey = Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+            if (!isTeam) {
+                visitMetrics.byDay[dayKey] = (visitMetrics.byDay[dayKey] || 0) + 1;
+                if (dayKey === todayStr) visitMetrics.today++;
+                if (d >= sevenDaysAgo) visitMetrics.last7Days++;
+            }
+        });
+
+        visitMetrics.uniqueAll = Object.keys(allSids).length;
+        visitMetrics.uniqueNonTeam = Object.keys(nonTeamSids).length;
+    }
+
+    // Conversion rate
+    const conversion = visitMetrics.uniqueNonTeam > 0
+        ? (baseStats.total / visitMetrics.uniqueNonTeam * 100)
+        : 0;
+
+    // Days remaining + projected total at current rate
+    const now = new Date();
+    const daysRemaining = Math.max(0, Math.ceil((DEADLINE - now) / (1000 * 60 * 60 * 24)));
+    const daysSinceFirstSignup = (function() {
+        const days = Object.keys(byDay).sort();
+        if (days.length === 0) return 0;
+        const first = new Date(days[0]);
+        return Math.max(1, Math.ceil((now - first) / (1000 * 60 * 60 * 24)));
+    })();
+    const dailyRate = daysSinceFirstSignup > 0 ? baseStats.total / daysSinceFirstSignup : 0;
+    const projectedTotal = Math.round(baseStats.total + (dailyRate * daysRemaining));
+
+    // Recommendations — under-represented grades & categories
+    const totalGradeEntries = Object.values(baseStats.byGrade).reduce((a, b) => a + b, 0);
+    const expectedPerGrade = totalGradeEntries > 0 ? totalGradeEntries / 7 : 0;
+    const underGrades = ['K','1','2','3','4','5','6'].filter(g => (baseStats.byGrade[g] || 0) < expectedPerGrade);
+
+    const totalCatEntries = Object.values(baseStats.byCategory).reduce((a, b) => a + b, 0);
+    const allCats = ['clean-water','energy','food','sustainability','health','space','animals','engineering','other'];
+    const emptyCats = allCats.filter(c => !(baseStats.byCategory[c] > 0));
+
+    return {
+        base: baseStats,
+        byDay: byDay,
+        visits: visitMetrics,
+        conversion: conversion,
+        deadline: DEADLINE.toISOString(),
+        daysRemaining: daysRemaining,
+        dailyRate: dailyRate,
+        projectedTotal: projectedTotal,
+        recommendations: {
+            underGrades: underGrades,
+            emptyCategories: emptyCats
+        },
+        updatedAt: new Date().toISOString()
+    };
 }
 
 // ===== Confirmation Email =====

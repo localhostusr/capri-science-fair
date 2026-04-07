@@ -10,6 +10,22 @@ const CONFIG = {
     BACKEND_LIVE: true
 };
 
+// ===== Visit Tracking =====
+// Allow team-flag via URL: ?team=1
+if (new URLSearchParams(location.search).get('team') === '1') {
+    localStorage.setItem('csf-team', '1');
+}
+
+(function pingVisit() {
+    let sid = localStorage.getItem('csf-sid');
+    if (!sid) {
+        sid = 'sid-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem('csf-sid', sid);
+    }
+    const isTeam = localStorage.getItem('csf-team') === '1' ? '1' : '0';
+    fetch(CONFIG.APPS_SCRIPT_URL + '?action=visit&sid=' + encodeURIComponent(sid) + '&team=' + isTeam + '&page=signup', { mode: 'no-cors' });
+})();
+
 // ===== Language Toggle =====
 let currentLang = 'en';
 

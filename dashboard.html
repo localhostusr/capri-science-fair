@@ -336,6 +336,30 @@
             }
         }
 
+        /* Friendly nudge banner */
+        .nudge-banner {
+            background: var(--bg-card);
+            border: 3px solid #1a1a1a;
+            border-left: 8px solid var(--primary);
+            box-shadow: var(--shadow);
+            padding: 18px 24px;
+            margin-bottom: 28px;
+            font-family: 'VT323', monospace;
+            font-size: 17px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .nudge-banner strong {
+            font-family: 'Bungee', sans-serif;
+            font-size: 14px;
+            display: block;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+
         /* Loading & error */
         .loading, .error {
             text-align: center;
@@ -438,6 +462,22 @@
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyajxk_HCGo8p6E0b2YUadPD9onpyoVvMmNutIhPqsRVLKeDfBnt-MBh_u0Wj5c0j-1/exec';
 
+// Allow team-flag via URL: ?team=1
+if (new URLSearchParams(location.search).get('team') === '1') {
+    localStorage.setItem('csf-team', '1');
+}
+
+// Visit tracking ping
+(function pingVisit() {
+    let sid = localStorage.getItem('csf-sid');
+    if (!sid) {
+        sid = 'sid-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem('csf-sid', sid);
+    }
+    const isTeam = localStorage.getItem('csf-team') === '1' ? '1' : '0';
+    fetch(APPS_SCRIPT_URL + '?action=visit&sid=' + encodeURIComponent(sid) + '&team=' + isTeam + '&page=dashboard', { mode: 'no-cors' });
+})();
+
 const PALETTE = {
     primary: '#e8611a',
     primaryLight: '#f27432',
@@ -528,6 +568,11 @@ function renderDashboard(stats) {
                 <div class="kpi-value">${stats.powerNeeded}</div>
                 <div class="kpi-sub">electricity requests</div>
             </div>
+        </div>
+
+        <div class="nudge-banner">
+            <strong>Curious where your project could fit in?</strong>
+            Every grade and topic is welcome. Some areas have more entries than others — your project could help round things out!
         </div>
 
         <!-- Heatmaps -->
