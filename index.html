@@ -313,17 +313,70 @@
             </p>
         </div>
 
-        <!-- Success Message -->
+        <!-- Success Message + Printable Confirmation -->
         <div class="success-message" id="success-message" style="display:none;">
             <div class="success-icon">🎉</div>
             <h3 data-en="Hooray — You're Signed Up!" data-es="¡Hurra — Estás Inscrito!">Hooray — You're Signed Up!</h3>
-            <p data-en="Your sign-up has been received. Additional information about the Science Fair will be shared as we get closer to April 23. Check out the Quick Start Guide to get started on your project!"
-               data-es="Hemos recibido tu inscripción. Se compartirá más información sobre la Feria de Ciencias a medida que nos acerquemos al 23 de abril. ¡Consulta la Guía de Inicio Rápido para empezar tu proyecto!">
-                Your sign-up has been received. Additional information about the Science Fair will be shared as we get closer to April 23. Check out the Quick Start Guide to get started on your project!
+            <p class="success-intro" data-en="Save or print your confirmation below. More info about the Science Fair will be shared as we get closer to April 23."
+               data-es="Guarde o imprima su confirmación abajo. Más información sobre la Feria de Ciencias se compartirá a medida que nos acerquemos al 23 de abril.">
+                Save or print your confirmation below. More info about the Science Fair will be shared as we get closer to April 23.
             </p>
-            <p style="margin-top:16px;">
-                <a href="guide.html" class="guide-btn" data-en="📘 Open Quick Start Guide" data-es="📘 Abrir Guía de Inicio Rápido">📘 Open Quick Start Guide</a>
-            </p>
+
+            <!-- Printable Confirmation Card -->
+            <div class="confirmation-card" id="confirmation-card">
+                <div class="conf-header">
+                    <img src="logo.png" alt="Capri Stingrays" class="conf-logo">
+                    <div>
+                        <h4 data-en="Capri Science Fair 2026" data-es="Feria de Ciencias de Capri 2026">Capri Science Fair 2026</h4>
+                        <p class="conf-tagline" data-en="Confirmation of Registration" data-es="Confirmación de Inscripción">Confirmation of Registration</p>
+                    </div>
+                </div>
+
+                <div class="conf-event">
+                    <div><strong data-en="Date:" data-es="Fecha:">Date:</strong> <span data-en="Thursday, April 23, 2026" data-es="Jueves, 23 de abril de 2026">Thursday, April 23, 2026</span></div>
+                    <div><strong data-en="Time:" data-es="Hora:">Time:</strong> 5:00 PM – 6:30 PM</div>
+                    <div><strong data-en="Location:" data-es="Lugar:">Location:</strong> <span data-en="Capri Quad" data-es="Patio de Capri">Capri Quad</span></div>
+                </div>
+
+                <h5 data-en="Your Sign-Up Details" data-es="Detalles de su Inscripción">Your Sign-Up Details</h5>
+                <dl class="conf-details" id="conf-details">
+                    <!-- populated by script.js -->
+                </dl>
+
+                <h5 data-en="What to Bring" data-es="Qué Traer">What to Bring</h5>
+                <ul class="conf-bring">
+                    <li data-en="Your completed science project" data-es="Su proyecto de ciencias completado">Your completed science project</li>
+                    <li data-en="Your tri-fold display board (pick up from Ms. Pudvah in the Science Lab or Claudia at the front office if needed)"
+                        data-es="Su tablero tríptico (recoja con la Sra. Pudvah en el laboratorio de ciencias o con Claudia en la oficina si es necesario)">
+                        Your tri-fold display board (pick up from Ms. Pudvah in the Science Lab or Claudia at the front office if needed)
+                    </li>
+                    <li data-en="Arrive by 4:45 PM to set up your project" data-es="Llegue a las 4:45 PM para montar su proyecto">Arrive by 4:45 PM to set up your project</li>
+                </ul>
+
+                <h5 data-en="Schedule" data-es="Horario">Schedule</h5>
+                <ul class="conf-schedule">
+                    <li><strong>5:00 PM</strong> — <span data-en="Projects & SD Lab Rats interactive stations" data-es="Proyectos y estaciones interactivas de SD Lab Rats">Projects & SD Lab Rats interactive stations</span></li>
+                    <li><strong>6:00 PM</strong> — <span data-en="SD Lab Rats science show" data-es="Show de ciencias de SD Lab Rats">SD Lab Rats science show</span></li>
+                    <li><strong>6:30 PM</strong> — <span data-en="Event ends" data-es="Fin del evento">Event ends</span></li>
+                </ul>
+
+                <p class="conf-footer">
+                    <span data-en="Questions? Contact" data-es="¿Preguntas? Contacte">Questions? Contact</span>
+                    capriptapresident@gmail.com
+                </p>
+            </div>
+
+            <div class="success-actions no-print">
+                <button type="button" class="action-btn primary" id="add-to-calendar-btn">
+                    <span data-en="📅 Add to Calendar" data-es="📅 Agregar al Calendario">📅 Add to Calendar</span>
+                </button>
+                <button type="button" class="action-btn secondary" onclick="window.print()">
+                    <span data-en="🖨️ Print / Save as PDF" data-es="🖨️ Imprimir / Guardar como PDF">🖨️ Print / Save as PDF</span>
+                </button>
+                <a href="guide.html" class="action-btn secondary">
+                    <span data-en="📘 Open Quick Start Guide" data-es="📘 Abrir Guía de Inicio Rápido">📘 Open Quick Start Guide</span>
+                </a>
+            </div>
         </div>
 
         <form id="signup-form" novalidate>

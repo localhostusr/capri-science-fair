@@ -270,7 +270,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
                 body: JSON.stringify(formData)
             });
 
-            showSuccess();
+            showSuccess(formData);
         } catch (error) {
             console.error('Submission error:', error);
             submitBtn.disabled = false;
@@ -282,16 +282,165 @@ document.getElementById('signup-form').addEventListener('submit', async function
     } else {
         // Demo mode — simulate submission
         console.log('DEMO MODE — Form data:', formData);
-        setTimeout(() => showSuccess(), 1000);
+        setTimeout(() => showSuccess(formData), 1000);
     }
 });
 
-function showSuccess() {
+function showSuccess(data) {
     document.getElementById('signup-form').style.display = 'none';
     document.getElementById('deadline-banner').style.display = 'none';
     document.getElementById('form-header').style.display = 'none';
+
+    // Populate the printable confirmation card with the user's info
+    if (data) {
+        populateConfirmation(data);
+        // Wire up the calendar download
+        var calBtn = document.getElementById('add-to-calendar-btn');
+        if (calBtn) {
+            calBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                downloadCalendar(data);
+            });
+        }
+    }
+
     document.getElementById('success-message').style.display = 'block';
     document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function populateConfirmation(d) {
+    var dl = document.getElementById('conf-details');
+    if (!dl) return;
+    var isEs = currentLang === 'es';
+    var L = isEs ? {
+        student: 'Estudiante', grade: 'Grado', teacher: 'Maestro/a',
+        project: 'Proyecto', group: 'Proyecto en grupo', members: 'Miembros del grupo',
+        parent: 'Padre/Tutor', email: 'Correo', phone: 'Teléfono',
+        board: 'Necesita tablero', power: 'Necesita electricidad',
+        yes: 'Sí', no: 'No'
+    } : {
+        student: 'Student', grade: 'Grade', teacher: 'Teacher',
+        project: 'Project', group: 'Group Project', members: 'Group Members',
+        parent: 'Parent/Guardian', email: 'Email', phone: 'Phone',
+        board: 'Needs Board', power: 'Needs Power',
+        yes: 'Yes', no: 'No'
+    };
+
+    function row(label, value) {
+        if (!value) return '';
+        return '<dt>' + label + '</dt><dd>' + escapeHtml(value) + '</dd>';
+    }
+
+    var groupMembersHtml = '';
+    if (d.isGroup === 'yes' && d.groupMembers) {
+        try {
+            var members = JSON.parse(d.groupMembers);
+            if (members && members.length) {
+                groupMembersHtml = members.map(function(m) {
+                    return escapeHtml(m.studentName) + (m.grade ? ' (' + L.grade + ' ' + escapeHtml(m.grade) + ')' : '');
+                }).join('<br>');
+            }
+        } catch (e) {}
+    }
+
+    dl.innerHTML =
+        row(L.student, d.studentName) +
+        row(L.grade, d.grade) +
+        row(L.teacher, d.teacher) +
+        row(L.project, d.projectTitle) +
+        row(L.group, d.isGroup === 'yes' ? L.yes : L.no) +
+        (groupMembersHtml ? '<dt>' + L.members + '</dt><dd>' + groupMembersHtml + '</dd>' : '') +
+        row(L.parent, d.parentName) +
+        row(L.email, d.parentEmail) +
+        row(L.phone, d.parentPhone) +
+        row(L.board, d.needBoard === 'yes' ? L.yes : L.no) +
+        row(L.power, d.needPower === 'yes' ? L.yes : L.no);
+}
+
+function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, function(c) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+}
+
+function downloadCalendar(d) {
+    // Generate .ics file with sign-up details in description
+    var pad = function(n) { return n < 10 ? '0' + n : n; };
+    // Event: April 23, 2026, 5:00 PM - 6:30 PM Pacific
+    // Use UTC timestamps for portability — PT is UTC-7 in April (DST)
+    var dtStart = '20260424T000000Z'; // April 23, 5:00 PM PT = April 24, 00:00 UTC
+    var dtEnd = '20260424T013000Z';   // April 23, 6:30 PM PT = April 24, 01:30 UTC
+    var now = new Date();
+    var dtStamp = now.getUTCFullYear() +
+                  pad(now.getUTCMonth()+1) + pad(now.getUTCDate()) + 'T' +
+                  pad(now.getUTCHours()) + pad(now.getUTCMinutes()) + pad(now.getUTCSeconds()) + 'Z';
+
+    var groupMembersText = '';
+    if (d.isGroup === 'yes' && d.groupMembers) {
+        try {
+            var members = JSON.parse(d.groupMembers);
+            if (members && members.length) {
+                groupMembersText = '\\nGroup Members:\\n' + members.map(function(m) {
+                    return '- ' + m.studentName + (m.grade ? ' (Grade ' + m.grade + ')' : '');
+                }).join('\\n');
+            }
+        } catch (e) {}
+    }
+
+    var description =
+        'Capri Science Fair 2026 — "Science Brings Us Together"\\n\\n' +
+        'YOUR SIGN-UP:\\n' +
+        'Student: ' + (d.studentName || '') + '\\n' +
+        'Grade: ' + (d.grade || '') + '\\n' +
+        'Teacher: ' + (d.teacher || '') + '\\n' +
+        'Project: ' + (d.projectTitle || '') + '\\n' +
+        'Group Project: ' + (d.isGroup === 'yes' ? 'Yes' : 'No') +
+        groupMembersText + '\\n\\n' +
+        'WHAT TO BRING:\\n' +
+        '- Your completed science project\\n' +
+        '- Tri-fold display board (pickup from Ms. Pudvah or Claudia)\\n' +
+        '- Arrive by 4:45 PM to set up\\n\\n' +
+        'SCHEDULE:\\n' +
+        '5:00 PM — Projects & Lab Rats interactive stations\\n' +
+        '6:00 PM — SD Lab Rats science show\\n' +
+        '6:30 PM — Event ends\\n\\n' +
+        'Quick Start Guide: https://localhostusr.github.io/capri-science-fair/guide.html\\n\\n' +
+        'Questions? capriptapresident@gmail.com';
+
+    var ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Capri Science Fair 2026//EN',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
+        'BEGIN:VEVENT',
+        'UID:capri-science-fair-2026-' + (d.parentEmail || 'guest').replace(/[^a-z0-9]/gi, '') + '@capripta.org',
+        'DTSTAMP:' + dtStamp,
+        'DTSTART:' + dtStart,
+        'DTEND:' + dtEnd,
+        'SUMMARY:Capri Science Fair 2026',
+        'DESCRIPTION:' + description,
+        'LOCATION:Capri Elementary Quad\\, 941 Capri Rd\\, Encinitas\\, CA 92024',
+        'STATUS:CONFIRMED',
+        'BEGIN:VALARM',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:Capri Science Fair tomorrow!',
+        'TRIGGER:-P1D',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].join('\r\n');
+
+    var blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'capri-science-fair-2026.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 // ===== Duplicate Check (by email) =====

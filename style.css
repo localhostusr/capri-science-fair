@@ -583,6 +583,176 @@ body {
     background: var(--primary-dark);
 }
 
+/* Printable Confirmation Card */
+.success-intro {
+    margin-bottom: 24px;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.confirmation-card {
+    background: var(--bg-white);
+    border: 2px solid var(--primary);
+    padding: 28px;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto 24px;
+    box-shadow: var(--shadow);
+}
+
+.conf-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 16px;
+    margin-bottom: 18px;
+}
+
+.conf-logo {
+    width: 64px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.conf-header h4 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0;
+}
+
+.conf-tagline {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 4px 0 0;
+}
+
+.conf-event {
+    background: var(--bg);
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    border-left: 3px solid var(--secondary);
+}
+
+.conf-event > div {
+    margin: 4px 0;
+}
+
+.conf-event strong {
+    color: var(--secondary-dark);
+    margin-right: 6px;
+}
+
+.confirmation-card h5 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--secondary-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 18px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.conf-details {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 6px 14px;
+    font-size: 13px;
+    margin: 0;
+}
+
+.conf-details dt {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.conf-details dd {
+    margin: 0;
+    color: var(--text);
+    word-break: break-word;
+}
+
+.conf-bring,
+.conf-schedule {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+.conf-schedule {
+    list-style: none;
+    padding-left: 0;
+}
+
+.conf-schedule li {
+    padding: 2px 0;
+}
+
+.conf-schedule strong {
+    color: var(--primary);
+    display: inline-block;
+    min-width: 70px;
+}
+
+.conf-footer {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-light);
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.success-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.action-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    background: var(--bg-white);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.action-btn.primary {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary-dark);
+}
+
+.action-btn.primary:hover {
+    background: var(--primary-dark);
+}
+
+.action-btn.secondary:hover {
+    border-color: var(--secondary);
+    color: var(--secondary-dark);
+}
+
 .success-message h3 {
     font-family: 'Outfit', sans-serif;
     color: var(--success);
@@ -1658,19 +1828,33 @@ footer p + p {
 
 /* Print styles for QR code flyer */
 @media print {
-    .lang-toggle,
-    .form-section,
-    footer {
-        display: none;
+    /* Hide everything except the confirmation card when printing */
+    body * {
+        visibility: hidden;
     }
 
-    .hero {
-        background: white !important;
-        color: black !important;
-        padding: 20px;
+    .confirmation-card,
+    .confirmation-card * {
+        visibility: visible;
     }
 
-    .info-card {
-        break-inside: avoid;
+    .confirmation-card {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        max-width: 100%;
+        border: 2px solid #000 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    @page {
+        margin: 0.5in;
     }
 }
