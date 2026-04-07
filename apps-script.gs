@@ -131,12 +131,12 @@ function doPost(e) {
             'pending'
         ]);
 
-        // Send confirmation email
-        sendConfirmationEmail(data);
+        // Confirmation email DISABLED to avoid exposing admin's personal email
+        // sendConfirmationEmail(data);
 
         // Update confirmation status
         const lastRow = sheet.getLastRow();
-        sheet.getRange(lastRow, 17).setValue('sent');
+        sheet.getRange(lastRow, 17).setValue('disabled');
 
         // Notify admins (only on first sign-up, then every 5th)
         const totalSignups = lastRow - 1;

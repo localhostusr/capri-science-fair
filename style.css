@@ -567,6 +567,22 @@ body {
     margin-bottom: 16px;
 }
 
+.guide-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid var(--primary-dark);
+    transition: background 0.15s ease;
+}
+
+.guide-btn:hover {
+    background: var(--primary-dark);
+}
+
 .success-message h3 {
     font-family: 'Outfit', sans-serif;
     color: var(--success);
