@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Fair Dashboard — Capri 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --primary: #e8611a;
+            --primary-light: #f27432;
+            --primary-dark: #c85210;
+            --secondary: #9cc5d4;
+            --secondary-dark: #6a9aad;
+            --accent: #fbbf24;
+            --magenta: #ff2d9b;
+            --green: #10b981;
+            --bg: #fafafa;
+            --bg-white: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #555;
+            --text-muted: #888;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-lg: 0 4px 16px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 28px 32px;
+            border-bottom: 4px solid var(--secondary-dark);
+        }
+
+        header .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        header .subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 400;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        header .header-meta {
+            font-size: 12px;
+            text-align: right;
+            opacity: 0.85;
+        }
+
+        .updated-at {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 11px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        /* KPI cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .kpi {
+            background: var(--bg-white);
+            padding: 22px 24px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+            position: relative;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .kpi:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .kpi-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .kpi-sub {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+
+        .kpi.kpi-orange { border-left-color: var(--primary); }
+        .kpi.kpi-orange .kpi-value { color: var(--primary); }
+        .kpi.kpi-blue { border-left-color: var(--secondary-dark); }
+        .kpi.kpi-blue .kpi-value { color: var(--secondary-dark); }
+        .kpi.kpi-magenta { border-left-color: var(--magenta); }
+        .kpi.kpi-magenta .kpi-value { color: var(--magenta); }
+        .kpi.kpi-green { border-left-color: var(--green); }
+        .kpi.kpi-green .kpi-value { color: var(--green); }
+        .kpi.kpi-amber { border-left-color: var(--accent); }
+        .kpi.kpi-amber .kpi-value { color: #d97706; }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 24px;
+        }
+
+        .chart-card {
+            background: var(--bg-white);
+            padding: 24px 28px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--secondary-dark);
+        }
+
+        .chart-card h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .chart-card .chart-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+
+        .chart-canvas-wrap {
+            position: relative;
+            height: 280px;
+        }
+
+        .chart-card.wide {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 900px) {
+            .chart-card.wide {
+                grid-column: span 1;
+            }
+        }
+
+        /* Loading & error */
+        .loading, .error {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .error {
+            color: #c4342d;
+            background: #fff8f8;
+            border: 1px solid #fcd9d6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 32px 20px;
+            color: var(--text-muted);
+            font-size: 12px;
+            border-top: 1px solid var(--border);
+            margin-top: 32px;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        /* Refresh button */
+        .refresh-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 8px 16px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <div>
+            <h1>🔬 Science Fair Dashboard</h1>
+            <p class="subtitle">Capri Elementary 2026 — "Science Brings Us Together"</p>
+        </div>
+        <div class="header-meta">
+            <button class="refresh-btn" onclick="loadStats()">↻ Refresh</button>
+            <div class="updated-at" style="margin-top:8px;" id="updated-at">Loading...</div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div id="dashboard-content">
+        <div class="loading">Loading sign-up data...</div>
+    </div>
+</div>
+
+<footer>
+    Aggregated, anonymized stats only. No personal information is shown on this dashboard.<br>
+    <a href="index.html">← Back to sign-up page</a>
+</footer>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyajxk_HCGo8p6E0b2YUadPD9onpyoVvMmNutIhPqsRVLKeDfBnt-MBh_u0Wj5c0j-1/exec';
+
+const PALETTE = {
+    primary: '#e8611a',
+    primaryLight: '#f27432',
+    secondary: '#9cc5d4',
+    secondaryDark: '#6a9aad',
+    accent: '#fbbf24',
+    magenta: '#ff2d9b',
+    green: '#10b981',
+    purple: '#8b5cf6',
+    cyan: '#06b6d4',
+    pink: '#f472b6'
+};
+
+const CATEGORY_COLORS = {
+    'clean-water': '#06b6d4',
+    'energy': '#fbbf24',
+    'food': '#10b981',
+    'sustainability': '#84cc16',
+    'health': '#ef4444',
+    'space': '#8b5cf6',
+    'animals': '#f59e0b',
+    'engineering': '#6a9aad',
+    'other': '#94a3b8',
+    'uncategorized': '#cbd5e1'
+};
+
+const CATEGORY_LABELS = {
+    'clean-water': 'Clean Water',
+    'energy': 'Energy',
+    'food': 'Food & Agriculture',
+    'sustainability': 'Sustainability',
+    'health': 'Health & Body',
+    'space': 'Space & Weather',
+    'animals': 'Animals & Nature',
+    'engineering': 'Engineering',
+    'other': 'Other',
+    'uncategorized': 'No category'
+};
+
+async function loadStats() {
+    const content = document.getElementById('dashboard-content');
+    content.innerHTML = '<div class="loading">Loading sign-up data...</div>';
+
+    try {
+        const response = await fetch(APPS_SCRIPT_URL + '?action=stats');
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const stats = await response.json();
+        renderDashboard(stats);
+    } catch (err) {
+        console.error(err);
+        content.innerHTML = '<div class="error">Could not load stats: ' + err.message + '</div>';
+    }
+}
+
+function renderDashboard(stats) {
+    const updatedAt = stats.updatedAt ? new Date(stats.updatedAt) : new Date();
+    document.getElementById('updated-at').textContent = 'Updated ' + updatedAt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+
+    const content = document.getElementById('dashboard-content');
+    content.innerHTML = `
+        <div class="kpi-grid">
+            <div class="kpi kpi-orange">
+                <div class="kpi-label">Total Sign-Ups</div>
+                <div class="kpi-value">${stats.total}</div>
+                <div class="kpi-sub">project submissions</div>
+            </div>
+            <div class="kpi kpi-blue">
+                <div class="kpi-label">Students Participating</div>
+                <div class="kpi-value">${stats.students}</div>
+                <div class="kpi-sub">incl. group members</div>
+            </div>
+            <div class="kpi kpi-magenta">
+                <div class="kpi-label">Group Projects</div>
+                <div class="kpi-value">${stats.groupCount}</div>
+                <div class="kpi-sub">${stats.individualCount} individual</div>
+            </div>
+            <div class="kpi kpi-amber">
+                <div class="kpi-label">Boards Needed</div>
+                <div class="kpi-value">${stats.boardsNeeded}</div>
+                <div class="kpi-sub">tri-fold requests</div>
+            </div>
+            <div class="kpi kpi-green">
+                <div class="kpi-label">Power Needed</div>
+                <div class="kpi-value">${stats.powerNeeded}</div>
+                <div class="kpi-sub">electricity requests</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h2>By Grade</h2>
+                <p class="chart-sub">Students participating per grade level</p>
+                <div class="chart-canvas-wrap"><canvas id="grade-chart"></canvas></div>
+            </div>
+
+            <div class="chart-card">
+                <h2>Group vs Individual</h2>
+                <p class="chart-sub">Project format breakdown</p>
+                <div class="chart-canvas-wrap"><canvas id="group-chart"></canvas></div>
+            </div>
+
+            <div class="chart-card wide">
+                <h2>By Project Category</h2>
+                <p class="chart-sub">Topic areas chosen</p>
+                <div class="chart-canvas-wrap"><canvas id="category-chart"></canvas></div>
+            </div>
+
+            <div class="chart-card">
+                <h2>Language Preference</h2>
+                <p class="chart-sub">English vs Spanish form usage</p>
+                <div class="chart-canvas-wrap"><canvas id="lang-chart"></canvas></div>
+            </div>
+
+            <div class="chart-card">
+                <h2>Day-of Needs</h2>
+                <p class="chart-sub">Boards & power requirements</p>
+                <div class="chart-canvas-wrap"><canvas id="needs-chart"></canvas></div>
+            </div>
+        </div>
+    `;
+
+    renderCharts(stats);
+}
+
+function renderCharts(stats) {
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = '#555';
+
+    // ===== Grade Chart =====
+    const gradeOrder = ['K', '1', '2', '3', '4', '5', '6'];
+    const gradeLabels = gradeOrder.filter(g => stats.byGrade[g] != null && stats.byGrade[g] > 0);
+    // Add any unexpected grades
+    Object.keys(stats.byGrade).forEach(g => {
+        if (!gradeLabels.includes(g)) gradeLabels.push(g);
+    });
+    const gradeData = gradeLabels.map(g => stats.byGrade[g] || 0);
+
+    new Chart(document.getElementById('grade-chart'), {
+        type: 'bar',
+        data: {
+            labels: gradeLabels.map(g => 'Grade ' + g),
+            datasets: [{
+                data: gradeData,
+                backgroundColor: PALETTE.primary,
+                borderRadius: 0,
+                borderSkipped: false,
+                barThickness: 'flex',
+                maxBarThickness: 40
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#f0f0f0' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // ===== Group vs Individual =====
+    new Chart(document.getElementById('group-chart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Group', 'Individual'],
+            datasets: [{
+                data: [stats.groupCount, stats.individualCount],
+                backgroundColor: [PALETTE.magenta, PALETTE.secondaryDark],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '65%',
+            plugins: {
+                legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } }
+            }
+        }
+    });
+
+    // ===== Category Chart =====
+    const catKeys = Object.keys(stats.byCategory).sort((a, b) => stats.byCategory[b] - stats.byCategory[a]);
+    const catLabels = catKeys.map(k => CATEGORY_LABELS[k] || k);
+    const catData = catKeys.map(k => stats.byCategory[k]);
+    const catColors = catKeys.map(k => CATEGORY_COLORS[k] || PALETTE.primary);
+
+    new Chart(document.getElementById('category-chart'), {
+        type: 'bar',
+        data: {
+            labels: catLabels,
+            datasets: [{
+                data: catData,
+                backgroundColor: catColors,
+                borderRadius: 0,
+                borderSkipped: false,
+                barThickness: 'flex',
+                maxBarThickness: 50
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#f0f0f0' } },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // ===== Language Chart =====
+    new Chart(document.getElementById('lang-chart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['English', 'Español'],
+            datasets: [{
+                data: [stats.languages.en || 0, stats.languages.es || 0],
+                backgroundColor: [PALETTE.primary, PALETTE.cyan],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '65%',
+            plugins: {
+                legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } }
+            }
+        }
+    });
+
+    // ===== Needs Chart =====
+    new Chart(document.getElementById('needs-chart'), {
+        type: 'bar',
+        data: {
+            labels: ['Boards', 'Power'],
+            datasets: [{
+                label: 'Requested',
+                data: [stats.boardsNeeded, stats.powerNeeded],
+                backgroundColor: [PALETTE.accent, PALETTE.green],
+                borderRadius: 0,
+                borderSkipped: false,
+                maxBarThickness: 60
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#f0f0f0' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+}
+
+loadStats();
+// Auto-refresh every 60 seconds
+setInterval(loadStats, 60000);
+</script>
+
+</body>
+</html>

@@ -167,14 +167,96 @@ function doPost(e) {
     }
 }
 
-// Handle GET requests (for testing)
+// Handle GET requests
 function doGet(e) {
+    const action = e && e.parameter ? e.parameter.action : null;
+
+    // Stats endpoint — returns aggregated, anonymized counts only
+    if (action === 'stats') {
+        return ContentService.createTextOutput(JSON.stringify(getStats()))
+            .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Default health check
     return ContentService.createTextOutput(JSON.stringify({
         status: 'ok',
         message: 'Capri Science Fair API is running',
         deadline: DEADLINE.toISOString(),
         signups: getSheet().getLastRow() - 1
     })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ===== Aggregated Stats (no PII) =====
+function getStats() {
+    const sheet = getSheet();
+    const lastRow = sheet.getLastRow();
+    if (lastRow < 2) {
+        return {
+            total: 0, students: 0,
+            byGrade: {}, byCategory: {},
+            groupCount: 0, individualCount: 0,
+            boardsNeeded: 0, powerNeeded: 0,
+            languages: { en: 0, es: 0 },
+            updatedAt: new Date().toISOString()
+        };
+    }
+
+    const data = sheet.getRange(2, 1, lastRow - 1, 17).getValues();
+    const stats = {
+        total: 0,           // total form submissions
+        students: 0,        // total students participating (incl. group members)
+        byGrade: {},
+        byCategory: {},
+        groupCount: 0,
+        individualCount: 0,
+        boardsNeeded: 0,
+        powerNeeded: 0,
+        languages: { en: 0, es: 0 },
+        updatedAt: new Date().toISOString()
+    };
+
+    data.forEach(row => {
+        const grade = String(row[2] || 'Unknown');
+        const isGroup = String(row[4] || '').toLowerCase() === 'yes';
+        const groupMembersJson = row[5];
+        const category = String(row[8] || 'uncategorized');
+        const needsBoard = String(row[12] || '').toLowerCase() === 'yes';
+        const needsPower = String(row[13] || '').toLowerCase() === 'yes';
+        const language = String(row[15] || 'en').toLowerCase();
+
+        stats.total++;
+        stats.students++; // the lead student
+        stats.byGrade[grade] = (stats.byGrade[grade] || 0) + 1;
+        stats.byCategory[category] = (stats.byCategory[category] || 0) + 1;
+
+        if (isGroup) {
+            stats.groupCount++;
+            // Count additional group members
+            if (groupMembersJson) {
+                try {
+                    const members = JSON.parse(groupMembersJson);
+                    if (Array.isArray(members)) {
+                        stats.students += members.length;
+                        members.forEach(m => {
+                            if (m && m.grade) {
+                                const g = String(m.grade);
+                                stats.byGrade[g] = (stats.byGrade[g] || 0) + 1;
+                            }
+                        });
+                    }
+                } catch (e) { /* ignore parse errors */ }
+            }
+        } else {
+            stats.individualCount++;
+        }
+
+        if (needsBoard) stats.boardsNeeded++;
+        if (needsPower) stats.powerNeeded++;
+        if (language === 'es') stats.languages.es++;
+        else stats.languages.en++;
+    });
+
+    return stats;
 }
 
 // ===== Confirmation Email =====
