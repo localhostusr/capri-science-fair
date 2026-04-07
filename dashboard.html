@@ -6,7 +6,6 @@
     <title>Science Fair Dashboard — Capri 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Bungee&family=Bangers&family=Anton&family=VT323&family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
         :root {
             --primary: #e8611a;
@@ -327,6 +326,39 @@
             line-height: 1;
         }
 
+        .heatmap-cell-dots {
+            font-family: 'VT323', monospace;
+            font-size: 1.4rem;
+            letter-spacing: 0.15em;
+            line-height: 1;
+        }
+
+        /* Legend below heatmaps */
+        .intensity-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed var(--border);
+            font-family: 'VT323', monospace;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .intensity-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .intensity-legend .dots {
+            font-size: 16px;
+            letter-spacing: 0.15em;
+            color: var(--primary);
+        }
+
         @media (max-width: 900px) {
             .chart-card.wide {
                 grid-column: span 1;
@@ -536,90 +568,56 @@ function renderDashboard(stats) {
 
     const content = document.getElementById('dashboard-content');
     content.innerHTML = `
-        <div class="kpi-grid">
-            <div class="kpi kpi-orange">
-                <div class="kpi-label">Total Sign-Ups</div>
-                <div class="kpi-value">${stats.total}</div>
-                <div class="kpi-sub">project submissions</div>
-            </div>
-            <div class="kpi kpi-blue">
-                <div class="kpi-label">Students Participating</div>
-                <div class="kpi-value">${stats.students}</div>
-                <div class="kpi-sub">incl. group members</div>
-            </div>
-            <div class="kpi kpi-magenta">
-                <div class="kpi-label">Group Projects</div>
-                <div class="kpi-value">${stats.groupCount}</div>
-                <div class="kpi-sub">${stats.individualCount} individual</div>
-            </div>
-            <div class="kpi kpi-amber">
-                <div class="kpi-label">Boards Needed</div>
-                <div class="kpi-value">${stats.boardsNeeded}</div>
-                <div class="kpi-sub">tri-fold requests</div>
-            </div>
-            <div class="kpi kpi-green">
-                <div class="kpi-label">Power Needed</div>
-                <div class="kpi-value">${stats.powerNeeded}</div>
-                <div class="kpi-sub">electricity requests</div>
-            </div>
-        </div>
-
         <div class="nudge-banner">
             <strong>Curious where your project could fit in?</strong>
-            Every grade and topic is welcome. Some areas have more entries than others — your project could help round things out!
-        </div>
-
-        <!-- Heatmaps -->
-        <div class="charts-grid">
-            <div class="chart-card wide">
-                <h2>Grade Heatmap</h2>
-                <p class="chart-sub">Where the action is right now — cells brighten where entries are concentrated</p>
-                <div class="heatmap-grid" id="grade-heatmap"></div>
-            </div>
-
-            <div class="chart-card wide">
-                <h2>Category Heatmap</h2>
-                <p class="chart-sub">Where the action is right now — cells brighten where entries are concentrated</p>
-                <div class="heatmap-grid heatmap-categories" id="category-heatmap"></div>
-            </div>
+            Every grade and every topic is welcome. The grids below show where the early sign-ups are gathering — but your project could light up any cell. Pick a topic that excites you, and bring your science!
         </div>
 
         <div class="charts-grid">
-            <div class="chart-card">
+            <div class="chart-card wide">
                 <h2>By Grade</h2>
-                <p class="chart-sub">All grades shown — bars rise where entries are concentrated</p>
-                <div class="chart-canvas-wrap"><canvas id="grade-chart"></canvas></div>
-            </div>
-
-            <div class="chart-card">
-                <h2>Group vs Individual</h2>
-                <p class="chart-sub">Project format breakdown</p>
-                <div class="chart-canvas-wrap"><canvas id="group-chart"></canvas></div>
+                <p class="chart-sub">Cells brighten as more sign-ups arrive in each grade</p>
+                <div class="heatmap-grid" id="grade-heatmap"></div>
+                <div class="intensity-legend">
+                    <span><span class="dots" style="color:#cbd5e1;">○○○○</span> none</span>
+                    <span><span class="dots">●○○○</span> a few</span>
+                    <span><span class="dots">●●○○</span> some</span>
+                    <span><span class="dots">●●●○</span> lots</span>
+                    <span><span class="dots">●●●●</span> very popular</span>
+                </div>
             </div>
 
             <div class="chart-card wide">
-                <h2>By Project Category</h2>
-                <p class="chart-sub">All topics shown — bars extend where entries are concentrated</p>
-                <div class="chart-canvas-wrap"><canvas id="category-chart"></canvas></div>
-            </div>
-
-            <div class="chart-card">
-                <h2>Language Preference</h2>
-                <p class="chart-sub">English vs Spanish form usage</p>
-                <div class="chart-canvas-wrap"><canvas id="lang-chart"></canvas></div>
-            </div>
-
-            <div class="chart-card">
-                <h2>Day-of Needs</h2>
-                <p class="chart-sub">Boards & power requirements</p>
-                <div class="chart-canvas-wrap"><canvas id="needs-chart"></canvas></div>
+                <h2>By Project Topic</h2>
+                <p class="chart-sub">Cells brighten as more sign-ups arrive in each topic area</p>
+                <div class="heatmap-grid heatmap-categories" id="category-heatmap"></div>
+                <div class="intensity-legend">
+                    <span><span class="dots" style="color:#cbd5e1;">○○○○</span> none</span>
+                    <span><span class="dots">●○○○</span> a few</span>
+                    <span><span class="dots">●●○○</span> some</span>
+                    <span><span class="dots">●●●○</span> lots</span>
+                    <span><span class="dots">●●●●</span> very popular</span>
+                </div>
             </div>
         </div>
     `;
 
     renderHeatmaps(stats);
-    renderCharts(stats);
 }
+
+// Convert a count into a relative intensity bucket (0-4) compared to the max
+// This avoids exposing exact numbers while still showing where activity is concentrated.
+function intensityBucket(count, max) {
+    if (count === 0 || max === 0) return 0;
+    const ratio = count / max;
+    if (ratio >= 0.85) return 4;  // strong
+    if (ratio >= 0.55) return 3;  // medium
+    if (ratio >= 0.30) return 2;  // light
+    return 1;                     // faint
+}
+
+const INTENSITY_LABELS = ['No sign-ups yet', 'A few sign-ups', 'Some sign-ups', 'Lots of sign-ups', 'Very popular'];
+const INTENSITY_DOTS   = ['○○○○', '●○○○', '●●○○', '●●●○', '●●●●'];
 
 function renderHeatmaps(stats) {
     // === Grade Heatmap ===
@@ -627,14 +625,15 @@ function renderHeatmaps(stats) {
     const maxGrade = Math.max(1, ...ALL_GRADES.map(g => stats.byGrade[g] || 0));
     gradeContainer.innerHTML = ALL_GRADES.map(g => {
         const count = stats.byGrade[g] || 0;
-        const intensity = count === 0 ? 0 : (0.25 + (count / maxGrade) * 0.75);
-        const bg = count === 0
+        const bucket = intensityBucket(count, maxGrade);
+        const intensity = bucket === 0 ? 0 : (0.25 + (bucket / 4) * 0.75);
+        const bg = bucket === 0
             ? 'background: #f1f5f9; color: #94a3b8; border-color: #e2e8f0;'
-            : `background: rgba(232,97,26,${intensity}); color: ${intensity > 0.5 ? '#fff' : '#1a1a1a'}; border-color: rgba(232,97,26,${Math.min(1, intensity + 0.2)});`;
+            : `background: rgba(232,97,26,${intensity}); color: ${intensity > 0.55 ? '#fff' : '#1a1a1a'}; border-color: rgba(232,97,26,${Math.min(1, intensity + 0.2)});`;
         return `
-            <div class="heatmap-cell" style="${bg}">
-                <div class="heatmap-cell-label">${g === 'K' ? 'K' : 'Gr ' + g}</div>
-                <div class="heatmap-cell-value">${count}</div>
+            <div class="heatmap-cell" style="${bg}" title="${INTENSITY_LABELS[bucket]}">
+                <div class="heatmap-cell-label">${g === 'K' ? 'K' : 'Grade ' + g}</div>
+                <div class="heatmap-cell-dots">${INTENSITY_DOTS[bucket]}</div>
             </div>
         `;
     }).join('');
@@ -644,15 +643,16 @@ function renderHeatmaps(stats) {
     const maxCat = Math.max(1, ...ALL_CATEGORIES.map(c => stats.byCategory[c] || 0));
     catContainer.innerHTML = ALL_CATEGORIES.map(c => {
         const count = stats.byCategory[c] || 0;
+        const bucket = intensityBucket(count, maxCat);
         const baseColor = CATEGORY_COLORS[c] || '#94a3b8';
-        const intensity = count === 0 ? 0 : (0.3 + (count / maxCat) * 0.7);
-        const bg = count === 0
+        const intensity = bucket === 0 ? 0 : (0.3 + (bucket / 4) * 0.7);
+        const bg = bucket === 0
             ? 'background: #f1f5f9; color: #94a3b8; border-color: #e2e8f0;'
             : `background: ${hexToRgba(baseColor, intensity)}; color: ${intensity > 0.55 ? '#fff' : '#1a1a1a'}; border-color: ${baseColor};`;
         return `
-            <div class="heatmap-cell" style="${bg}">
+            <div class="heatmap-cell" style="${bg}" title="${INTENSITY_LABELS[bucket]}">
                 <div class="heatmap-cell-label">${CATEGORY_LABELS[c] || c}</div>
-                <div class="heatmap-cell-value">${count}</div>
+                <div class="heatmap-cell-dots">${INTENSITY_DOTS[bucket]}</div>
             </div>
         `;
     }).join('');
@@ -665,147 +665,6 @@ function hexToRgba(hex, alpha) {
     return `rgba(${r},${g},${b},${alpha})`;
 }
 
-function renderCharts(stats) {
-    Chart.defaults.font.family = "'Inter', sans-serif";
-    Chart.defaults.font.size = 12;
-    Chart.defaults.color = '#555';
-
-    // ===== Grade Chart — always show all grades K-6, grey for empty =====
-    const gradeData = ALL_GRADES.map(g => stats.byGrade[g] || 0);
-    const gradeColors = gradeData.map(c => c === 0 ? '#e2e8f0' : PALETTE.primary);
-
-    new Chart(document.getElementById('grade-chart'), {
-        type: 'bar',
-        data: {
-            labels: ALL_GRADES.map(g => g === 'K' ? 'K' : 'Gr ' + g),
-            datasets: [{
-                data: gradeData,
-                backgroundColor: gradeColors,
-                borderRadius: 0,
-                borderSkipped: false,
-                barThickness: 'flex',
-                maxBarThickness: 40,
-                minBarLength: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#f0f0f0' } },
-                x: { grid: { display: false } }
-            }
-        }
-    });
-
-    // ===== Group vs Individual =====
-    new Chart(document.getElementById('group-chart'), {
-        type: 'doughnut',
-        data: {
-            labels: ['Group', 'Individual'],
-            datasets: [{
-                data: [stats.groupCount, stats.individualCount],
-                backgroundColor: [PALETTE.magenta, PALETTE.secondaryDark],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '65%',
-            plugins: {
-                legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } }
-            }
-        }
-    });
-
-    // ===== Category Chart — show ALL categories, sorted by count then name =====
-    const catSorted = ALL_CATEGORIES.slice().sort((a, b) => {
-        const ca = stats.byCategory[a] || 0;
-        const cb = stats.byCategory[b] || 0;
-        if (cb !== ca) return cb - ca;
-        return a.localeCompare(b);
-    });
-    const catLabels = catSorted.map(k => CATEGORY_LABELS[k] || k);
-    const catData = catSorted.map(k => stats.byCategory[k] || 0);
-    const catColors = catSorted.map(k => {
-        const count = stats.byCategory[k] || 0;
-        return count === 0 ? '#e2e8f0' : (CATEGORY_COLORS[k] || PALETTE.primary);
-    });
-
-    new Chart(document.getElementById('category-chart'), {
-        type: 'bar',
-        data: {
-            labels: catLabels,
-            datasets: [{
-                data: catData,
-                backgroundColor: catColors,
-                borderRadius: 0,
-                borderSkipped: false,
-                barThickness: 'flex',
-                maxBarThickness: 50,
-                minBarLength: 4
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#f0f0f0' } },
-                y: { grid: { display: false } }
-            }
-        }
-    });
-
-    // ===== Language Chart =====
-    new Chart(document.getElementById('lang-chart'), {
-        type: 'doughnut',
-        data: {
-            labels: ['English', 'Español'],
-            datasets: [{
-                data: [stats.languages.en || 0, stats.languages.es || 0],
-                backgroundColor: [PALETTE.primary, PALETTE.cyan],
-                borderWidth: 0
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '65%',
-            plugins: {
-                legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle' } }
-            }
-        }
-    });
-
-    // ===== Needs Chart =====
-    new Chart(document.getElementById('needs-chart'), {
-        type: 'bar',
-        data: {
-            labels: ['Boards', 'Power'],
-            datasets: [{
-                label: 'Requested',
-                data: [stats.boardsNeeded, stats.powerNeeded],
-                backgroundColor: [PALETTE.accent, PALETTE.green],
-                borderRadius: 0,
-                borderSkipped: false,
-                maxBarThickness: 60
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#f0f0f0' } },
-                x: { grid: { display: false } }
-            }
-        }
-    });
-}
 
 loadStats();
 // Auto-refresh every 60 seconds
