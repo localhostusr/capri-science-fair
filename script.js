@@ -52,25 +52,20 @@ function setLang(lang) {
     updateDeadlineDisplay();
 }
 
-// ===== Deadline display (soft — no countdown, no auto-close) =====
+// ===== Countdown to the Fair (not a deadline — just excitement) =====
 function updateDeadlineDisplay() {
     // No hard deadline to display — banner is now a static reminder
 }
 
 function updateCountdown() {
-    // No countdown — form stays open until fair day
-    // The banner now shows a friendly "better late than never" message
-    return;
-
-    // DISABLED — original countdown code below for reference
+    const fairDate = new Date('2026-04-23T17:00:00'); // Fair starts at 5 PM
     const now = new Date();
-    const diff = CONFIG.DEADLINE - now;
+    const diff = fairDate - now;
     const countdownEl = document.getElementById('countdown');
+    if (!countdownEl) return;
 
     if (diff <= 0) {
-        document.getElementById('signup-form').style.display = 'none';
-        document.getElementById('deadline-banner').style.display = 'none';
-        document.getElementById('form-closed').style.display = 'block';
+        countdownEl.textContent = currentLang === 'es' ? '¡La Feria de Ciencias es HOY!' : 'The Science Fair is TODAY!';
         return;
     }
 
@@ -78,9 +73,9 @@ function updateCountdown() {
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
     if (currentLang === 'es') {
-        countdownEl.textContent = `Quedan ${days} día${days !== 1 ? 's' : ''} y ${hours} hora${hours !== 1 ? 's' : ''}`;
+        countdownEl.textContent = `${days} día${days !== 1 ? 's' : ''} y ${hours} hora${hours !== 1 ? 's' : ''} hasta la Feria de Ciencias`;
     } else {
-        countdownEl.textContent = `${days} day${days !== 1 ? 's' : ''} and ${hours} hour${hours !== 1 ? 's' : ''} remaining`;
+        countdownEl.textContent = `${days} day${days !== 1 ? 's' : ''} and ${hours} hour${hours !== 1 ? 's' : ''} until the Science Fair`;
     }
 }
 
