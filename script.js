@@ -3,8 +3,8 @@ const CONFIG = {
     // UPDATE THIS: Your Google Apps Script Web App URL after deploying
     APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyajxk_HCGo8p6E0b2YUadPD9onpyoVvMmNutIhPqsRVLKeDfBnt-MBh_u0Wj5c0j-1/exec',
 
-    // Sign-up deadline (midnight on this date = closed)
-    DEADLINE: new Date('2026-04-11T23:59:59'),
+    // No hard deadline — form stays open until the fair
+    DEADLINE: new Date('2026-04-23T16:00:00'),
 
     // Backend is live
     BACKEND_LIVE: true
@@ -52,21 +52,22 @@ function setLang(lang) {
     updateDeadlineDisplay();
 }
 
-// ===== Deadline & Countdown =====
+// ===== Deadline display (soft — no countdown, no auto-close) =====
 function updateDeadlineDisplay() {
-    const deadlineEl = document.getElementById('deadline-date');
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const locale = currentLang === 'es' ? 'es-US' : 'en-US';
-    deadlineEl.textContent = CONFIG.DEADLINE.toLocaleDateString(locale, options);
+    // No hard deadline to display — banner is now a static reminder
 }
 
 function updateCountdown() {
+    // No countdown — form stays open until fair day
+    // The banner now shows a friendly "better late than never" message
+    return;
+
+    // DISABLED — original countdown code below for reference
     const now = new Date();
     const diff = CONFIG.DEADLINE - now;
     const countdownEl = document.getElementById('countdown');
 
     if (diff <= 0) {
-        // Deadline passed — hide form, show closed message
         document.getElementById('signup-form').style.display = 'none';
         document.getElementById('deadline-banner').style.display = 'none';
         document.getElementById('form-closed').style.display = 'block';

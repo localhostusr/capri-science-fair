@@ -22,7 +22,8 @@ const SPREADSHEET_NAME = 'Capri Science Fair 2026 — Sign-Ups';
 const ADMIN_EMAILS = ['capriptapresident@gmail.com', 'christopher.kohl@gmail.com', 'tracykohl06@gmail.com', 'vasunanduri@gmail.com'];
 // Notification recipients — only Chris gets sign-up notification emails
 const NOTIFY_EMAILS = ['christopher.kohl@gmail.com'];
-const DEADLINE = new Date('2026-04-11T23:59:59');
+// No hard deadline — form stays open until day of the fair
+const DEADLINE = new Date('2026-04-23T16:00:00');
 
 // ===== Setup (DISABLED — spreadsheet already exists and is locked by ID) =====
 // This function is intentionally a no-op that throws. The original setup logic
