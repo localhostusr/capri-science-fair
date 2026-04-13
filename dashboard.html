@@ -543,6 +543,28 @@ const CATEGORY_LABELS = {
     'uncategorized': 'No category'
 };
 
+// Normalize category keys — the sheet may have full display text ("sustainability & recycling")
+// instead of short keys ("sustainability"). Map them back so the heatmap matches.
+const CATEGORY_ALIASES = {
+    'clean water': 'clean-water',
+    'food & agriculture': 'food',
+    'sustainability & recycling': 'sustainability',
+    'health & body': 'health',
+    'space & weather': 'space',
+    'animals & nature': 'animals',
+    'engineering & building': 'engineering'
+};
+
+function normalizeCategories(byCategory) {
+    const normalized = {};
+    Object.keys(byCategory).forEach(key => {
+        const lower = key.toLowerCase().trim();
+        const mapped = CATEGORY_ALIASES[lower] || lower;
+        normalized[mapped] = (normalized[mapped] || 0) + byCategory[key];
+    });
+    return normalized;
+}
+
 async function loadStats() {
     const content = document.getElementById('dashboard-content');
     content.innerHTML = '<div class="loading">Loading sign-up data...</div>';
@@ -551,6 +573,7 @@ async function loadStats() {
         const response = await fetch(APPS_SCRIPT_URL + '?action=stats');
         if (!response.ok) throw new Error('HTTP ' + response.status);
         const stats = await response.json();
+        stats.byCategory = normalizeCategories(stats.byCategory || {});
         renderDashboard(stats);
     } catch (err) {
         console.error(err);
