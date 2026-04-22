@@ -3,8 +3,8 @@ const CONFIG = {
     // UPDATE THIS: Your Google Apps Script Web App URL after deploying
     APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyajxk_HCGo8p6E0b2YUadPD9onpyoVvMmNutIhPqsRVLKeDfBnt-MBh_u0Wj5c0j-1/exec',
 
-    // No hard deadline — form stays open until the fair
-    DEADLINE: new Date('2026-04-23T16:00:00'),
+    // Sign-ups close the night before the fair
+    DEADLINE: new Date('2026-04-22T23:55:00'),
 
     // Backend is live
     BACKEND_LIVE: true
@@ -62,6 +62,24 @@ function updateCountdown() {
     const now = new Date();
     const diff = fairDate - now;
     const countdownEl = document.getElementById('countdown');
+
+    // Close the sign-up form once the deadline passes
+    if (now > CONFIG.DEADLINE) {
+        const form = document.getElementById('signup-form');
+        const banner = document.getElementById('deadline-banner');
+        const header = document.getElementById('form-header');
+        const closed = document.getElementById('form-closed');
+        // Only hide if success card isn't already showing (don't yank a just-submitted confirmation)
+        const success = document.getElementById('success-message');
+        const successVisible = success && success.style.display !== 'none' && success.offsetParent !== null;
+        if (!successVisible) {
+            if (form) form.style.display = 'none';
+            if (banner) banner.style.display = 'none';
+            if (header) header.style.display = 'none';
+            if (closed) closed.style.display = 'block';
+        }
+    }
+
     if (!countdownEl) return;
 
     if (diff <= 0) {
